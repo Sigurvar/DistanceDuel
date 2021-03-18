@@ -1,0 +1,2 @@
+com/sigurvar/distanceduel/desktop/DesktopLauncher.java
+ com.sigurvar.distanceduel.desktop.DesktopLauncher

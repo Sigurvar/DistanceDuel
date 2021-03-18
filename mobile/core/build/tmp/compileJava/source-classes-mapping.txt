@@ -6,8 +6,8 @@ com/sigurvar/distanceduel/states/game/WriteQuestionState.java
  com.sigurvar.distanceduel.states.game.WriteQuestionState
 com/sigurvar/distanceduel/models/Player.java
  com.sigurvar.distanceduel.models.Player
-com/sigurvar/distanceduel/utility/APIController.java
- com.sigurvar.distanceduel.utility.APIController
+com/sigurvar/distanceduel/states/game/FinalResultState.java
+ com.sigurvar.distanceduel.states.game.FinalResultState
 com/sigurvar/distanceduel/states/State.java
  com.sigurvar.distanceduel.states.State
 com/sigurvar/distanceduel/states/game/WaitResultState.java
@@ -18,8 +18,8 @@ com/sigurvar/distanceduel/utility/StateController.java
  com.sigurvar.distanceduel.utility.StateController
 com/sigurvar/distanceduel/models/Question.java
  com.sigurvar.distanceduel.models.Question
-com/sigurvar/distanceduel/utility/ServerController.java
- com.sigurvar.distanceduel.utility.ServerController
+com/sigurvar/distanceduel/utility/Unit.java
+ com.sigurvar.distanceduel.utility.Unit
 com/sigurvar/distanceduel/states/SettingsState.java
  com.sigurvar.distanceduel.states.SettingsState
 com/sigurvar/distanceduel/states/LobbyState.java
@@ -32,17 +32,17 @@ com/sigurvar/distanceduel/states/game/WaitQuestionState.java
  com.sigurvar.distanceduel.states.game.WaitQuestionState
 com/sigurvar/distanceduel/states/JoinState.java
  com.sigurvar.distanceduel.states.JoinState
-com/sigurvar/distanceduel/utility/NetworkComponent.java
- com.sigurvar.distanceduel.utility.NetworkComponent
+com/sigurvar/distanceduel/controller/GameMode.java
+ com.sigurvar.distanceduel.controller.GameMode
 com/sigurvar/distanceduel/states/MainState.java
  com.sigurvar.distanceduel.states.MainState
 com/sigurvar/distanceduel/states/game/WaitState.java
  com.sigurvar.distanceduel.states.game.WaitState
-com/sigurvar/distanceduel/utility/Unit.java
- com.sigurvar.distanceduel.utility.Unit
-com/sigurvar/distanceduel/controller/GameMode.java
- com.sigurvar.distanceduel.controller.GameMode
-com/sigurvar/distanceduel/states/game/FinalResultState.java
- com.sigurvar.distanceduel.states.game.FinalResultState
+com/sigurvar/distanceduel/utility/NetworkComponent.java
+ com.sigurvar.distanceduel.utility.NetworkComponent
+com/sigurvar/distanceduel/utility/APIController.java
+ com.sigurvar.distanceduel.utility.APIController
 com/sigurvar/distanceduel/Main.java
  com.sigurvar.distanceduel.Main
+com/sigurvar/distanceduel/utility/ServerController.java
+ com.sigurvar.distanceduel.utility.ServerController
