@@ -5,10 +5,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.sigurvar.distanceduel.utility.ServerController;
 import com.sigurvar.distanceduel.utility.StateController;
 
 public class Main extends ApplicationAdapter {
 	private StateController stateController;
+	private ServerController serverController;
 	SpriteBatch batch;
 	Texture img;
 	
@@ -16,6 +18,8 @@ public class Main extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
+		serverController = new ServerController();
+		serverController.get();
 	}
 
 	@Override
