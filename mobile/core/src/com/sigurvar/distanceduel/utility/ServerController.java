@@ -10,10 +10,9 @@ public class ServerController extends NetworkComponent {
 
     public void get() {
         try {
-            super.SendRequest("http://ip.jsontest.com/", "");
+            System.out.println(super.SendRequest("http://ip.jsontest.com/", ""));
         }catch (IOException e){
             System.out.println(e);
-            status=1;
         }
     }
 }
