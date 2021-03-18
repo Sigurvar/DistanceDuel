@@ -1,0 +1,4 @@
+#Thu Mar 18 13:05:40 CET 2021
+base.0=/Users/knutbuene/Dropbox/KOMTEK-NTNU/KomTek 8.Semester/ProgArk-Distance Duel/DistanceDuel/mobile/android/build/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

@@ -1,0 +1,4 @@
+com/sigurvar/distanceduel/AndroidLauncher.java
+ com.sigurvar.distanceduel.AndroidLauncher
+com/sigurvar/distanceduel/BuildConfig.java
+ com.sigurvar.distanceduel.BuildConfig
