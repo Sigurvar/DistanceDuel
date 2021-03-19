@@ -1,9 +1,12 @@
 package main;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.lang.Thread;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLParameters;
@@ -15,44 +18,45 @@ import game.Game;
 import game.Player;
 import game.Question;
 
-public class Server {
-	
-	SSLContext sslContext;
-	HttpsServer server;
-	
-	private ArrayList<Game> activeGames;
+public class Server extends Thread {// https://stackoverflow.com/questions/20753971/java-handling-multiple-client-sockets
 
+	final private ServerSocket serverSocket;
+	final public static int MAX_CLIENTS = 3000;
+	final private Player[] players = new Player[ MAX_CLIENTS ];
 
-	public Server() {
-		try {
-			SSLContext sslContext = SSLContext.getInstance("yesyes");
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			HttpsServer server = HttpsServer.create();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public Server( int port ) throws IOException {
+		this.serverSocket = new ServerSocket( port );
+		start();
+		System.out.println("Starting socket.....");
+	}
+
+	@Override
+	public void run() {
+		while ( !this.interrupted() ) {
+			System.out.println("Client connected");
+			//wait for clients
+			Socket connection;
+			try {
+				connection = this.serverSocket.accept();
+				assignConnectionToPlayer( connection );
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 	}
-	
-	private SSLContext getSSLContext() {
-			return this.sslContext;
-	}
-	
 
-	public static void main(String[] args) {
-		try {
-			HttpsServer.create();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void assignConnectionToPlayer( Socket connection ) {
+		for ( int i = 0 ; i < MAX_CLIENTS ; i++ ) {
+
+			//find an unassigned player
+			if ( this.players[ i ] == null ) {
+				this.players[ i ] = new Player( connection , i );
+				break;
+			}
 		}
-
 	}
-	
 	public void sendCode(Player player, String code) {
 		
 	}
@@ -71,23 +75,17 @@ public class Server {
 	
 	//public void finalResult(Player player, ArrayList<HashMap<Player,Integer>> results) {
 	//}
+	
+	
+	public static void main(String[] args)
+    {
+        try {
+			Server server = new Server(8888);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 
 }
 
-
-
-/*
- * server.setHttpsConfigurator(new HttpsConfigurator(sslContext) { public void
- * configure (HttpsParameters params) {
- * 
- * // get the remote address if needed InetSocketAddress remote =
- * params.getClientAddress();
- * 
- * SSLContext c = getSSLContext();
- * 
- * // get the default parameters SSLParameters sslparams =
- * c.getDefaultSSLParameters(); if (remote.equals() ) { // modify the default
- * set for client x }
- * 
- * params.setSSLParameters(sslparams); } });
- */

@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sigurvar.distanceduel.utility.ServerController;
 import com.sigurvar.distanceduel.utility.StateController;
 
+import java.util.concurrent.TimeUnit;
+
 public class Main extends ApplicationAdapter {
 	private StateController stateController;
 	private ServerController serverController;
@@ -20,6 +22,13 @@ public class Main extends ApplicationAdapter {
 		img = new Texture("badlogic.jpg");
 		serverController = new ServerController();
 		serverController.get();
+		serverController.connect();
+		try {
+			TimeUnit.SECONDS.sleep(3);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		serverController.sendData("Dette er en test");
 	}
 
 	@Override
