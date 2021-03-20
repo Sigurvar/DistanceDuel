@@ -1,18 +1,9 @@
 package main;
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.lang.Thread;
-
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLParameters;
-
-import com.sun.net.httpserver.HttpsParameters;
-import com.sun.net.httpserver.HttpsServer;
 
 import game.Game;
 import game.Player;
@@ -33,12 +24,12 @@ public class Server extends Thread {// https://stackoverflow.com/questions/20753
 	@Override
 	public void run() {
 		while ( !this.interrupted() ) {
-			System.out.println("Client connected");
 			//wait for clients
 			Socket connection;
 			try {
 				connection = this.serverSocket.accept();
 				assignConnectionToPlayer( connection );
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -52,6 +43,7 @@ public class Server extends Thread {// https://stackoverflow.com/questions/20753
 
 			//find an unassigned player
 			if ( this.players[ i ] == null ) {
+				System.out.println("Player " +i+" connected");
 				this.players[ i ] = new Player( connection , i );
 				break;
 			}

@@ -1,20 +1,20 @@
 package com.sigurvar.distanceduel.utility;
 
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class ServerController extends NetworkComponent {
 
-    Socket s;
-    private DataOutputStream dOut;
-    public  ServerController(){
-        super();
+    Socket socket;
+    private DataOutputStream outputStream;
+    private DataInputStream inputStream;
+    public  ServerController() throws IOException {
+        this.socket = new Socket("10.0.2.2", 8888);
+        this.outputStream = new DataOutputStream(this.socket.getOutputStream());
+        this.inputStream = new DataInputStream(socket.getInputStream());
+
     }
 
     public void get() {
@@ -25,57 +25,50 @@ public class ServerController extends NetworkComponent {
         }
     }
 
-    public void connect(){
+    public void waitForData(){
         try{
-            this.s = new Socket("10.0.2.2", 8888);
-            try {
-                this.dOut = new DataOutputStream(this.s.getOutputStream());
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            while(true) {
-                DataInputStream dIn = new DataInputStream(s.getInputStream());
-                boolean done = false;
-                while(!done) {
-                    byte messageType = dIn.readByte();
-
-                    switch(messageType)
-                    {
-                        case 1: // Type A
-                            System.out.println("Received message: " + dIn.readUTF());
-                            sendData("responding");
-                            break;
-                        case 2: // Type B
-                            System.out.println("Message B: " + dIn.readUTF());
-                            break;
-                        case 3: // Type C
-                            System.out.println("Message C [1]: " + dIn.readUTF());
-                            System.out.println("Message C [2]: " + dIn.readUTF());
-                            break;
-            }}}
+            while(inputStream.available() != 0){}
+            byte messageType = inputStream.readByte();
+            switch(messageType)
+            {
+                case 1: // Type A
+                    System.out.println("Received message: " + inputStream.readUTF());
+                    break;
+                case 2: // Type B
+                    System.out.println("Message B: " + inputStream.readUTF());
+                    break;
+                case 3: // Type C
+                    System.out.println("Message C [1]: " + inputStream.readUTF());
+                    System.out.println("Message C [2]: " + inputStream.readUTF());
+                    break;
+        }
             // TODO: Insert logic which use the recived message (textMessage)
-        }catch (UnknownHostException e1){
+        } catch (IOException e1){
             e1.printStackTrace();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }catch (Exception e){
-            System.out.println(e);
         }
     }
 
     public void sendData(String message) {
 
         try {
-            dOut.writeByte(1);
-            dOut.writeUTF(message);
-            dOut.flush();
+            outputStream.writeByte(1);
+            outputStream.writeUTF(message);
+            outputStream.flush();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
         System.out.println("Sent message "+message);
+    }
 
+    public void disconnect(){
+        try {
+            this.inputStream.close();
+            this.outputStream.close();
+            this.socket.close();
+        } catch ( IOException e ) {
+            //ignore
+        }
     }
 }

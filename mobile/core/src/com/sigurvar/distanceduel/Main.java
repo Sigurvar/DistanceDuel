@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sigurvar.distanceduel.utility.ServerController;
 import com.sigurvar.distanceduel.utility.StateController;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class Main extends ApplicationAdapter {
@@ -20,15 +21,16 @@ public class Main extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
-		serverController = new ServerController();
-		serverController.get();
-		serverController.connect();
 		try {
-			TimeUnit.SECONDS.sleep(3);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			serverController = new ServerController();
+		}catch (IOException e){
+			System.out.println("Could not connect to service");
 		}
+		serverController.get();
+		serverController.sendData("nick1");
+		serverController.waitForData();
 		serverController.sendData("Dette er en test");
+		serverController.disconnect();
 	}
 
 	@Override

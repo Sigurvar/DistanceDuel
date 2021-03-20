@@ -1,21 +1,18 @@
-package game;
+package main;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import main.PlayerSocket;
+public class PlayerSocket extends Thread{
 
-public class Player extends Thread{
-	
-	private String nickname;
 	private int id;
 	private Socket socket;
 	private DataInputStream inputStream;
 	private DataOutputStream outputStream;
-
-	public Player(Socket socket, int id) {
+	
+	public PlayerSocket(Socket socket, int id) {
 		start();
 		this.socket=socket;
 		this.id=id;
@@ -28,31 +25,21 @@ public class Player extends Thread{
 			e.printStackTrace();
 		}
 		
+		this.sendData("Dette er meg");
 		this.waitForData();
 		this.sendData("Den er god:);!");
-		this.waitForData();
 		
 	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-
-
+	
 	public void waitForData() {
 		byte messageType;
 		try {
 			while(inputStream.available() != 0);
 			messageType = inputStream.readByte();
-			String data = inputStream.readUTF();
 	        switch(messageType)
 	        {
-	            case 1: // Nickname
-	            	nickname= data;
-	                System.out.println("Sett nickname to: " + data);
+	            case 1: // Type A
+	                System.out.println("Recived message: " + inputStream.readUTF());
 	                break;
 	        }
 		} catch (IOException e) {
@@ -80,5 +67,4 @@ public class Player extends Thread{
 			//ignore
 		}
 	}
-
 }
