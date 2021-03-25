@@ -1,4 +1,9 @@
 package main;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 import java.util.Stack;
 
 import game.Question;
@@ -6,22 +11,32 @@ import game.Unit;
 
 public final class QuestionGenerator {
 		
-	public static Stack<Question> generate(Unit unit, int numberOfQuestions) {
-		
+	public static Stack<Question> generate(Unit unit, int numberOfQuestions) throws FileNotFoundException {
+		Random rand = new Random();
 		Stack<Question> product = new Stack<Question>();
-		File file = FileReader("path.csv");
+		Scanner file = new Scanner(new File("server/Distance-Server/src/main/worldcities.txt"));  
+		file.useDelimiter("\n");
 		
+		int numberoflines = 0;
+		ArrayList<String> cities = new ArrayList<String>();
+
+		while (file.hasNext()){	
+			cities.add(new String(file.next()));
+			numberoflines++;
+		}
+		System.out.println(cities);
+
 		for (int i = 0; i < numberOfQuestions; i ++) {
 			
-			int a = randomint(0,file.numberoflines());
-			int b = randomint(0,file.numberoflines());
+			int a = rand.nextInt(numberoflines);
+			int b = rand.nextInt(numberoflines);
 			while (a==b) {
-				b = randomint(0,file.numberoflines());
+				b = rand.nextInt(numberoflines);
 			}
 			
-			String placeA = file.readLine(a);
-			String placeB = file.readLine(b);
-			
+			String placeA = cities.get(a);
+			String placeB = cities.get(b);
+
 			float distance = calculateDistance(api.getCoordinate(placeA), api.getCoordinate(placeB));
 			
 			product.push(new Question(placeA, placeB, distance, unit));
@@ -36,8 +51,14 @@ public final class QuestionGenerator {
 		
 	}
 	
-	public float calculateDistance(Json a, Json b) {
+	public float calculateDistance(JSONObject a, JSONObject b) {
 		return sqrt(pwr((a[0]-b[0]),2) + pwr((a[1]-b[1]),2));
 	}
+	/*public static void main(String[] args) throws FileNotFoundException{
+		QuestionGenerator q = new QuestionGenerator();
+
+		q.generate(Unit.BANANA, 4);
+
+	}*/
 
 }
