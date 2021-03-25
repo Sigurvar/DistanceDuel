@@ -11,7 +11,7 @@ import game.Unit;
 
 public final class QuestionGenerator {
 		
-	public static Stack<Question> generate(Unit unit, int numberOfQuestions) throws FileNotFoundException {
+	public Stack<Question> generate(Unit unit, int numberOfQuestions) throws FileNotFoundException {
 		Random rand = new Random();
 		Stack<Question> product = new Stack<Question>();
 		Scanner file = new Scanner(new File("server/Distance-Server/src/main/worldcities.txt"));  
@@ -37,9 +37,9 @@ public final class QuestionGenerator {
 			String placeA = cities.get(a);
 			String placeB = cities.get(b);
 
-			float distance = calculateDistance(api.getCoordinate(placeA), api.getCoordinate(placeB));
+			//float distance = calculateDistance(api.getCoordinate(placeA), api.getCoordinate(placeB));
 			
-			product.push(new Question(placeA, placeB, distance, unit));
+			product.push(create(placeA, placeB, unit));
 		}
 		return null;
 		

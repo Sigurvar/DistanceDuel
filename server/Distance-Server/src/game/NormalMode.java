@@ -1,5 +1,7 @@
 package game;
 
+import java.io.FileNotFoundException;
+
 import main.QuestionGenerator;
 
 public class NormalMode extends Game {
@@ -11,7 +13,13 @@ public class NormalMode extends Game {
 
 	@Override
 	public void startGame() {
-		upcoming = QuestionGenerator.generate(unit, 10);
+		QuestionGenerator questionGenerator = new QuestionGenerator();
+		try {
+			upcoming = questionGenerator.generate(unit, 10);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
