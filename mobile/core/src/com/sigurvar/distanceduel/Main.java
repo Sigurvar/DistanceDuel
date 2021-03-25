@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Main extends ApplicationAdapter {
 	private StateController stateController;
-	private ServerController serverController;
+	private ServerController serverController = ServerController.getInstance();
 	SpriteBatch batch;
 	Texture img;
 	
@@ -21,15 +21,10 @@ public class Main extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
-		try {
-			serverController = new ServerController();
-		}catch (IOException e){
-			System.out.println("Could not connect to service");
-		}
-		serverController.get();
-		serverController.sendData("nick1");
+		serverController.start();
+		serverController.sendNickname("nick1");
 		serverController.waitForData();
-		serverController.sendData("Dette er en test");
+		serverController.sendNewGame("Dette er en test");
 		serverController.disconnect();
 	}
 
@@ -47,4 +42,5 @@ public class Main extends ApplicationAdapter {
 		batch.dispose();
 		img.dispose();
 	}
+
 }

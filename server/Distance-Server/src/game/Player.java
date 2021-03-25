@@ -7,11 +7,14 @@ import java.net.Socket;
 
 public class Player extends Thread{
 	
+	private final float interuptTimer = 11000;
+	private long startTime;
 	private String nickname;
 	private int id;
 	private Socket socket;
 	private DataInputStream inputStream;
 	private DataOutputStream outputStream;
+	private boolean shouldInterupt;
 
 	public Player(Socket socket, int id) {
 		start();
@@ -27,7 +30,7 @@ public class Player extends Thread{
 		}
 		
 		this.waitForData();
-		this.sendData("Den er god:);!");
+		this.sendData(1, "Den er god:);!");
 		this.waitForData();
 		
 	}
@@ -42,8 +45,14 @@ public class Player extends Thread{
 
 	public void waitForData() {
 		byte messageType;
+		boolean stop = false;
 		try {
-			while(inputStream.available() != 0);
+			while(inputStream.available() != 0) {
+				if (shouldInterupt && this.startTime-System.currentTimeMillis()>this.interuptTimer) {
+					System.out.println(nickname + " did not answer");
+					throw new RuntimeException("User did not anser");
+				}
+			}
 			messageType = inputStream.readByte();
 			String data = inputStream.readUTF();
 	        switch(messageType)
@@ -52,16 +61,51 @@ public class Player extends Thread{
 	            	nickname= data;
 	                System.out.println("Sett nickname to: " + data);
 	                break;
+	            case 2: // New game
+	            	System.out.println("Creating new game; "+ data);
+	            	break;
+	            case 3: // Game code
+	            	System.out.println("Game code: " + data);
+	            	break;
+	            case 4: // Answer
+	            	System.out.println(nickname + " answerd: " + data);
+	            	break;
+	            case 5: //Start game
+	            	System.out.println("Starting game");
 	        }
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
 		}
+		shouldInterupt = false;
+	}
+	public void sendPlayersInGame(String players) {
+		this.sendData(1, players);
+	}	
+	public void sendGameCode(String code) {
+		this.sendData(2,code);
+	}
+	public void newPlayerJoined(String nickname) {
+		this.sendData(3, nickname);
+	}
+	public void sendQuestion(String question) {
+		this.shouldInterupt = true;
+		this.startTime = System.currentTimeMillis();	
+		this.sendData(4, question);
+	}
+	public void sendResult(String result) {
+		this.sendData(5, result);
+	}
+	public void sendGameDone(String done) {
+		this.sendData(6, done);
 	}
 	
-	public void sendData(String message) {
+	
+	private void sendData(int type, String message) {
 		System.out.println("sending message: " +message);
 		try {
-			outputStream.writeByte(1);
+			outputStream.writeByte(type);
 			outputStream.writeUTF(message);
 			outputStream.flush();
 		} catch (IOException e) {

@@ -1,4 +1,13 @@
 package com.sigurvar.distanceduel.utility;
 
-public class APIController {
+import java.io.IOException;
+
+public class APIController  extends NetworkComponent{
+    public void get() {
+        try {
+            System.out.println(super.SendRequest("http://ip.jsontest.com/"));
+        }catch (IOException e){
+            System.out.println(e);
+        }
+    }
 }
