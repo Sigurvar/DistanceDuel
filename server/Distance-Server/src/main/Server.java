@@ -17,12 +17,14 @@ public class Server extends Thread {// https://stackoverflow.com/questions/20753
 
 	public Server( int port ) throws IOException {
 		this.serverSocket = new ServerSocket( port );
-		start();
+		
 		System.out.println("Starting socket.....");
+		start();
 	}
 
 	@Override
 	public void run() {
+		System.out.println("Running...");
 		while ( !this.interrupted() ) {
 			//wait for clients
 			Socket connection;
@@ -49,35 +51,5 @@ public class Server extends Thread {// https://stackoverflow.com/questions/20753
 			}
 		}
 	}
-	public void sendCode(Player player, String code) {
-		
-	}
-	
-	public void sendQuestion(Player player, Question question) {
-		
-	}
-	
-	public void partialResult(Player player, HashMap<Player,Integer> result, float solution) {
-		
-	}
-	
-	public void finishGame(Player player) {
-		//player.getIp()
-	}
-	
-	//public void finalResult(Player player, ArrayList<HashMap<Player,Integer>> results) {
-	//}
-	
-	
-	public static void main(String[] args)
-    {
-        try {
-			Server server = new Server(8888);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-
 }
 
