@@ -2,8 +2,8 @@ package game;
 
 public class WriteQuestionsMode extends Game {
 
-	public WriteQuestionsMode(Unit unit) {
-		super(unit);
+	public WriteQuestionsMode(String code,Unit unit) {
+		super(code, unit);
 		// TODO Auto-generated constructor stub
 	}
 
