@@ -17,7 +17,6 @@ public class Server extends Thread {// https://stackoverflow.com/questions/20753
 
 	public Server( int port ) throws IOException {
 		this.serverSocket = new ServerSocket( port );
-		
 		System.out.println("Starting socket.....");
 		start();
 	}
@@ -26,14 +25,12 @@ public class Server extends Thread {// https://stackoverflow.com/questions/20753
 	public void run() {
 		System.out.println("Running...");
 		while ( !this.interrupted() ) {
-			//wait for clients
+			System.out.println("Ready to receive new player");
 			Socket connection;
 			try {
 				connection = this.serverSocket.accept();
 				assignConnectionToPlayer( connection );
-
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
