@@ -35,32 +35,21 @@ public class InputThread extends Thread{
 		        {
 		            case SET_NICKNAME:
 		            	player.setNickname(data);
-		                System.out.println("Player setting nickname to: " + data);
 		                break;
 		            case CREATE_NEW_GAME:
-		            	// Create new game with code and send to user
-		            	// TODO exception no game handeling
-		            	Game game = Main.getInstance().createGame(this.player);
-		            	this.player.joinGame(game);
-		            	player.outputThread.sendGameCode(game.code);
+		            	player.createGame(data);
 		            	break;
 		            case JOIN_GAME:
-		            	Game g = Main.getInstance().joinGame(data, player);
-		            	System.out.println(player.getNickname()+" joining with game code: " + data);
-		            	if (g==null) {
-		            		player.outputThread.sendGameCodeDoesNotExist();
-		            	}else {
-		            		System.out.println(player.getNickname()+" joining with game code: " + data);
-			            	player.joinGame(g);
-			            	player.outputThread.sendPlayersInGame(g.getAllNames());
-		            	}
+		            	player.joinGame(data);
 		            	break;
 		            case START_GAME:
 		            	player.startGame();
-		            	System.out.println("Starting game");
 		            	break;
 		            case ANSWER_QUESTION:
 		            	System.out.println(player.getNickname() + " answerd: " + data);
+		            	break;
+		            case LEAVING_GAME:
+		            	player.disconect();
 		            	break;
 		        }
 			} catch (IOException e) {

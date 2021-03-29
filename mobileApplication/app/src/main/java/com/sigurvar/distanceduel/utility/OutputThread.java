@@ -37,6 +37,7 @@ public class OutputThread extends Thread{
     public void sendStartGame(){
         this.sendData(START_GAME, "");
     }
+    public void leaveGame() {this.sendData(LEAVING_GAME, "");}
 
 
 

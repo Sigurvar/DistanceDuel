@@ -31,27 +31,57 @@ public class Player{
 	}
 
 	public void setNickname(String nickname) {
+		 System.out.println("Player " +id +" setting nickname to: " + nickname);
 		this.nickname = nickname;
 	}
 	public String getNickname() {
 		return nickname;
 	}
-	public void joinGame(Game game) {
-		game.join(this);
-		this.game=game;
+	public int getId() {
+		return id;
+	}
+	public void createGame(String settings) {
+		// TODO add settings to game constructor
+		Game game = Main.getInstance().createGame(this);
+		this.game = game;
+    	this.outputThread.sendGameCode(game.code);
+	}
+	public void joinGame(String gameCode) {
+		Game g = Main.getInstance().joinGame(gameCode, this);
+    	System.out.print(this.getNickname()+" wants to join game with game code: " + gameCode+"...");
+    	if (g==null) {
+    		this.outputThread.sendGameCodeDoesNotExist();
+    		System.out.println("Game code does not exist");
+    	}else {
+    		System.out.println(" Sucess");
+    		this.outputThread.sendPlayersInGame(g.getAllNames());
+        	g.join(this);
+    		this.game=g;
+    		
+    	}
 	}
 	public void startGame() {
+		System.out.print("Player requesting to start game... ");
 		if (game.getOwner()==this) {
+			System.out.println("Approved, starting game");
 			game.startGame();
+		}else {
+			System.out.println("Not owner");
 		}
 	}
 
 	public void disconect() {
 		try {
+			// TODO remove player from server list of players 
+			
+			if (game!=null) {
+				game.leaveGame(this);
+			}
 			this.inputThread.disconnect();
 			this.outputThread.disconnect();
 			this.socket.close();
 		} catch ( IOException e ) {
+			System.out.println(e);
 			//ignore
 		}
 	}

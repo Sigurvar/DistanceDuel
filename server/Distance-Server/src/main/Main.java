@@ -37,12 +37,8 @@ public class Main {
 		for ( int i = 0 ; i < MAX_GAMES ; i++ ) {
 			if ( this.games[ i ] == null ) {
 				String code = generateGameCode();
-				while (gameCodes.get(code)!=null) {
-					code = generateGameCode();
-				}
-				Game newGame = new NormalMode(code, Unit.BANANA);
+				Game newGame = new NormalMode(code, Unit.BANANA, i, player);
 				gameCodes.put(code, newGame);
-				System.out.println("Game created by "+player.getNickname()+ " with code "+code);
 				this.games[ i ] = newGame;
 				return newGame;
 				
@@ -62,8 +58,11 @@ public class Main {
     }
 	private String generateGameCode() {
 		String c = "";
-		for (int i=0;i<5;i++) {
-			c+=Math.round(Math.random() * 5);
+		while (c=="" || gameCodes.get(c)!=null) {
+			c = "";
+			for (int i=0;i<5;i++) {
+				c+=Math.round(Math.random() * 5);
+			}
 		}
 		return c;
 	}

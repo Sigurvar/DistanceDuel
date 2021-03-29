@@ -44,6 +44,9 @@ public class OutputThread extends Thread{
 	public void sendGameDone(String done) {
 		this.sendData(GAME_DONE, done);
 	}
+	public void sendYouAreOwner() {
+		this.sendData(YOU_ARE_OWNER, "You are owner of the game");
+	}
 	
 	private void sendData(int message_type, String message) {
 		System.out.println("sending message: " +message);

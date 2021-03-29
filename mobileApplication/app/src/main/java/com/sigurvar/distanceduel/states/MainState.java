@@ -37,6 +37,7 @@ public class MainState extends State {
         serverController.outputThread.sendNickname(tv.getText().toString());
 
     }
+    public void leaveGame(View view){serverController.disconnect();}
     public void startGame(View view){
         serverController.outputThread.sendStartGame();
     }

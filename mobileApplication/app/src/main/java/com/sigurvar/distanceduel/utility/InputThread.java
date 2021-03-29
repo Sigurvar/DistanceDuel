@@ -70,6 +70,11 @@ public class InputThread extends Thread{
                         Log.i("InputThread", "Game done: " + message);
                         this.disconnect();
                         break;
+                    case YOU_ARE_OWNER:
+                        // TODO: implement function to set player as owner
+                        Log.i("InputThread", message);
+                        this.setDisplayInfo(message);
+                        break;
                 }
                 // TODO: Insert logic which use the recived message (textMessage)
             } catch (IOException e1) {

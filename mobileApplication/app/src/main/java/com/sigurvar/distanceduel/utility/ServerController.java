@@ -38,6 +38,7 @@ public class ServerController {
     }
     public void disconnect(){
         try {
+            this.outputThread.leaveGame();
             this.inputThread.disconnect();
             this.outputThread.disconnect();
             this.socket.close();
