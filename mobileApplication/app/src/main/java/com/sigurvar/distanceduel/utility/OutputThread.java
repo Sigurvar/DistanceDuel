@@ -12,7 +12,7 @@ public class OutputThread extends Thread{
     private static final int JOIN_GAME = 3;
     private static final int START_GAME = 4;
     private static final int ANSWER_QUESTION = 5;
-    private static final int LEAVING_GAME = 6; //TODO implementer funksjon
+    private static final int LEAVING_GAME = 6;
 
 
 
@@ -38,6 +38,7 @@ public class OutputThread extends Thread{
         this.sendData(START_GAME, "");
     }
     public void leaveGame() {this.sendData(LEAVING_GAME, "");}
+
 
 
 

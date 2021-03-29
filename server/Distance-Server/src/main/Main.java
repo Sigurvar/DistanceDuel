@@ -18,7 +18,7 @@ public class Main {
     public static Main getInstance( ) {
         return main;
     }
-    
+    // TODO: Har bare en server, hvordan blir det hvis vi utvider med flere 
 	Server server;
 	// TODO Har begrensning på antall spillere, trenger det være begrensning på antall spill??
 	Game[] games = new Game[MAX_GAMES];
@@ -27,7 +27,8 @@ public class Main {
 	
 	public  void startServer() {
 		try {
-			server = new Server(8888);
+			server = Server.getInstance();
+			server.start(8888);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,5 +66,10 @@ public class Main {
 			}
 		}
 		return c;
+	}
+
+	public void endGame(int id, String code) {
+		games[id]=null;
+		gameCodes.put(code, null);
 	}
 }

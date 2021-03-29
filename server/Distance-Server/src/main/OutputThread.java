@@ -38,7 +38,7 @@ public class OutputThread extends Thread{
 		//this.startTime = System.currentTimeMillis();	
 		this.sendData(NEW_QUESTION, question);
 	}
-	public void sendResult(String result) {
+	public void sendPartialResult(String result) {
 		this.sendData(PARTIAL_RESULT, result);
 	}
 	public void sendGameDone(String done) {

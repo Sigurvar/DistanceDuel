@@ -17,6 +17,7 @@ public class Question {
 		this.unit = unit;
 	}
 
+	// TODO: burde vel gi poeng basert på hvor nære man er
 	public boolean checkAnswer(float answer) {
 		if (answer == this.answer/unit.getLength()) {
 			return true;

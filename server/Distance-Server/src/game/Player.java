@@ -8,6 +8,7 @@ import java.net.Socket;
 import main.InputThread;
 import main.Main;
 import main.OutputThread;
+import main.Server;
 
 public class Player{
 	
@@ -31,7 +32,7 @@ public class Player{
 	}
 
 	public void setNickname(String nickname) {
-		 System.out.println("Player " +id +" setting nickname to: " + nickname);
+		 System.out.println("Player " +id +" seting nickname to: " + nickname);
 		this.nickname = nickname;
 	}
 	public String getNickname() {
@@ -39,6 +40,12 @@ public class Player{
 	}
 	public int getId() {
 		return id;
+	}
+	public void answerQuestion(String answer) {
+		Float ans = Float.valueOf(answer);
+		//TODO add exception handeling
+		this.game.answer(this, ans);
+		
 	}
 	public void createGame(String settings) {
 		// TODO add settings to game constructor
@@ -51,7 +58,7 @@ public class Player{
     	System.out.print(this.getNickname()+" wants to join game with game code: " + gameCode+"...");
     	if (g==null) {
     		this.outputThread.sendGameCodeDoesNotExist();
-    		System.out.println("Game code does not exist");
+    		System.out.println(" Game code does not exist");
     	}else {
     		System.out.println(" Sucess");
     		this.outputThread.sendPlayersInGame(g.getAllNames());
@@ -72,11 +79,12 @@ public class Player{
 
 	public void disconect() {
 		try {
-			// TODO remove player from server list of players 
+			// TODO: destroy player instanse, eventult ha en player pool med tilgjenlige spillere som gjør at man ikke må oprette og slete spillere hele tiden 
 			
 			if (game!=null) {
 				game.leaveGame(this);
 			}
+			Server.getInstance().disconnectPlayer(this);
 			this.inputThread.disconnect();
 			this.outputThread.disconnect();
 			this.socket.close();

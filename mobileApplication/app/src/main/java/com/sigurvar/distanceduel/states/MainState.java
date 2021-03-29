@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.utility.ServerController;
 
+import org.w3c.dom.Text;
+
 public class MainState extends State {
 
     ServerController serverController = ServerController.getInstance();
@@ -36,6 +38,10 @@ public class MainState extends State {
         TextView tv = findViewById(R.id.nickname);
         serverController.outputThread.sendNickname(tv.getText().toString());
 
+    }
+    public void sendAnswer(View view){
+        TextView tv = findViewById(R.id.sendAnswer);
+        serverController.outputThread.sendAnswer(tv.getText().toString());
     }
     public void leaveGame(View view){serverController.disconnect();}
     public void startGame(View view){

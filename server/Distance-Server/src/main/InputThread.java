@@ -13,7 +13,7 @@ public class InputThread extends Thread{
     private static final int JOIN_GAME = 3;
     private static final int START_GAME = 4;
     private static final int ANSWER_QUESTION = 5;
-    private static final int LEAVING_GAME = 6; //TODO implementer håndtering
+    private static final int LEAVING_GAME = 6; 
     
 	private final Player player;
     private final DataInputStream dataInputStream;

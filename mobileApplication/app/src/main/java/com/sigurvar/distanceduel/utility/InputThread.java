@@ -65,6 +65,7 @@ public class InputThread extends Thread{
                         break;
                     case PARTIAL_RESULT:
                         Log.i("InputThread", "Received result: " + message);
+                        this.setDisplayInfo(message);
                         break;
                     case GAME_DONE:
                         Log.i("InputThread", "Game done: " + message);
