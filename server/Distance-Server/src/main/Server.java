@@ -54,6 +54,7 @@ public class Server extends Thread {// https://stackoverflow.com/questions/20753
 		}
 	}
 	public void disconnectPlayer(Player player) {
+		System.out.println("Player "+player.getId()+" disconnecting from server");
 		players[player.getId()]=null;
 	}
 }

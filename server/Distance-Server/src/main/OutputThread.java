@@ -49,7 +49,6 @@ public class OutputThread extends Thread{
 	}
 	
 	private void sendData(int message_type, String message) {
-		System.out.println("sending message: " +message);
 		try {
 			dataOutputStream.writeByte(message_type);
 			dataOutputStream.writeUTF(message);

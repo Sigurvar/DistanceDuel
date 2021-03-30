@@ -31,12 +31,14 @@ public abstract class Game {
 		this.id= id;
 		this.players.add(creator);
 		System.out.println("Game "+id+" created by "+creator.getNickname()+ " with code "+code);
+		System.out.println("Sending game code to owner");
 	}
 	void sendQuestion() {
 		try {
 			Question question = upcoming.pop();
-		}catch(EmptyStackException e) {
+		}catch(Exception e) {
 			System.out.println("Det finnes ingen q");
+			//TODO send game over
 		}
 		currentAnswer = new JSONObject();
 		System.out.println("Sending question to all players");
@@ -49,7 +51,7 @@ public abstract class Game {
 		System.out.println(player.getNickname()+" joined game "+id);
 	}
 	
-	public void answer(Player player, Float answer) {
+	public void answer(Player player, double answer) {
 		// TODO add timer on question
 		System.out.println(player.getNickname() +" answered "+answer);
 		try {
@@ -58,9 +60,9 @@ public abstract class Game {
 				System.out.println("All players have answerd");
 				
 				for (Player p: players) p.outputThread.sendPartialResult(currentAnswer.toString());
+				// TODO wait 3 seconds and send new question
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -68,10 +70,9 @@ public abstract class Game {
 		return players.get(0);
 	}
 	public void leaveGame(Player player) {
-		System.out.println(player.getNickname()+" is leaving the game "+id);
+		System.out.println(player.getNickname()+" is leaving game "+id);
 		for (int i=0;i<players.size();i++) {
 			if(players.get(i)==player) {
-				System.out.println(i);
 				players.remove(i);
 				if(players.size()==0) {
 					Main main = Main.getInstance();
@@ -93,7 +94,10 @@ public abstract class Game {
 		}
 		return r;
 	}
-
+	public void gameDone() {
+		System.out.println("Game complete");
+		for (Player p: players) p.outputThread.sendGameDone("Game completed");
+	}
 	public abstract void startGame();
 	
 }

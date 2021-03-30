@@ -62,7 +62,7 @@ public class Main {
 		while (c=="" || gameCodes.get(c)!=null) {
 			c = "";
 			for (int i=0;i<5;i++) {
-				c+=Math.round(Math.random() * 5);
+				c+=Math.round(Math.random() * 9);
 			}
 		}
 		return c;

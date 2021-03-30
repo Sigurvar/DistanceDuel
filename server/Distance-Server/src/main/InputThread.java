@@ -46,7 +46,7 @@ public class InputThread extends Thread{
 		            	player.startGame();
 		            	break;
 		            case ANSWER_QUESTION:
-		            	System.out.println(player.getNickname() + " answerd: " + data);
+		            	player.answerQuestion(data);
 		            	break;
 		            case LEAVING_GAME:
 		            	player.disconect();

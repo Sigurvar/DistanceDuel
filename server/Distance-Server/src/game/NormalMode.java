@@ -12,7 +12,7 @@ public class NormalMode extends Game {
 	@Override
 	public void startGame() {
 		upcoming = QuestionGenerator.generate(unit, 10);
-		
+		super.sendQuestion();
 	}
 
 }

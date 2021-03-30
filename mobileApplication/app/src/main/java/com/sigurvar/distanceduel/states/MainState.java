@@ -40,7 +40,7 @@ public class MainState extends State {
 
     }
     public void sendAnswer(View view){
-        TextView tv = findViewById(R.id.sendAnswer);
+        TextView tv = findViewById(R.id.answer);
         serverController.outputThread.sendAnswer(tv.getText().toString());
     }
     public void leaveGame(View view){serverController.disconnect();}

@@ -42,8 +42,14 @@ public class Player{
 		return id;
 	}
 	public void answerQuestion(String answer) {
-		Float ans = Float.valueOf(answer);
-		//TODO add exception handeling
+		double ans = -1;
+		try {
+			// TODO mulig vi heller vil ha float her
+			ans = Double.valueOf(answer);
+		}catch(NumberFormatException e) {
+			// TODO add exception handling
+			// System.out.println(e);
+		}
 		this.game.answer(this, ans);
 		
 	}
