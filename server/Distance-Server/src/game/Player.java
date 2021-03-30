@@ -5,132 +5,98 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import main.InputThread;
 import main.Main;
+import main.OutputThread;
+import main.Server;
 
-public class Player extends Thread{
+public class Player{
 	
-	private final float interuptTimer = 11000;
-	private long startTime;
+	
 	private String nickname;
 	private int id;
 	private Socket socket;
-	private DataInputStream inputStream;
-	private DataOutputStream outputStream;
-	private boolean shouldInterupt;
+	private Game game;
+	public OutputThread outputThread;
+    public InputThread inputThread;
 
 	public Player(Socket socket, int id) {
-
 		this.socket=socket;
 		this.id=id;
 		try {
-			this.outputStream = new DataOutputStream(this.socket.getOutputStream());
-            this.inputStream = new DataInputStream(this.socket.getInputStream());
-    		start();
+			this.outputThread = new OutputThread(new DataOutputStream(this.socket.getOutputStream()));
+			this.inputThread = new InputThread(new DataInputStream(this.socket.getInputStream()), this);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	public void setNickname(String nickname) {
+		 System.out.println("Player " +id +" seting nickname to: " + nickname);
 		this.nickname = nickname;
 	}
 	public String getNickname() {
 		return nickname;
 	}
-
-	@Override
-	public void run() {
-
-		byte messageType;
-		while(!this.isInterrupted()) {
-			System.out.println("Waiting");
-			try {
-				while(inputStream.available() != 0) {
-					if (shouldInterupt && this.startTime-System.currentTimeMillis()>this.interuptTimer) {
-						System.out.println(nickname + " did not answer");
-						throw new RuntimeException("User did not anser");
-					}
-				}
-				System.out.println("Recieved message");
-				messageType = inputStream.readByte();
-				String data = inputStream.readUTF();
-		        switch(messageType)
-		        {
-		            case 1: // Nickname
-		            	nickname= data;
-		                System.out.println("Player "+id+" setting nickname to: " + data);
-		                break;
-		            case 2: // New game
-		            	System.out.println("Creating new game; "+ data);
-		            	// Create new game with code and send to user
-		            	Main.getInstance().createGame("1234", this);
-		            	this.sendGameCode("1234");
-		            	return;
-		            case 3: // Game code
-		            	System.out.println(nickname+" joining with game code: " + data);
-		            	Game g = Main.getInstance().joinGame(data, this);
-		            	this.sendPlayersInGame(g.getAllNames());
-		            	return;
-		            case 4: // Answer
-		            	System.out.println(nickname + " answerd: " + data);
-		            	break;
-		            case 5: //Start game
-		            	System.out.println("Starting game");
-		            	break;
-		        }
-			} catch (IOException e) {
-				e.printStackTrace();
-				this.disconect();
-				return;
-			} catch (RuntimeException e) {
-				e.printStackTrace();
-			}
-			shouldInterupt = false;
-		}
+	public int getId() {
+		return id;
 	}
-		
-	public void sendPlayersInGame(String players) {
-		this.sendData(1, players);
-	}	
-	public void sendGameCode(String code) {
-		this.sendData(2,code);
-	}
-	public void newPlayerJoined(String nickname) {
-		this.sendData(3, nickname);
-	}
-	public void sendQuestion(String question) {
-		this.shouldInterupt = true;
-		this.startTime = System.currentTimeMillis();	
-		this.sendData(4, question);
-	}
-	public void sendResult(String result) {
-		this.sendData(5, result);
-	}
-	public void sendGameDone(String done) {
-		this.sendData(6, done);
-	}
-	
-	
-	private void sendData(int type, String message) {
-		System.out.println("sending message: " +message);
+	public void answerQuestion(String answer) {
+		double ans = -1;
 		try {
-			outputStream.writeByte(type);
-			outputStream.writeUTF(message);
-			outputStream.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
+			// TODO mulig vi heller vil ha float her
+			ans = Double.valueOf(answer);
+		}catch(NumberFormatException e) {
+			// TODO add exception handling
+			// System.out.println(e);
 		}
-       
+		this.game.answer(this, ans);
+		
 	}
+	public void createGame(String settings) {
+		// TODO add settings to game constructor
+		Game game = Main.getInstance().createGame(this);
+		this.game = game;
+    	this.outputThread.sendGameCode(game.code);
+	}
+	public void joinGame(String gameCode) {
+		Game g = Main.getInstance().joinGame(gameCode, this);
+    	System.out.print(this.getNickname()+" wants to join game with game code: " + gameCode+"...");
+    	if (g==null) {
+    		this.outputThread.sendGameCodeDoesNotExist();
+    		System.out.println(" Game code does not exist");
+    	}else {
+    		System.out.println(" Sucess");
+    		this.outputThread.sendPlayersInGame(g.getAllNames());
+        	g.join(this);
+    		this.game=g;
+    		
+    	}
+	}
+	public void startGame() {
+		System.out.print("Player requesting to start game... ");
+		if (game.getOwner()==this) {
+			System.out.println("Approved, starting game");
+			game.startGame();
+		}else {
+			System.out.println("Not owner");
+		}
+	}
+
 	public void disconect() {
 		try {
-			this.inputStream.close();
-			this.outputStream.close();
+			// TODO: destroy player instanse, eventult ha en player pool med tilgjenlige spillere som gjør at man ikke må oprette og slete spillere hele tiden 
+			
+			if (game!=null) {
+				game.leaveGame(this);
+			}
+			Server.getInstance().disconnectPlayer(this);
+			this.inputThread.disconnect();
+			this.outputThread.disconnect();
 			this.socket.close();
 		} catch ( IOException e ) {
+			System.out.println(e);
 			//ignore
 		}
 	}
-
 }

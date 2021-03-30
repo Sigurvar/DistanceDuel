@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.utility.ServerController;
 
+import org.w3c.dom.Text;
+
 public class MainState extends State {
 
     ServerController serverController = ServerController.getInstance();
@@ -25,21 +27,36 @@ public class MainState extends State {
 
     public void createGame(View view){
         Log.i("Game", "Starting new game");
-        serverController.sendNewGame("Dette er innstilligene");
-        serverController.start();
+        serverController.outputThread.sendNewGame("Dette er innstilligene");
     }
 
     public void joinGame(View view){
         TextView tv = findViewById(R.id.gameCode);
-        serverController.sendGameCode(tv.getText().toString());
-        serverController.start();
+        serverController.outputThread.sendGameCode(tv.getText().toString());
     }
     public void setNickname(View view){
         TextView tv = findViewById(R.id.nickname);
-        serverController.sendNickname(tv.getText().toString());
+        serverController.outputThread.sendNickname(tv.getText().toString());
 
     }
+    public void sendAnswer(View view){
+        TextView tv = findViewById(R.id.answer);
+        serverController.outputThread.sendAnswer(tv.getText().toString());
+    }
+    public void leaveGame(View view){serverController.disconnect();}
+    public void startGame(View view){
+        serverController.outputThread.sendStartGame();
+    }
     public void connect(View view){
-        serverController.connect();
+        serverController.connect(this);
+    }
+    public void displayInfo(String text){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView tv = findViewById(R.id.displayInfo);
+                tv.setText(text);
+            }
+        });
     }
 }

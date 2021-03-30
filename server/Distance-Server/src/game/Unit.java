@@ -1,8 +1,8 @@
 package game;
 
 public enum Unit {
-	BANANA(3),
-	CAR(8);
+	BANANA(15),
+	CAR(300);
 	
 	private float length;
 	
