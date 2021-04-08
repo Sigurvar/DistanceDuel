@@ -1,44 +1,105 @@
 package main;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 import java.util.Stack;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import game.Question;
 import game.Unit;
 
 public final class QuestionGenerator {
 		
-	public static Stack<Question> generate(Unit unit, int numberOfQuestions) {
+	public  Stack<Question> generate(Unit unit, int numberOfQuestions) throws FileNotFoundException, JSONException {
 		
+		Random rand = new Random();
 		Stack<Question> product = new Stack<Question>();
-		File file = new File("path.csv");
+		Scanner file = new Scanner(new File("src/main/worldcities.txt"));  
+		file.useDelimiter("\n");
 		
-		/*for (int i = 0; i < numberOfQuestions; i ++) {
+		int numberoflines = 0;
+		ArrayList<String> cities = new ArrayList<String>();
+
+		while (file.hasNext()){	
+			cities.add(new String(file.next()));
+			numberoflines++;
+		}
+		System.out.println(cities);
+
+		for (int i = 0; i < numberOfQuestions; i ++) {
 			
-			int a = randomint(0,file.numberoflines());
-			int b = randomint(0,file.numberoflines());
+			int a = rand.nextInt(numberoflines);
+			int b = rand.nextInt(numberoflines);
 			while (a==b) {
-				b = randomint(0,file.numberoflines());
+				b = rand.nextInt(numberoflines);
 			}
 			
-			String placeA = file.readLine(a);
-			String placeB = file.readLine(b);
+			String placeA = cities.get(a);
+			String placeB = cities.get(b);
+			System.out.println(placeA + placeB);
 			
-			float distance = calculateDistance(api.getCoordinate(placeA), api.getCoordinate(placeB));
-			
-			product.push(new Question(placeA, placeB, distance, unit));
-		}*/
+			product.push(create(placeA, placeB, unit));
+		}
+		System.out.println(product);
 		return null;
-		
 	}
 	
-	public Question create(String placeA, String placeB, Unit unit) {
-		float distance = 0;//calculateDistance(APIController.getCoordinate(placeA), APIController.getCoordinate(placeB));
+	public Question create(String placeA, String placeB, Unit unit) throws JSONException {
+		JSONObject jsonA = APIController.getCoordinate(placeA);
+		JSONObject jsonB = APIController.getCoordinate(placeB);
+		
+		JSONArray dataA = jsonA.getJSONArray("data");
+		
+		double placeAx = dataA.getJSONObject(0).getDouble("longitude");
+		double placeAy = dataA.getJSONObject(0).getDouble("latitude");
+		
+		JSONArray dataB = jsonB.getJSONArray("data");
+		
+		double placeBx = dataB.getJSONObject(0).getDouble("longitude");
+		double placeBy = dataB.getJSONObject(0).getDouble("latitude");
+		
+		System.out.println(placeAx + " "+ placeAy + " B: " + placeBx + " "+ placeBy);
+		
+		float distance = (float) calculateDistance(placeAx, placeAy, placeBx, placeBy );
 		return new Question(placeA, placeB, distance, unit);
 		
 	}
 	
-	public float calculateDistance(/*Json a, Json b*/) {
-		return 0;//sqrt(pwr((a[0]-b[0]),2) + pwr((a[1]-b[1]),2));
+	public double calculateDistance(double placeAx, double placeAy, double placeBx, double placeBy) {
+		
+		double theta = placeAx-placeBx;
+		double dist = Math.sin(deg2rad(placeAy)) * Math.sin(deg2rad(placeBy)) + Math.cos(deg2rad(placeAy)) * Math.cos(deg2rad(placeBy)) * Math.cos(deg2rad(theta));
+		dist = Math.acos(dist);
+		dist = rad2deg(dist);
+		dist = dist * 60 * 1.1515;
+		dist = dist * 1.609344;
+		System.out.println(dist);
+		return (dist);
+	}
+	private double deg2rad(double deg) {
+		  return (deg * Math.PI / 180.0);
+		}
+
+	private double rad2deg(double rad) {
+		  return (rad * 180.0 / Math.PI);
+		}
+	
+	public static void main(String[] args) throws FileNotFoundException{
+		QuestionGenerator q = new QuestionGenerator();
+		try {
+			q.generate(Unit.BANANA, 4);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
