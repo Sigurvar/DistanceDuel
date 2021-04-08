@@ -27,4 +27,6 @@ public abstract class State extends AppCompatActivity {
         serverController.disconnect();
         super.onDestroy();
     }
+
+    public void displayInfo(String text){    }
 }

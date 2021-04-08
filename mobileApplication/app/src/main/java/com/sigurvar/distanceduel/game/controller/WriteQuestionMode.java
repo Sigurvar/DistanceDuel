@@ -1,4 +1,4 @@
 package com.sigurvar.distanceduel.game.controller;
 
-public class WriteQuestionClass extends GameMode{
+public class WriteQuestionMode extends GameMode{
 }
