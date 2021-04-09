@@ -21,14 +21,12 @@ public class Game {
     protected List<Player> players;
     protected boolean isHost;
 
-    public void newGame(String gameCode, String self, String player, boolean isHost){
+    public void newGame(String gameCode, String self){
         players = new ArrayList<>();
         questions = new Stack<>();
         gameMode = new NormalMode(); //TODO skal være basert på settings til spillet
-        this.players.add(new Player(self, true));
         this.gameCode=gameCode;
-        if (player!=null) this.players.add(new Player(player, false));
-        this.isHost = isHost;
+        this.players.add(new Player(self, true));
     }
 
     public GameMode getGameMode() {
@@ -39,6 +37,12 @@ public class Game {
         StringBuilder str = new StringBuilder();
         for(Player p: players) str.append(p.getNickname()).append("\n");
         return str.toString();
+    }
+    public void setMeAsHost(){
+        this.isHost=true;
+    }
+    public boolean isHost(){
+        return isHost;
     }
     public void addNewPlayer(String nickname){
         this.players.add(new Player(nickname, false));

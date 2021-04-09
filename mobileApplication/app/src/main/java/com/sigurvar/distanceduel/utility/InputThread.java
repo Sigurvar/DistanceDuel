@@ -2,6 +2,8 @@ package com.sigurvar.distanceduel.utility;
 
 import android.util.Log;
 
+import com.sigurvar.distanceduel.game.views.ReceiveQuestionState;
+import com.sigurvar.distanceduel.game.views.WaitResultState;
 import com.sigurvar.distanceduel.states.JoinState;
 import com.sigurvar.distanceduel.states.LobbyState;
 import com.sigurvar.distanceduel.states.NewGameState;
@@ -67,12 +69,14 @@ public class InputThread extends Thread{
                                 },
                                 10000
                         );*/
+                        ((ReceiveQuestionState)StateController.getInstance().getState()).receivedQuestion(message);
                         Log.i("InputThread", "Received question: " + message);
-                        ((LobbyState)StateController.getInstance().getState()).displayInfo("Question: "+message);
+                        //((LobbyState)StateController.getInstance().getState()).displayInfo("Question: "+message);
                         break;
                     case PARTIAL_RESULT:
                         Log.i("InputThread", "Received result: " + message);
-                        this.setDisplayInfo(message);
+                        //this.setDisplayInfo(message);
+                        ((WaitResultState)StateController.getInstance().getState()).receivedResult(message);
                         break;
                     case GAME_DONE:
                         Log.i("InputThread", "Game done: " + message);

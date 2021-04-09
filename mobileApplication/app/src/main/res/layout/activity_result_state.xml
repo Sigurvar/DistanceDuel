@@ -4,32 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".states.LobbyState">
+    tools:context=".game.views.ResultState">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="You are now in the lobby"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/gameCode"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/players"/>
+            android:id="@+id/result"/>
 
         <Button
-            android:id="@+id/startGame"
+            android:id="@+id/nextQuestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start Game"
+            android:text="Next question"
             android:visibility="invisible"
-            android:onClick="startGame"/>
-
+            android:onClick="nextQuestion"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

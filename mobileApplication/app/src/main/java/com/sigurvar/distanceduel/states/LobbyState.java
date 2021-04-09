@@ -7,11 +7,12 @@ import android.widget.TextView;
 
 import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.game.models.Game;
+import com.sigurvar.distanceduel.game.views.ReceiveQuestionState;
 import com.sigurvar.distanceduel.utility.ServerController;
 import com.sigurvar.distanceduel.utility.StateController;
 
 
-public class LobbyState extends State {
+public class LobbyState extends ReceiveQuestionState {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,17 +22,19 @@ public class LobbyState extends State {
         Intent intent = getIntent();
         ((TextView)findViewById(R.id.gameCode)).setText(intent.getStringExtra("gameCode"));
         Game game = Game.getInstance();
-        boolean isHost = false;
-        String player = null;
-        try{
-            String nickname = intent.getStringExtra("players");
-            ((TextView)findViewById(R.id.players)).setText(nickname);
-            player = nickname;
-        }catch (Exception e){
-            isHost = true;
+        game.newGame(intent.getStringExtra("gameCode"), intent.getStringExtra("nickname"));
+
+        String players = intent.getStringExtra("players");
+        if (players==null){
+            game.setMeAsHost();
             findViewById(R.id.startGame).setVisibility(View.VISIBLE);
+        }else{
+            for(String playerName:players.split(", ")){
+                //TODO: adjust to adapt to message format form server
+                game.addNewPlayer(playerName);
+            }
+            updatePlayersInGame();
         }
-        game.newGame(intent.getStringExtra("gameCode"), intent.getStringExtra("nickname"), player, isHost);
     }
 
     public void newPlayerJoinedGame(String playerName){
@@ -39,14 +42,18 @@ public class LobbyState extends State {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                TextView tv = findViewById(R.id.players);
-                tv.setText(Game.getInstance().getAllPlayersInGame());
+                updatePlayersInGame();
             }
         });
+    }
+    private void updatePlayersInGame(){
+        TextView tv = findViewById(R.id.players);
+        tv.setText(Game.getInstance().getAllPlayersInGame());
     }
     public void startGame(View view){
         ServerController.getInstance().outputThread.sendStartGame();
     }
+
     public void displayInfo(String text){
         runOnUiThread(new Runnable() {
             @Override
