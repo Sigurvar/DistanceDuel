@@ -6,22 +6,44 @@ public class Question {
 	
 	private String placeA;
 	private String placeB;
-	private float answer;
+	private float correctAnswer;
 	private Unit unit;
 	private ArrayList<Float> answers;
+	private final float maxScore = 1500;
 	
-	public Question(String placeA, String placeB, float answer, Unit unit) {
+	public Question(String placeA, String placeB, float correctAnswer, Unit unit) {
 		this.placeA = placeA;
 		this.placeB = placeB;
-		this.answer = answer;
+		this.correctAnswer = correctAnswer;
 		this.unit = unit;
 	}
 
-	// TODO: burde vel gi poeng basert på hvor nære man er
-	public boolean checkAnswer(float answer) {
-		if (answer == this.answer/unit.getLength()) {
-			return true;
-		}
-		return false;
+	public int calculateScore(float userAnswer) {
+		float percentageIncorrect = Math.abs(1 - (userAnswer / correctAnswer));
+		int score = Math.round(maxScore - (maxScore * percentageIncorrect));
+		System.out.println(score);
+		return score;
+			
 	}
+
+public String getPlaceA() {
+	return placeA;
+}
+
+
+public String getPlaceB() {
+	return placeB;
+}
+
+
+public float getCorrectAnswer() {
+	return correctAnswer;
+}
+
+
+public Unit getUnit() {
+	return unit;
+}
+
+	
 }

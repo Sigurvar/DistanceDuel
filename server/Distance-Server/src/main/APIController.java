@@ -53,10 +53,6 @@ public class APIController {
 		
 
 	}
-public static void main(String[] args) {
-	APIController.getCoordinate("ho chi minh city vietnam");
-	
-}
 
 }
 

@@ -65,12 +65,12 @@ public final class QuestionGenerator {
 		
 		System.out.println(placeAx + " "+ placeAy + " B: " + placeBx + " "+ placeBy);
 		
-		float distance = (float) calculateDistance(placeAx, placeAy, placeBx, placeBy );
+		float distance = (float) calculateDistance(placeAx, placeAy, placeBx, placeBy, unit);
 		return new Question(placeA, placeB, distance, unit);
 		
 	}
 	
-	public double calculateDistance(double placeAx, double placeAy, double placeBx, double placeBy) {
+	public double calculateDistance(double placeAx, double placeAy, double placeBx, double placeBy, Unit unit) {
 		
 		double theta = placeAx-placeBx;
 		double dist = Math.sin(deg2rad(placeAy)) * Math.sin(deg2rad(placeBy)) + Math.cos(deg2rad(placeAy)) * Math.cos(deg2rad(placeBy)) * Math.cos(deg2rad(theta));
@@ -79,6 +79,8 @@ public final class QuestionGenerator {
 		dist = dist * 60 * 1.1515;
 		dist = dist * 1.609344;
 		System.out.println(dist);
+		dist = (dist / unit.getLength())*1000;
+		System.out.println("banan"+dist);
 		return (dist);
 	}
 	private double deg2rad(double deg) {
@@ -88,18 +90,5 @@ public final class QuestionGenerator {
 	private double rad2deg(double rad) {
 		  return (rad * 180.0 / Math.PI);
 		}
-	
-	public static void main(String[] args) throws FileNotFoundException{
-		QuestionGenerator q = new QuestionGenerator();
-		try {
-			q.generate(Unit.BANANA, 4);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 }
