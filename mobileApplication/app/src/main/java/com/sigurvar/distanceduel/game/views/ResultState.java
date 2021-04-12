@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.sigurvar.distanceduel.R;
-import com.sigurvar.distanceduel.game.models.Game;
+import com.sigurvar.distanceduel.game.controller.GameController;
 import com.sigurvar.distanceduel.utility.StateController;
 
 public class ResultState extends ReceiveQuestionState {
@@ -18,7 +18,7 @@ public class ResultState extends ReceiveQuestionState {
         StateController.getInstance().setState(this);
         Intent intent = getIntent();
         ((TextView)findViewById(R.id.result)).setText("The result is\n"+intent.getStringExtra("result"));
-        if(Game.getInstance().isHost()){
+        if(GameController.getInstance().isHost()){
             findViewById(R.id.nextQuestion).setVisibility(View.VISIBLE);
         }
     }

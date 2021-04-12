@@ -2,10 +2,11 @@ package com.sigurvar.distanceduel.utility;
 
 import android.util.Log;
 
+import com.sigurvar.distanceduel.game.controller.GameController;
 import com.sigurvar.distanceduel.game.views.ReceiveQuestionState;
 import com.sigurvar.distanceduel.game.views.WaitResultState;
 import com.sigurvar.distanceduel.states.JoinState;
-import com.sigurvar.distanceduel.states.LobbyState;
+import com.sigurvar.distanceduel.game.views.LobbyState;
 import com.sigurvar.distanceduel.states.NewGameState;
 
 import java.io.DataInputStream;
@@ -56,7 +57,8 @@ public class InputThread extends Thread{
                     case NEW_PLAYER_IN_GAME:
                         Log.i("InputThread", message + " joined the game");
                         //this.setDisplayInfo(message + " joined the game");
-                        ((LobbyState)StateController.getInstance().getState()).newPlayerJoinedGame(message);
+                        //((LobbyState)StateController.getInstance().getState()).newPlayerJoinedGame(message);
+                        GameController.getCurrentGame().newPlayerJoinedGame(message);
                         break;
                     case NEW_QUESTION:/*
                         new java.util.Timer().schedule(

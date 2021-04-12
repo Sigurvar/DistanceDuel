@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.sigurvar.distanceduel.R;
+import com.sigurvar.distanceduel.game.controller.GameController;
+import com.sigurvar.distanceduel.game.controller.NormalController;
+import com.sigurvar.distanceduel.game.views.LobbyState;
 import com.sigurvar.distanceduel.utility.ServerController;
 import com.sigurvar.distanceduel.utility.StateController;
 
@@ -13,6 +16,7 @@ public class NewGameState extends State {
 
     ServerController serverController = ServerController.getInstance();
     private String nickname = "";
+    private String settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +27,18 @@ public class NewGameState extends State {
     public void createGame(View view) {
         Log.i("Game", "Starting new game");
         setNickname(view);
+        settings = "Dette er innstilligene";
         serverController.outputThread.sendNewGame("Dette er innstilligene");
     }
 
-    public void receivedGameCode(String text){
-        Intent intent = new Intent(this, LobbyState.class);
-        intent.putExtra("gameCode", text);
-        intent.putExtra("nickname", nickname);
-        this.startActivity(intent);
+    public void receivedGameCode(String gameCode){
+        if (true) {// Settings = Normal mode
+            new NormalController(gameCode, nickname, getApplicationContext());
+        }else{
+            // settings = challenge mode
+        }
+        GameController.getCurrentGame().setMeAsHost();
+        GameController.getCurrentGame().goToLobby();
     }
     public void setNickname(View view){
         nickname = ((TextView)findViewById(R.id.nickname)).getText().toString();

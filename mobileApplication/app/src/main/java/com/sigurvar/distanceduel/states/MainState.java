@@ -1,18 +1,14 @@
 package com.sigurvar.distanceduel.states;
 
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.utility.ServerController;
 import com.sigurvar.distanceduel.utility.StateController;
-
-import org.w3c.dom.Text;
 
 public class MainState extends State {
 

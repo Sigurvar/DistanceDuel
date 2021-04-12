@@ -24,7 +24,7 @@
 
         <activity android:name=".states.SettingsState" />
         <activity android:name=".states.NewGameState" />
-        <activity android:name=".states.LobbyState" />
+        <activity android:name=".game.views.LobbyState" />
         <activity android:name=".states.MainState">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

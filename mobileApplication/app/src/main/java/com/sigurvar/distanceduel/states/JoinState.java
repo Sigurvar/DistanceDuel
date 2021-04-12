@@ -8,6 +8,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sigurvar.distanceduel.R;
+import com.sigurvar.distanceduel.game.controller.GameController;
+import com.sigurvar.distanceduel.game.controller.NormalController;
+import com.sigurvar.distanceduel.game.views.LobbyState;
 import com.sigurvar.distanceduel.utility.ServerController;
 import com.sigurvar.distanceduel.utility.StateController;
 
@@ -28,12 +31,14 @@ public class JoinState extends State {
         serverController.outputThread.sendGameCode(gameCode);
     }
 
-    public void joinedGameSuccessful(String players){
-        Intent intent = new Intent(this, LobbyState.class);
-        intent.putExtra("gameCode", gameCode);
-        intent.putExtra("players", players);
-        intent.putExtra("nickname", nickname);
-        this.startActivity(intent);
+    public void joinedGameSuccessful(String info){
+        // TODO: info needs to contain game setting and players in game
+        GameController g = new NormalController(gameCode, nickname, getApplicationContext());
+        for(String playerName : info.split(", ")){
+            //TODO: adjust to adapt to message format form server
+            g.addNewPlayer(playerName);
+        }
+        g.goToLobby();
     }
 
     public void joinedGameFailed(String error){
