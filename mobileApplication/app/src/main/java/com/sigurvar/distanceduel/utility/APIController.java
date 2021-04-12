@@ -36,7 +36,7 @@ public class APIController {
 
     }
 
-    public String suggest(String suggest) {
+    public String suggestPlace(String suggest) {
         String page = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/suggest?text=" + suggest + "&outFields=*&maxSuggestions=1&f=json";
         try {
             JSONObject response = SendRequest(page);
