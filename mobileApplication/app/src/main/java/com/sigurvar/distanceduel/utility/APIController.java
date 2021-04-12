@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class APIController {
     public void get() {
         try {
@@ -30,5 +34,17 @@ public class APIController {
 
         return response.toString();
 
+    }
+
+    public String suggest(String suggest) {
+        String page = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/suggest?text=" + suggest + "&outFields=*&maxSuggestions=1&f=json";
+        try {
+            JSONObject response = SendRequest(page);
+            System.out.println(response.toString());
+            return respone.getJSONArray("suggestions").getJSONObject(0).getString("text");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
