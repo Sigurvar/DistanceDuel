@@ -36,7 +36,7 @@ public final class QuestionGenerator {
 			int a = rand.nextInt(cities.size());
 			int b = rand.nextInt(cities.size());
 			while (a==b) {
-				b = rand.nextInt(numberoflines);
+				b = rand.nextInt(cities.size());
 			}
 			
 			String placeA = cities.get(a);
