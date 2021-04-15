@@ -1,5 +1,9 @@
 package game;
 
+import java.io.FileNotFoundException;
+
+import org.json.JSONException;
+
 import main.QuestionGenerator;
 
 public class NormalMode extends Game {
@@ -11,7 +15,12 @@ public class NormalMode extends Game {
 
 	@Override
 	public void startGame() {
-		upcoming = QuestionGenerator.generate(unit, 10);
+		QuestionGenerator questionGenerator = new QuestionGenerator();
+		try {
+			upcoming = questionGenerator.generate(unit, 10);
+		} catch (FileNotFoundException | JSONException e) {
+			e.printStackTrace();
+		}
 		super.sendQuestion();
 	}
 

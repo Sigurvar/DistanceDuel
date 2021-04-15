@@ -36,13 +36,15 @@ public abstract class Game {
 	void sendQuestion() {
 		try {
 			Question question = upcoming.pop();
+			currentAnswer = new JSONObject();
+			System.out.println("Sending question to all players");
+			String questionString = "How many " + question.getUnit() + " is it between " + question.getPlaceA() + " and " + question.getPlaceB() + "?";
+			for (Player p : players) p.outputThread.sendQuestion(questionString);
 		}catch(Exception e) {
 			System.out.println("Det finnes ingen q");
 			//TODO send game over
 		}
-		currentAnswer = new JSONObject();
-		System.out.println("Sending question to all players");
-		for (Player p : players) p.outputThread.sendQuestion("Hvor mange bananer er det mellom oslo og bergen ");
+		
 		
 	}
 	public void join(Player player) {
@@ -53,7 +55,9 @@ public abstract class Game {
 	
 	public void answer(Player player, double answer) {
 		// TODO add timer on question
+		
 		System.out.println(player.getNickname() +" answered "+answer);
+
 		try {
 			this.currentAnswer.append(player.getNickname(), answer);
 			if (this.currentAnswer.length()==players.size()) {
