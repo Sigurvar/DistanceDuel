@@ -33,8 +33,8 @@ public final class QuestionGenerator {
 
 		for (int i = 0; i < numberOfQuestions; i ++) {
 			
-			int a = rand.nextInt(numberoflines);
-			int b = rand.nextInt(numberoflines);
+			int a = rand.nextInt(cities.size());
+			int b = rand.nextInt(cities.size());
 			while (a==b) {
 				b = rand.nextInt(numberoflines);
 			}

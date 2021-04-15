@@ -19,7 +19,7 @@ public class Question {
 	}
 
 	public int calculateScore(float userAnswer) {
-		float percentageIncorrect = Math.abs(1 - (userAnswer / correctAnswer));
+		float percentageIncorrect = Math.abs(1 - Math.min((userAnswer / correctAnswer), 2));
 		int score = Math.round(maxScore - (maxScore * percentageIncorrect));
 		System.out.println(score);
 		return score;
