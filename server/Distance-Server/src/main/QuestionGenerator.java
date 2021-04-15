@@ -27,7 +27,6 @@ public final class QuestionGenerator {
 		while (file.hasNext()){	
 			cities.add(new String(file.next()));
 		}
-		System.out.println(cities);
 
 		for (int i = 0; i < numberOfQuestions; i ++) {
 			
@@ -60,7 +59,7 @@ public final class QuestionGenerator {
 		double placeBx = dataB.getJSONObject(0).getDouble("longitude");
 		double placeBy = dataB.getJSONObject(0).getDouble("latitude");
 		
-		System.out.println(placeAx + " "+ placeAy + " B: " + placeBx + " "+ placeBy);
+		System.out.println(placeA+": "+placeAx + " "+ placeAy + placeB+": " + placeBx + " "+ placeBy);
 		
 		float distance = (float) calculateDistance(placeAx, placeAy, placeBx, placeBy, unit);
 		return new Question(placeA, placeB, distance, unit);
@@ -75,9 +74,8 @@ public final class QuestionGenerator {
 		dist = rad2deg(dist);
 		dist = dist * 60 * 1.1515;
 		dist = dist * 1.609344;
-		System.out.println(dist);
 		dist = (dist / unit.getLength())*1000;
-		System.out.println("banan"+dist);
+		System.out.println("number of "+unit.name()+"'s: "+dist);
 		return (dist);
 	}
 	private double deg2rad(double deg) {

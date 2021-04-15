@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".game.views.AnswerState">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/question"/>
+        <EditText
+            android:id="@+id/answer"
+            android:layout_width="112dp"
+            android:layout_height="64dp"
+            android:text="answer"
+            tools:layout_editor_absoluteX="177dp"
+            tools:layout_editor_absoluteY="356dp" />
+        <Button
+            android:id="@+id/sendAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send Answer"
+            android:onClick="sendAnswer"
+            tools:layout_editor_absoluteX="153dp"
+            tools:layout_editor_absoluteY="416dp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

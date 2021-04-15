@@ -2,8 +2,8 @@ package com.sigurvar.distanceduel.utility;
 
 import android.util.Log;
 
-import com.sigurvar.distanceduel.states.JoinState;
-import com.sigurvar.distanceduel.states.LobbyState;
+import com.sigurvar.distanceduel.game.Game;
+import com.sigurvar.distanceduel.states.JoinGameState;
 import com.sigurvar.distanceduel.states.NewGameState;
 
 import java.io.DataInputStream;
@@ -39,7 +39,7 @@ public class InputThread extends Thread{
                 switch (messageType) {
                     case PLAYERS_IN_GAME:
                         Log.i("InputThread", "Players in game: " + message);
-                        ((JoinState)StateController.getInstance().getState()).joinedGameSuccessful(message);
+                        ((JoinGameState)StateController.getInstance().getState()).joinedGameSuccessful(message);
                         break;
                     case GAME_CODE:
                         Log.i("InputThread", "Game code received: " + message);
@@ -48,13 +48,14 @@ public class InputThread extends Thread{
                         break;
                     case GAME_CODE_DOES_NOT_EXIST:
                         Log.i("InputThread", message);
-                        ((JoinState)StateController.getInstance().getState()).joinedGameFailed(message);
+                        ((JoinGameState)StateController.getInstance().getState()).joinedGameFailed(message);
                         //this.setDisplayInfo(message);
                         break;
                     case NEW_PLAYER_IN_GAME:
                         Log.i("InputThread", message + " joined the game");
                         //this.setDisplayInfo(message + " joined the game");
-                        ((LobbyState)StateController.getInstance().getState()).newPlayerJoinedGame(message);
+                        //((LobbyState)StateController.getInstance().getState()).newPlayerJoinedGame(message);
+                        Game.getInstance().getGameController().newPlayerJoinedGame(message);
                         break;
                     case NEW_QUESTION:/*
                         new java.util.Timer().schedule(
@@ -67,12 +68,16 @@ public class InputThread extends Thread{
                                 },
                                 10000
                         );*/
+                        Game.getInstance().getGameController().receivedQuestion(message);
+                        //((ReceiveQuestionState)StateController.getInstance().getState()).receivedQuestion(message);
                         Log.i("InputThread", "Received question: " + message);
-                        ((LobbyState)StateController.getInstance().getState()).displayInfo("Question: "+message);
+                        //((LobbyState)StateController.getInstance().getState()).displayInfo("Question: "+message);
                         break;
                     case PARTIAL_RESULT:
                         Log.i("InputThread", "Received result: " + message);
-                        this.setDisplayInfo(message);
+                        //this.setDisplayInfo(message);
+                        Game.getInstance().getGameController().receivedResult(message);
+                        //((WaitResultState)StateController.getInstance().getState()).receivedResult(message);
                         break;
                     case GAME_DONE:
                         Log.i("InputThread", "Game done: " + message);

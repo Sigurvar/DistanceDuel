@@ -29,9 +29,6 @@ public class OutputThread extends Thread{
         this.sendData(CREATE_NEW_GAME, setting);
     }
     public void sendGameCode(String code){
-        System.out.println("sending gamecode");
-
-
         this.sendData(JOIN_GAME, code);
     }
     public void sendAnswer(String answer){

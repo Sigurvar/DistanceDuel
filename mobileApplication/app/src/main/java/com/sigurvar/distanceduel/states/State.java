@@ -15,11 +15,7 @@ public abstract class State extends AppCompatActivity {
         //setContentView(R.layout.activity_state1);
     }
 
-    @Override
-    public void onBackPressed() {
-        // TODO: Legg til spm om man er sikker på å forlate spillet, skal kanskje inn i GAMEMODE
-        ServerController serverController = ServerController.getInstance();
-    }
+
 
     @Override
     public void onDestroy() {
