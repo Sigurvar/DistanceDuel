@@ -15,9 +15,12 @@ import com.sigurvar.distanceduel.game.views.ResultState;
 import com.sigurvar.distanceduel.game.views.WaitResultState;
 import com.sigurvar.distanceduel.game.views.WaitState;
 import com.sigurvar.distanceduel.states.GameState;
-import com.sigurvar.distanceduel.states.State;
 import com.sigurvar.distanceduel.utility.ServerController;
-import com.sigurvar.distanceduel.utility.StateController;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.BreakIterator;
 
 
 public abstract class GameController {
@@ -58,12 +61,5 @@ public abstract class GameController {
         Intent intent = new Intent(context, ResultState.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
-    }
-
-    public void receivedFinalResult(String result){
-        Intent intent = new Intent(context, FinalResultState.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
-        gameModel.gotResultForQuestion(result);
     }
 }

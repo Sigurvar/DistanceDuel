@@ -8,11 +8,8 @@ import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.utility.ServerController;
 import com.sigurvar.distanceduel.utility.StateController;
 
-import java.util.Observable;
-import java.util.Observer;
 
-
-public class LobbyState extends ReceiveQuestionState implements Observer {
+public class LobbyState extends ReceiveQuestionState {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +43,5 @@ public class LobbyState extends ReceiveQuestionState implements Observer {
                 tv.setText(text);
             }
         });
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        setPlayersInGame();
     }
 }

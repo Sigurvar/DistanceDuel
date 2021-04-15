@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DistanceDuel">
         <activity android:name=".game.views.ResultState"/>
+        <activity android:name=".game.views.FinalResultState"/>
         <activity android:name=".game.views.WaitResultState"/>
         <activity android:name=".game.views.AnswerState"/>
 

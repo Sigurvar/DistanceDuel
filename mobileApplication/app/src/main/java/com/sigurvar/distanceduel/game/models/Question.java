@@ -9,7 +9,7 @@ public class Question {
     private String q; // TODO add location class
     private Unit unit;
     private HashMap<Player, Float> answers; // TODO: create an answer class
-    private Float answer;
+    private String answer;
     private String result;
 
 
@@ -26,5 +26,17 @@ public class Question {
 
     public String getResult() {
         return result;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswers(HashMap<Player, Float> answers) {
+        this.answers = answers;
     }
 }

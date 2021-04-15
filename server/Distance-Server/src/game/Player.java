@@ -82,6 +82,11 @@ public class Player{
 			System.out.println("Not owner");
 		}
 	}
+	public void askForNextQuestion() {
+		if (game.getOwner()==this) {
+			game.sendQuestion();
+		}
+	}
 
 	public void disconect() {
 		try {

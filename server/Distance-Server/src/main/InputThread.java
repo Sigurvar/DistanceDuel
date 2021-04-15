@@ -14,6 +14,7 @@ public class InputThread extends Thread{
     private static final int START_GAME = 4;
     private static final int ANSWER_QUESTION = 5;
     private static final int LEAVING_GAME = 6; 
+    private static final int NEXT_QUESTION = 7;
     
 	private final Player player;
     private final DataInputStream dataInputStream;
@@ -50,6 +51,9 @@ public class InputThread extends Thread{
 		            	break;
 		            case LEAVING_GAME:
 		            	player.disconect();
+		            	break;
+		            case NEXT_QUESTION:
+		            	player.askForNextQuestion();
 		            	break;
 		        }
 			} catch (IOException e) {

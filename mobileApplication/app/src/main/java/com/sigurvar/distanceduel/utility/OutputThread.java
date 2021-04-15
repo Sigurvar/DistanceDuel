@@ -13,6 +13,7 @@ public class OutputThread extends Thread{
     private static final int START_GAME = 4;
     private static final int ANSWER_QUESTION = 5;
     private static final int LEAVING_GAME = 6;
+    private static final int NEXT_QUESTION = 7;
 
 
 
@@ -38,6 +39,7 @@ public class OutputThread extends Thread{
         this.sendData(START_GAME, "");
     }
     public void leaveGame() {this.sendData(LEAVING_GAME, "");}
+    public void getNextQuestion(){this.sendData(NEXT_QUESTION, "");}
 
 
 
