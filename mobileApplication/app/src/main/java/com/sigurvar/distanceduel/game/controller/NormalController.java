@@ -4,8 +4,14 @@ import android.content.Context;
 
 public class NormalController extends GameController{
 
-    public NormalController(String gameCode, String nickname, Context context){
-        super(gameCode, nickname, context);
-        super.setGameController(this);
+    public NormalController(Context context){
+        super(context);
     }
+
+    @Override
+    public void startGame() {
+
+    }
+
+
 }

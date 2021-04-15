@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.sigurvar.distanceduel.R;
+import com.sigurvar.distanceduel.game.Game;
 import com.sigurvar.distanceduel.game.controller.GameController;
-import com.sigurvar.distanceduel.game.controller.NormalController;
 import com.sigurvar.distanceduel.game.views.LobbyState;
 import com.sigurvar.distanceduel.utility.ServerController;
 import com.sigurvar.distanceduel.utility.StateController;
@@ -32,13 +32,10 @@ public class NewGameState extends State {
     }
 
     public void receivedGameCode(String gameCode){
-        if (true) {// Settings = Normal mode
-            new NormalController(gameCode, nickname, getApplicationContext());
-        }else{
-            // settings = challenge mode
-        }
-        GameController.getCurrentGame().setMeAsHost();
-        GameController.getCurrentGame().goToLobby();
+        Game.getInstance().setupNewGame(nickname, gameCode, getApplicationContext());
+        Game.getInstance().getGameModel().setAsHost();
+        Intent intent = new Intent(this, LobbyState.class);
+        this.startActivity(intent);
     }
     public void setNickname(View view){
         nickname = ((TextView)findViewById(R.id.nickname)).getText().toString();

@@ -16,14 +16,16 @@ public class AnswerState extends GameState {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer_state);
         StateController.getInstance().setState(this);
-        Intent intent = getIntent();
-        ((TextView)findViewById(R.id.question)).setText("Question:\n"+intent.getStringExtra("question"));
+        displayQuestion();
+        //Intent intent = getIntent();
+        //((TextView)findViewById(R.id.question)).setText("Question:\n"+intent.getStringExtra("question"));
 
     }
     public void sendAnswer(View view){
-        Intent intent = new Intent(this, WaitResultState.class);
-        intent.putExtra("answer", ((TextView)findViewById(R.id.answer)).getText().toString());
-        this.startActivity(intent);
+        gameController.sendAnswer( ((TextView)findViewById(R.id.answer)).getText().toString());
+    }
 
+    public void displayQuestion(){
+        ((TextView)findViewById(R.id.question)).setText("Question:\n"+gameModel.getQuestionText());
     }
 }

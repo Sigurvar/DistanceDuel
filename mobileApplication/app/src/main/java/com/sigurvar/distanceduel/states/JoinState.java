@@ -8,8 +8,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sigurvar.distanceduel.R;
+import com.sigurvar.distanceduel.game.Game;
 import com.sigurvar.distanceduel.game.controller.GameController;
-import com.sigurvar.distanceduel.game.controller.NormalController;
 import com.sigurvar.distanceduel.game.views.LobbyState;
 import com.sigurvar.distanceduel.utility.ServerController;
 import com.sigurvar.distanceduel.utility.StateController;
@@ -33,12 +33,13 @@ public class JoinState extends State {
 
     public void joinedGameSuccessful(String info){
         // TODO: info needs to contain game setting and players in game
-        GameController g = new NormalController(gameCode, nickname, getApplicationContext());
+        Game.getInstance().setupNewGame(nickname, gameCode, getApplicationContext());
         for(String playerName : info.split(", ")){
             //TODO: adjust to adapt to message format form server
-            g.addNewPlayer(playerName);
+            Game.getInstance().getGameModel().addNewPlayer(playerName);
         }
-        g.goToLobby();
+        Intent intent = new Intent(this, LobbyState.class);
+        this.startActivity(intent);
     }
 
     public void joinedGameFailed(String error){

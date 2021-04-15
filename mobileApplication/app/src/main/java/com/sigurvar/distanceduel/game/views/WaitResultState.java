@@ -15,7 +15,6 @@ public class WaitResultState extends GameState {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wait_result_state);
         StateController.getInstance().setState(this);
-        ServerController.getInstance().outputThread.sendAnswer(getIntent().getStringExtra("answer"));
 
     }
 
