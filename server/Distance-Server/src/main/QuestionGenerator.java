@@ -22,12 +22,10 @@ public final class QuestionGenerator {
 		Scanner file = new Scanner(new File("src/main/worldcities.txt"));  
 		file.useDelimiter("\n");
 		
-		int numberoflines = 0;
 		ArrayList<String> cities = new ArrayList<String>();
 
 		while (file.hasNext()){	
 			cities.add(new String(file.next()));
-			numberoflines++;
 		}
 		System.out.println(cities);
 
@@ -45,8 +43,7 @@ public final class QuestionGenerator {
 			
 			product.push(create(placeA, placeB, unit));
 		}
-		System.out.println(product);
-		return null;
+		return product;
 	}
 	
 	public Question create(String placeA, String placeB, Unit unit) throws JSONException {

@@ -30,7 +30,6 @@ public class APIController {
         }
         in.close();
         String str = content.toString();
-       
         return str;
 
     }
@@ -38,17 +37,20 @@ public class APIController {
 	public static JSONObject getCoordinate(String place) {
 		
 		String urlEncodedPlace = URLEncoder.encode(place, StandardCharsets.UTF_8);
-		JSONObject jsonObj;
-		
+		JSONObject jsonObj = null;
+		System.out.println(urlEncodedPlace);
+		String s = "[]";
 		try {
-			String dataStr = SendRequest("http://api.positionstack.com/v1/forward?access_key=bbf5216ec5ff418aea03e7544e54729d&query="+urlEncodedPlace,"");
-			jsonObj = new JSONObject(dataStr);
+			while (s.equals("[]")){
+				String dataStr = SendRequest("http://api.positionstack.com/v1/forward?access_key=bbf5216ec5ff418aea03e7544e54729d&query="+urlEncodedPlace,"");
+				jsonObj = new JSONObject(dataStr);
+				JSONArray data = jsonObj.getJSONArray("data");
+				s = data.get(0).toString();
+			}
 			
 		} catch (IOException | JSONException e) {
-			jsonObj = null;
 			e.printStackTrace();
 		}
-		System.out.println(jsonObj);
 		return jsonObj;
 		
 
