@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.sigurvar.distanceduel.R;
+import com.sigurvar.distanceduel.utility.APIController;
 import com.sigurvar.distanceduel.utility.ServerController;
 import com.sigurvar.distanceduel.utility.StateController;
 
@@ -56,5 +57,11 @@ public class MainState extends State {
                 tv.setText(text);
             }
         });
+    }
+
+    public void autocomplete(View view){
+        TextView tv = findViewById(R.id.search_text);
+        System.out.println(new APIController().suggestPlace(tv.getText().toString()));
+
     }
 }

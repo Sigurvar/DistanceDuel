@@ -64,9 +64,29 @@
             tools:layout_editor_absoluteX="153dp"
             tools:layout_editor_absoluteY="416dp" />
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/displayInfo"/>
+
+
+        <!--
+        To test if autocomplete works
+        -->
+
+        <EditText
+            android:id="@+id/search_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="search for text"
+            tools:layout_editor_absoluteX="171dp"
+            tools:layout_editor_absoluteY="107dp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="give autocomplete answers"
+            android:onClick="autocomplete"
+            tools:layout_editor_absoluteX="153dp"
+            tools:layout_editor_absoluteY="143dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
