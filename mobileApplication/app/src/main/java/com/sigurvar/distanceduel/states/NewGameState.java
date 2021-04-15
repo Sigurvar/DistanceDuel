@@ -1,21 +1,17 @@
 package com.sigurvar.distanceduel.states;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.game.Game;
-import com.sigurvar.distanceduel.game.controller.GameController;
 import com.sigurvar.distanceduel.game.views.LobbyState;
-import com.sigurvar.distanceduel.utility.ServerController;
 import com.sigurvar.distanceduel.utility.StateController;
 
-public class NewGameState extends State {
+public class NewGameState extends ConnectToServerState {
 
-    ServerController serverController = ServerController.getInstance();
-    private String nickname = "";
     private String settings;
 
     @Override
@@ -26,7 +22,7 @@ public class NewGameState extends State {
     }
     public void createGame(View view) {
         Log.i("Game", "Starting new game");
-        setNickname(view);
+        connectToServer();
         settings = "Dette er innstilligene";
         serverController.outputThread.sendNewGame("Dette er innstilligene");
     }
@@ -36,11 +32,5 @@ public class NewGameState extends State {
         Game.getInstance().getGameModel().setAsHost();
         Intent intent = new Intent(this, LobbyState.class);
         this.startActivity(intent);
-    }
-    public void setNickname(View view){
-        nickname = ((TextView)findViewById(R.id.nickname)).getText().toString();
-        //TODO: validate nickname
-        serverController.outputThread.sendNickname(nickname);
-
     }
 }

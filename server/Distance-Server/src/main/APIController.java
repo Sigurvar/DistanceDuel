@@ -20,8 +20,6 @@ public class APIController {
         URL url1 = new URL(url);
         HttpURLConnection con = (HttpURLConnection) url1.openConnection();
         con.setRequestMethod("GET");
-        System.out.print(con.getResponseCode());
-        System.out.println(con.getResponseMessage());
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuffer content = new StringBuffer();
@@ -38,7 +36,6 @@ public class APIController {
 		
 		String urlEncodedPlace = URLEncoder.encode(place, StandardCharsets.UTF_8);
 		JSONObject jsonObj = null;
-		System.out.println(urlEncodedPlace);
 		String s = "[]";
 		try {
 			while (s.equals("[]")){

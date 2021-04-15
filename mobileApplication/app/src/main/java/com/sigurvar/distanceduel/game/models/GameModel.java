@@ -23,12 +23,9 @@ public class GameModel extends Observable {
 
     public void setAsHost(){
         this.isHost=true;
-    }//TODO make observable
+    }
     public boolean isHost(){
         return isHost;
-    }
-    public void setGameCode(String gameCode){
-        this.gameCode = gameCode;
     }
     public String getGameCode() {
         return gameCode;

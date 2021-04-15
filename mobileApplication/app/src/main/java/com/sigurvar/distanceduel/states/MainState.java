@@ -26,29 +26,16 @@ public class MainState extends State {
     }
 
     public void createGame(View view){
-        //Log.i("Game", "Starting new game");
-        //serverController.outputThread.sendNewGame("Dette er innstilligene");
         Intent myIntent = new Intent(this, NewGameState.class);
-        //myIntent.putExtra("key", value); //Optional parameters
         this.startActivity(myIntent);
     }
 
     public void joinGame(View view){
-        Intent myIntent = new Intent(this, JoinState.class);
-        //myIntent.putExtra("key", value); //Optional parameters
+        Intent myIntent = new Intent(this, JoinGameState.class);
         this.startActivity(myIntent);
-        //TextView tv = findViewById(R.id.gameCode);
-        //serverController.outputThread.sendGameCode(tv.getText().toString());
     }
 
-    public void sendAnswer(View view){
-        TextView tv = findViewById(R.id.answer);
-        serverController.outputThread.sendAnswer(tv.getText().toString());
-    }
     public void leaveGame(View view){serverController.disconnect();}
-    public void connect(View view){
-        serverController.connect(this);
-    }
     public void displayInfo(String text){
         runOnUiThread(new Runnable() {
             @Override

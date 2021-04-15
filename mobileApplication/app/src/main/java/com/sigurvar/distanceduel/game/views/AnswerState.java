@@ -1,6 +1,5 @@
 package com.sigurvar.distanceduel.game.views;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -17,9 +16,6 @@ public class AnswerState extends GameState {
         setContentView(R.layout.activity_answer_state);
         StateController.getInstance().setState(this);
         displayQuestion();
-        //Intent intent = getIntent();
-        //((TextView)findViewById(R.id.question)).setText("Question:\n"+intent.getStringExtra("question"));
-
     }
     public void sendAnswer(View view){
         gameController.sendAnswer( ((TextView)findViewById(R.id.answer)).getText().toString());

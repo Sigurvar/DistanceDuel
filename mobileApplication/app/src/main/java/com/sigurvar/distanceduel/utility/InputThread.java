@@ -3,11 +3,7 @@ package com.sigurvar.distanceduel.utility;
 import android.util.Log;
 
 import com.sigurvar.distanceduel.game.Game;
-import com.sigurvar.distanceduel.game.controller.GameController;
-import com.sigurvar.distanceduel.game.views.ReceiveQuestionState;
-import com.sigurvar.distanceduel.game.views.WaitResultState;
-import com.sigurvar.distanceduel.states.JoinState;
-import com.sigurvar.distanceduel.game.views.LobbyState;
+import com.sigurvar.distanceduel.states.JoinGameState;
 import com.sigurvar.distanceduel.states.NewGameState;
 
 import java.io.DataInputStream;
@@ -43,7 +39,7 @@ public class InputThread extends Thread{
                 switch (messageType) {
                     case PLAYERS_IN_GAME:
                         Log.i("InputThread", "Players in game: " + message);
-                        ((JoinState)StateController.getInstance().getState()).joinedGameSuccessful(message);
+                        ((JoinGameState)StateController.getInstance().getState()).joinedGameSuccessful(message);
                         break;
                     case GAME_CODE:
                         Log.i("InputThread", "Game code received: " + message);
@@ -52,7 +48,7 @@ public class InputThread extends Thread{
                         break;
                     case GAME_CODE_DOES_NOT_EXIST:
                         Log.i("InputThread", message);
-                        ((JoinState)StateController.getInstance().getState()).joinedGameFailed(message);
+                        ((JoinGameState)StateController.getInstance().getState()).joinedGameFailed(message);
                         //this.setDisplayInfo(message);
                         break;
                     case NEW_PLAYER_IN_GAME:

@@ -12,16 +12,6 @@
         <Button
             android:layout_marginLeft="1dp"
             android:layout_marginTop="1dp"
-            android:id="@+id/connect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Connect"
-            android:onClick="connect"
-            tools:layout_editor_absoluteX="123dp"
-            tools:layout_editor_absoluteY="261dp" />
-        <Button
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="1dp"
             android:id="@+id/createGame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,22 +26,6 @@
             android:layout_height="wrap_content"
             android:text="Join game"
             android:onClick="joinGame"
-            tools:layout_editor_absoluteX="153dp"
-            tools:layout_editor_absoluteY="416dp" />
-
-        <EditText
-            android:id="@+id/answer"
-            android:layout_width="112dp"
-            android:layout_height="64dp"
-            android:text="answer"
-            tools:layout_editor_absoluteX="177dp"
-            tools:layout_editor_absoluteY="356dp" />
-        <Button
-            android:id="@+id/sendAnswer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send Answer"
-            android:onClick="sendAnswer"
             tools:layout_editor_absoluteX="153dp"
             tools:layout_editor_absoluteY="416dp" />
 
