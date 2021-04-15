@@ -19,20 +19,6 @@
             android:onClick="connect"
             tools:layout_editor_absoluteX="123dp"
             tools:layout_editor_absoluteY="261dp" />
-        <EditText
-            android:id="@+id/nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nickname"
-            tools:layout_editor_absoluteX="171dp"
-            tools:layout_editor_absoluteY="107dp" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Set nickname"
-            android:onClick="setNickname"
-            tools:layout_editor_absoluteX="153dp"
-            tools:layout_editor_absoluteY="143dp" />
         <Button
             android:layout_marginLeft="1dp"
             android:layout_marginTop="1dp"
@@ -44,28 +30,12 @@
             tools:layout_editor_absoluteX="123dp"
             tools:layout_editor_absoluteY="261dp" />
 
-
-        <EditText
-            android:id="@+id/gameCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="game code"
-            tools:layout_editor_absoluteX="177dp"
-            tools:layout_editor_absoluteY="356dp" />
         <Button
             android:id="@+id/joinGame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Join game"
             android:onClick="joinGame"
-            tools:layout_editor_absoluteX="153dp"
-            tools:layout_editor_absoluteY="416dp" />
-        <Button
-            android:id="@+id/startGame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start Game"
-            android:onClick="startGame"
             tools:layout_editor_absoluteX="153dp"
             tools:layout_editor_absoluteY="416dp" />
 

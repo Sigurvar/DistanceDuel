@@ -2,6 +2,10 @@ package com.sigurvar.distanceduel.utility;
 
 import android.util.Log;
 
+import com.sigurvar.distanceduel.states.JoinState;
+import com.sigurvar.distanceduel.states.LobbyState;
+import com.sigurvar.distanceduel.states.NewGameState;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 
@@ -35,19 +39,22 @@ public class InputThread extends Thread{
                 switch (messageType) {
                     case PLAYERS_IN_GAME:
                         Log.i("InputThread", "Players in game: " + message);
-                        this.setDisplayInfo("Players in game: " + message);
+                        ((JoinState)StateController.getInstance().getState()).joinedGameSuccessful(message);
                         break;
                     case GAME_CODE:
                         Log.i("InputThread", "Game code received: " + message);
-                        this.setDisplayInfo("Game code received: " + message);
+                        ((NewGameState)StateController.getInstance().getState()).receivedGameCode(message);
+                        //this.setDisplayInfo("Game code received: " + message);
                         break;
                     case GAME_CODE_DOES_NOT_EXIST:
                         Log.i("InputThread", message);
-                        this.setDisplayInfo(message);
+                        ((JoinState)StateController.getInstance().getState()).joinedGameFailed(message);
+                        //this.setDisplayInfo(message);
                         break;
                     case NEW_PLAYER_IN_GAME:
                         Log.i("InputThread", message + " joined the game");
-                        this.setDisplayInfo(message + " joined the game");
+                        //this.setDisplayInfo(message + " joined the game");
+                        ((LobbyState)StateController.getInstance().getState()).newPlayerJoinedGame(message);
                         break;
                     case NEW_QUESTION:/*
                         new java.util.Timer().schedule(
@@ -61,7 +68,7 @@ public class InputThread extends Thread{
                                 10000
                         );*/
                         Log.i("InputThread", "Received question: " + message);
-                        this.setDisplayInfo("Question: "+message);
+                        ((LobbyState)StateController.getInstance().getState()).displayInfo("Question: "+message);
                         break;
                     case PARTIAL_RESULT:
                         Log.i("InputThread", "Received result: " + message);
@@ -85,7 +92,7 @@ public class InputThread extends Thread{
         }
     }
     private void setDisplayInfo(String text){
-        serverController.main.displayInfo(text);
+        StateController.getInstance().getState().displayInfo(text);
     }
     public void disconnect(){
         try {
