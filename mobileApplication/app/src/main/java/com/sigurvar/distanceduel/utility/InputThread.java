@@ -17,6 +17,7 @@ public class InputThread extends Thread{
     private static final int GAME_DONE = 7;
     private static final int YOU_ARE_OWNER = 8;//Veldig usikker på navnet her
     private static final int GAME_STARTING_SOON = 9;//Burde det være countdown mellom hvert spm
+    private static final int PLAYER_LEFT_GAME = 10;
 
     private final ServerController serverController;
     private final DataInputStream dataInputStream;
@@ -75,6 +76,10 @@ public class InputThread extends Thread{
                         // TODO: implement function to set player as owner
                         Log.i("InputThread", message);
                         this.setDisplayInfo(message);
+                        break;
+                    case PLAYER_LEFT_GAME:
+                        Log.i("InputThread", message + " left the game");
+                        this.setDisplayInfo(message + " left the game");
                         break;
                 }
                 // TODO: Insert logic which use the recived message (textMessage)

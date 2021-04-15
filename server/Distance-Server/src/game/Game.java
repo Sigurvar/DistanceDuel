@@ -5,6 +5,7 @@ import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,6 +37,7 @@ public abstract class Game {
 	void sendQuestion() {
 		try {
 			Question question = upcoming.pop();
+			history.push(question);
 			currentAnswer = new JSONObject();
 			System.out.println("Sending question to all players");
 			String questionString = "How many " + question.getUnit() + " is it between " + question.getPlaceA() + " and " + question.getPlaceB() + "?";
@@ -54,17 +56,21 @@ public abstract class Game {
 	}
 	
 	public void answer(Player player, double answer) {
-		// TODO add timer on question
 		
 		System.out.println(player.getNickname() +" answered "+answer);
-
+		Question question = history.peek();
 		try {
-			this.currentAnswer.append(player.getNickname(), answer);
+			JSONObject jPlayer = new JSONObject();
+			jPlayer.put("Answer", answer);
+			jPlayer.put("Score", question.calculateScore((float)answer));
+
+			this.currentAnswer.append(player.getNickname(), jPlayer);
+			System.out.println(currentAnswer);
 			if (this.currentAnswer.length()==players.size()) {
 				System.out.println("All players have answerd");
 				
 				for (Player p: players) p.outputThread.sendPartialResult(currentAnswer.toString());
-				// TODO wait 3 seconds and send new question
+				
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -83,11 +89,13 @@ public abstract class Game {
 					main.endGame(id, code);
 				}
 				else if(i==0) {
-					this.players.get(0).outputThread.sendYouAreOwner();
+					this.players.get(0).outputThread.sendYouAreOwner();	
 				}
+				for (Player p : players) p.outputThread.sendPlayerLeftGame(player.getNickname());
 				return;
 			}
 		}
+		
 	}
 	
 	
@@ -104,4 +112,6 @@ public abstract class Game {
 	}
 	public abstract void startGame();
 	
+
 }
+
