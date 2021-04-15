@@ -69,6 +69,7 @@ hs_err_pid*
 *.idea/modules.xml
 *.idea/scopes/scope_settings.xml
 *.idea/vcs.xml
+*.idea/workspace.xml
 
 ## ECLIPSE (SERVER)
 
@@ -86,3 +87,7 @@ hs_err_pid*
 *.classpath
 *.settings/
 *.loadpath
+
+# OTHER
+*.iml
+*.idea*
