@@ -51,6 +51,7 @@
 *.idea/modules.xml
 *.idea/scopes/scope_settings.xml
 *.idea/vcs.xml
+*.idea/workspace.xml
 
 ## ECLIPSE (SERVER)
 
@@ -68,3 +69,7 @@
 *.classpath
 *.settings/
 *.loadpath
+
+# OTHER
+*.iml
+*.idea*
