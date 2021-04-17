@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".game.views.ResultState">
+    tools:context=".game.views.FinalResultState">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,26 +16,13 @@
             android:id="@+id/result"/>
 
         <Button
-            android:id="@+id/nextQuestion"
+            android:id="@+id/goHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Next question"
-            android:visibility="invisible"
-            android:onClick="nextQuestion"/>
-        <Button
-            android:id="@+id/finalResult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="See final result"
-            android:visibility="invisible"
-            android:onClick="finalResult"/>
-        <Button
-            android:id="@+id/moreQuestions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Create more questions"
-            android:visibility="invisible"
-            android:onClick="moreQuestions"/>
+            android:text="Go Home"
+            android:visibility="visible"
+            android:onClick="goHome"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,23 @@
 package com.sigurvar.distanceduel.game.models;
 
+import com.sigurvar.distanceduel.game.views.LobbyState;
+import com.sigurvar.distanceduel.utility.StateController;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.Stack;
 
-public class GameModel extends Observable {
+public class GameModel {
 
     protected String gameCode;
     protected boolean isHost;
     private List<Player> players;
     private Stack<Question> questions;
+    private boolean noMoreQuestions = false;
+    private boolean createMoreQuestions = false;
 
     public GameModel(String myNickname, String gameCode){
         this.players = new ArrayList<>();
@@ -18,8 +25,6 @@ public class GameModel extends Observable {
         this.gameCode = gameCode;
         this.players.add(new Player(myNickname, true));
     }
-
-
 
     public void setAsHost(){
         this.isHost=true;
@@ -39,13 +44,27 @@ public class GameModel extends Observable {
 
     public void addNewPlayer(String playerName){
         this.players.add(new Player(playerName, false));
-        setChanged();
-        notifyObservers(); //TODO ikke nødvendig å ha observer her, kan gjøres fint uten
+        if(( StateController.getInstance().getState()) instanceof  LobbyState){
+            ((LobbyState) StateController.getInstance().getState()).setPlayersInGame();
+        }
     }
     public void playerLeftTheGame(String playerName){
-        this.players.add(new Player(playerName, false));
-        setChanged();
-        notifyObservers();
+        for (Player p : players){
+            if (p.getNickname().equals(playerName)){
+                players.remove(p);
+            }
+        }
+        if(( StateController.getInstance().getState()) instanceof  LobbyState){
+            ((LobbyState) StateController.getInstance().getState()).setPlayersInGame();
+        }
+    }
+
+    public boolean isNoMoreQuestions() {
+        return noMoreQuestions;
+    }
+
+    public boolean isCreateMoreQuestions() {
+        return createMoreQuestions;
     }
 
     public void newQuestion(String question){
@@ -60,9 +79,27 @@ public class GameModel extends Observable {
         System.out.println(questions.peek().getResult());
         return  questions.peek().getResult();
     }
+    public String getFinalResult(){
+        StringBuilder out = new StringBuilder();
+        while(!questions.empty()){
+            out.append(questions.pop().getResult());
+        }
+        return out.toString();
+    }
 
 
     public void gotResultForQuestion(String result){
-        questions.peek().setResult(result);
+        Question q = questions.peek();
+        try{
+            JSONObject jsonObject = new JSONObject(result);
+            q.setAnswer(jsonObject.getString("Answer"));
+            q.setResult(jsonObject.getString("Result"));
+            noMoreQuestions = jsonObject.getBoolean("Last");
+            // createMoreQuestions = jsonObject.getBoolean("More")
+        }catch (JSONException ignored){
+            //TODO: gjør noe kult her
+            System.out.println("Feil");
+        }
+
     }
 }

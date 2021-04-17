@@ -17,9 +17,10 @@ public abstract class Game {
 	private final float interuptTimer = 11000;
 	private long startTime;
 	private int id;
-	protected Stack<Question> history;
+	protected Stack<Question> history = new Stack<>();
 	protected Stack<Question> upcoming;
 	protected List<Player> players = new ArrayList<Player>();
+	protected Question currentQuestion;
 	//private Server server;
 	protected Unit unit;
 	private JSONObject currentAnswer;
@@ -36,11 +37,11 @@ public abstract class Game {
 	}
 	void sendQuestion() {
 		try {
-			Question question = upcoming.pop();
-			history.push(question);
+			currentQuestion = upcoming.pop();
+			history.push(currentQuestion);
 			currentAnswer = new JSONObject();
 			System.out.println("Sending question to all players");
-			String questionString = "How many " + question.getUnit() + " is it between " + question.getPlaceA() + " and " + question.getPlaceB() + "?";
+			String questionString = "How many " + currentQuestion.getUnit() + " is it between " + currentQuestion.getPlaceA() + " and " + currentQuestion.getPlaceB() + "?";
 			for (Player p : players) p.outputThread.sendQuestion(questionString);
 		}catch(Exception e) {
 			System.out.println("Det finnes ingen q");
@@ -58,21 +59,33 @@ public abstract class Game {
 	public void answer(Player player, double answer) {
 		
 		System.out.println(player.getNickname() +" answered "+answer);
-		Question question = history.peek();
 		try {
 			JSONObject jPlayer = new JSONObject();
 			jPlayer.put("Answer", answer);
-			jPlayer.put("Score", question.calculateScore((float)answer));
+			jPlayer.put("Score", currentQuestion.calculateScore((float)answer));
 
 			this.currentAnswer.append(player.getNickname(), jPlayer);
 			System.out.println(currentAnswer);
 			if (this.currentAnswer.length()==players.size()) {
 				System.out.println("All players have answerd");
-				
-				for (Player p: players) p.outputThread.sendPartialResult(currentAnswer.toString());
+				sendResult();
+				//for (Player p: players) p.outputThread.sendPartialResult(currentAnswer.toString());
 				
 			}
 		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	public void sendResult() {
+		
+		try {
+			JSONObject result = new JSONObject();
+			result.put("Last", upcoming.empty());
+			result.put("Answer", currentQuestion.getCorrectAnswer());
+			result.put("Result", currentAnswer);
+			for (Player p: players) p.outputThread.sendPartialResult(result.toString());
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -106,9 +119,9 @@ public abstract class Game {
 		}
 		return r;
 	}
-	public void gameDone() {
+	public void gameComplete() {
 		System.out.println("Game complete");
-		for (Player p: players) p.outputThread.sendGameDone("Game completed");
+		for (Player p: players) p.outputThread.sendFinalResult("Game completed");
 	}
 	public abstract void startGame();
 	
