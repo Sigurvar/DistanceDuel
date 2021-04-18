@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">DistanceDuel</string>
-    <string name="title_activity_game_state">GameState</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
-    <string name="hello_world" >Hello Square World!</string>
-    <string name="title_activity_wait_for_next_question_state">WaitForNextQuestionState</string>
+
+
+
+    <!-- Game strings -->
+    <string name="new_game">New Game</string>
+    <string name="join_game">Join Game</string>
 </resources>
