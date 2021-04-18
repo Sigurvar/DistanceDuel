@@ -10,10 +10,10 @@ import com.sigurvar.distanceduel.game.Game;
 import com.sigurvar.distanceduel.game.views.LobbyState;
 import com.sigurvar.distanceduel.utility.StateController;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class NewGameState extends ConnectToServerState {
-
-    private String settings;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,9 +22,21 @@ public class NewGameState extends ConnectToServerState {
     }
     public void createGame(View view) {
         Log.i("Game", "Starting new game");
+        int gameMode;
+        if(view.getId()==R.id.normalMode){
+            gameMode = NORMAL_MODE;
+        }else {
+            gameMode = WRITE_QUESTION_MODE;
+        }
         connectToServer();
-        settings = "Dette er innstilligene";
-        serverController.outputThread.sendNewGame("Dette er innstilligene");
+        try{
+            // TODO: add other settings posibilities
+            JSONObject settings = new JSONObject();
+            settings.put("gameMode",gameMode);
+            serverController.outputThread.sendNewGame(settings.toString());
+        }catch (JSONException e){
+            //TODO: could not create game
+        }
     }
 
     public void receivedGameCode(String gameCode){
