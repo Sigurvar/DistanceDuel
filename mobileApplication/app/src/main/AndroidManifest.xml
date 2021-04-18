@@ -18,6 +18,7 @@
         <activity android:name=".game.views.FinalResultState"/>
         <activity android:name=".game.views.WaitResultState"/>
         <activity android:name=".game.views.AnswerState"/>
+        <activity android:name=".game.views.WriteQuestionState"/>
 
         <meta-data
             android:name="com.google.android.wearable.standalone"

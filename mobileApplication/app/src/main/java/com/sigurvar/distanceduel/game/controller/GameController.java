@@ -25,8 +25,8 @@ import java.text.BreakIterator;
 
 public abstract class GameController {
     private GameState activeState;
-    private Context context;
-    private GameModel gameModel;
+    protected Context context;
+    protected GameModel gameModel;
 
     public GameController(Context context){
         this.context = context;
