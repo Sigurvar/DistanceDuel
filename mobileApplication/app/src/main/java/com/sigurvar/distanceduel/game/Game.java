@@ -4,9 +4,16 @@ import android.content.Context;
 
 import com.sigurvar.distanceduel.game.controller.GameController;
 import com.sigurvar.distanceduel.game.controller.NormalController;
+import com.sigurvar.distanceduel.game.controller.WriteQuestionController;
 import com.sigurvar.distanceduel.game.models.GameModel;
 
 public class Game {
+
+
+    /** Game Modes **/
+    public static final int NORMAL_MODE = 1;
+    public static final int WRITE_QUESTION_MODE = 2;
+
 
     private static Game game = new Game();
     public static Game getInstance(){
@@ -19,9 +26,14 @@ public class Game {
     private GameModel gameModel;
     private GameController gameController;
 
-    public void setupNewGame(String myNickname, String gameCode, Context context){ // må også sende inn setting her
+    public GameModel setupNewGame(String myNickname, String gameCode, int gameMode, Context context){
         gameModel = new GameModel(myNickname, gameCode);
-        gameController = new NormalController(context);// TODO legg til if på settings her
+        if (gameMode==NORMAL_MODE) {
+            gameController = new NormalController(context);
+        }else if (gameMode==WRITE_QUESTION_MODE){
+            gameController = new WriteQuestionController(context);
+        }
+        return gameModel;
     }
 
     public GameController getGameController() {

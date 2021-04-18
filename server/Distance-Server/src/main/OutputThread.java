@@ -54,7 +54,7 @@ public class OutputThread extends Thread{
 		this.sendData(PLAYER_LEFT_GAME, nickname);
 	}
 	public void sendCreateQuestion() {
-		this.sendData(PLAYER_LEFT_GAME, "");
+		this.sendData(CREATE_QUESTION, "");
 	}
 	
 	private void sendData(int message_type, String message) {

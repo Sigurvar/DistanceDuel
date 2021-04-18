@@ -7,6 +7,8 @@ import android.view.View;
 
 import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.game.Game;
+import com.sigurvar.distanceduel.game.controller.GameController;
+import com.sigurvar.distanceduel.game.controller.WriteQuestionController;
 import com.sigurvar.distanceduel.game.views.LobbyState;
 import com.sigurvar.distanceduel.utility.StateController;
 
@@ -14,6 +16,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class NewGameState extends ConnectToServerState {
+
+    private int gameMode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,11 +27,11 @@ public class NewGameState extends ConnectToServerState {
     }
     public void createGame(View view) {
         Log.i("Game", "Starting new game");
-        int gameMode;
+
         if(view.getId()==R.id.normalMode){
-            gameMode = NORMAL_MODE;
+            gameMode = Game.NORMAL_MODE;
         }else {
-            gameMode = WRITE_QUESTION_MODE;
+            gameMode = Game.WRITE_QUESTION_MODE;
         }
         connectToServer();
         try{
@@ -40,7 +45,7 @@ public class NewGameState extends ConnectToServerState {
     }
 
     public void receivedGameCode(String gameCode){
-        Game.getInstance().setupNewGame(nickname, gameCode, getApplicationContext());
+        Game.getInstance().setupNewGame(nickname, gameCode, gameMode, getApplicationContext());
         Game.getInstance().getGameModel().setAsHost();
         Intent intent = new Intent(this, LobbyState.class);
         this.startActivity(intent);

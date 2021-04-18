@@ -14,8 +14,8 @@ import game.WriteQuestionsMode;
 public class GameController {
 	
 	/** Game Modes **/
-    protected static final int NORMAL_MODE = 1;
-    protected static final int WRITE_QUESTION_MODE = 2;
+    public static final int NORMAL_MODE = 1;
+    public static final int WRITE_QUESTION_MODE = 2;
 
 	
 	final public static int MAX_GAMES = 300;

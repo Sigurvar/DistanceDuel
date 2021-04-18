@@ -5,6 +5,7 @@ import java.util.Stack;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import main.GameController;
 import main.QuestionGenerator;
 
 public class WriteQuestionsMode extends Game {
@@ -38,4 +39,14 @@ public class WriteQuestionsMode extends Game {
 		}
 	}
 
+	public String getGameInfo() {
+		JSONObject info = super.getInfo();
+		try {
+			info.put("mode", GameController.NORMAL_MODE);
+			
+		}catch (JSONException e) {
+			
+		}
+		return info.toString();
+	}
 }

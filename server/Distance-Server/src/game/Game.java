@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -108,7 +109,18 @@ public abstract class Game {
 				return;
 			}
 		}
-		
+	}
+	
+	protected JSONObject getInfo() {
+		JSONObject info = new JSONObject();
+		try {
+			info.put("players", players.stream().map(p->p.getNickname()).collect(Collectors.toList()) );
+			info.put("unit", unit.name());
+			
+		}catch (JSONException e) {
+			
+		}
+		return info;
 	}
 	
 	
@@ -124,6 +136,7 @@ public abstract class Game {
 		for (Player p: players) p.outputThread.sendFinalResult("Game completed");
 	}
 	public abstract void startGame();
+	public abstract String getGameInfo();
 	
 
 }

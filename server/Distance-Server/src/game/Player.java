@@ -67,7 +67,7 @@ public class Player{
     		System.out.println(" Game code does not exist");
     	}else {
     		System.out.println(" Sucess");
-    		this.outputThread.sendPlayersInGame(g.getAllNames());
+    		this.outputThread.sendPlayersInGame(g.getGameInfo());
         	g.join(this);
     		this.game=g;
     		

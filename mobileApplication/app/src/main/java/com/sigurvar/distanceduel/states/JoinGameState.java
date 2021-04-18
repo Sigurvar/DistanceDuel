@@ -8,8 +8,14 @@ import android.widget.EditText;
 
 import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.game.Game;
+import com.sigurvar.distanceduel.game.controller.GameController;
+import com.sigurvar.distanceduel.game.models.GameModel;
 import com.sigurvar.distanceduel.game.views.LobbyState;
 import com.sigurvar.distanceduel.utility.StateController;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class JoinGameState extends ConnectToServerState {
 
@@ -28,10 +34,15 @@ public class JoinGameState extends ConnectToServerState {
 
     public void joinedGameSuccessful(String info){
         // TODO: info needs to contain game setting and players in game
-        Game.getInstance().setupNewGame(nickname, gameCode, getApplicationContext());
-        for(String playerName : info.split(", ")){
-            //TODO: adjust to adapt to message format form server
-            Game.getInstance().getGameModel().addNewPlayer(playerName);
+        try{
+            JSONObject details = new JSONObject(info);
+            GameModel g = Game.getInstance().setupNewGame(nickname, gameCode, details.getInt("mode"), getApplicationContext());
+            JSONArray players = details.getJSONArray("players");
+            for (int i=0;i<players.length();i++){
+                g.addNewPlayer(players.get(i).toString());
+            }
+        }catch (JSONException e){
+
         }
         Intent intent = new Intent(this, LobbyState.class);
         this.startActivity(intent);
