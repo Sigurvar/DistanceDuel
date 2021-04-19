@@ -19,7 +19,7 @@ public class ServerController {
     public InputThread inputThread;
     public  void connect() {
         try {
-            this.socket = new Socket("192.168.10.198", 8888);
+            this.socket = new Socket("10.22.71.86", 8888);
             this.outputThread = new OutputThread( new DataOutputStream(this.socket.getOutputStream()));
             this.inputThread = new InputThread(new DataInputStream(this.socket.getInputStream()), this);
         } catch (IOException e) {

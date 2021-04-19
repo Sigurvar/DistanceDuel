@@ -1,10 +1,13 @@
 package com.sigurvar.distanceduel.utility;
 
+import com.sigurvar.distanceduel.game.views.WriteQuestionState;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,15 +32,30 @@ public class APIController {
 
     }
 
-    public String suggestPlace(String suggest) {
-        String page = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/suggest?text=" + suggest + "&outFields=*&maxSuggestions=3&f=json";
-        try {
-            JSONObject response = new JSONObject(SendRequest(page));
-            System.out.println(response.toString());
-            return response.getJSONArray("suggestions").getJSONObject(0).getString("text");
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-            return null;
+    public void run(String text){
+        new Thread(new API(text)).start();
+
+    }
+    private class API implements Runnable {
+        private final String suggest;
+        protected API(String suggest){
+            this.suggest = suggest;
+
+        }
+        @Override
+        public void run() {
+            try {
+                String page = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/suggest?text=" + suggest + "&outFields=*&maxSuggestions=3&f=json";
+                JSONObject response = new JSONObject(SendRequest(page));
+                ArrayList<String> results = new ArrayList<>();
+                for (int i=0;i<response.getJSONArray("suggestions").length();i++ ){
+                    results.add(response.getJSONArray("suggestions").getJSONObject(i).getString("text"));
+                }
+                ((WriteQuestionState)StateController.getInstance().getState()).displayInfo(results);
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
+
 }

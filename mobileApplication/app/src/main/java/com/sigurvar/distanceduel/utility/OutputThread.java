@@ -14,6 +14,7 @@ public class OutputThread extends Thread{
     private static final int ANSWER_QUESTION = 5;
     private static final int LEAVING_GAME = 6;
     private static final int NEXT_QUESTION = 7;
+    private static final int CREATED_QUESTION = 8;
 
 
 
@@ -40,6 +41,9 @@ public class OutputThread extends Thread{
     }
     public void leaveGame() {this.sendData(LEAVING_GAME, "");}
     public void getNextQuestion(){this.sendData(NEXT_QUESTION, "");}
+    public void sendCreatedQuestion(String question){
+        this.sendData(CREATED_QUESTION, question);
+    }
 
 
 

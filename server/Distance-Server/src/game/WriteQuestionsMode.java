@@ -28,9 +28,10 @@ public class WriteQuestionsMode extends Game {
 		try {
 			// TODO: create writequestionmode with player as owner 
 			JSONObject data = new JSONObject(questionData);
-			String placeA = data.getString("placeA");
-			String placeB = data.getString("placeB");
-			upcoming.add(questionGenerator.create(placeA, placeB, unit));
+			String locationA = data.getString("locationA");
+			String locationB = data.getString("locationB");
+			upcoming.add(questionGenerator.create(locationA, locationB, unit));
+			System.out.println(upcoming.peek().getPlaceA());
 			if (upcoming.size()==players.size()) {
 				super.sendQuestion();
 			}
