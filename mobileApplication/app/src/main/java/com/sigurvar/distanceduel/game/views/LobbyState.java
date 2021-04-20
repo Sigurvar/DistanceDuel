@@ -28,8 +28,15 @@ public class LobbyState extends ReceiveQuestionState {
     }
 
     public void setPlayersInGame(){
-        TextView tv = findViewById(R.id.players);
-        tv.setText(gameModel.getAllPlayersInGame());
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                TextView tv = findViewById(R.id.players);
+                tv.setText(gameModel.getAllPlayersInGame());
+            }
+        });
+
     }
     public void startGame(View view){
         ServerController.getInstance().outputThread.sendStartGame();
