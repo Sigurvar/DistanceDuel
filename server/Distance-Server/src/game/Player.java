@@ -7,7 +7,6 @@ import java.net.Socket;
 
 import main.GameController;
 import main.InputThread;
-import main.Main;
 import main.OutputThread;
 import main.Server;
 
@@ -93,8 +92,6 @@ public class Player{
 
 	public void disconect() {
 		try {
-			// TODO: destroy player instanse, eventult ha en player pool med tilgjenlige spillere som gjør at man ikke må oprette og slete spillere hele tiden 
-			
 			if (game!=null) {
 				game.leaveGame(this);
 			}
