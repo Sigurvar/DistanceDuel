@@ -31,14 +31,12 @@ public class OutputThread extends Thread{
 		this.sendData(GAME_CODE,code);
 	}
 	public void sendGameCodeDoesNotExist() {
-		this.sendData(GAME_CODE_DOES_NOT_EXIST,"Game code does not exist");
+		this.sendData(GAME_CODE_DOES_NOT_EXIST);
 	}
 	public void newPlayerJoined(String nickname) {
 		this.sendData(NEW_PLAYER_IN_GAME, nickname);
 	}
 	public void sendQuestion(String question) {
-		//this.shouldInterupt = true;
-		//this.startTime = System.currentTimeMillis();	
 		this.sendData(NEW_QUESTION, question);
 	}
 	public void sendPartialResult(String result) {
@@ -48,13 +46,13 @@ public class OutputThread extends Thread{
 		this.sendData(FINAL_RESULT, done);
 	}
 	public void sendYouAreOwner() {
-		this.sendData(YOU_ARE_OWNER, "You are owner of the game");
+		this.sendData(YOU_ARE_OWNER);
 	}
 	public void sendPlayerLeftGame(String nickname) {
 		this.sendData(PLAYER_LEFT_GAME, nickname);
 	}
 	public void sendCreateQuestion() {
-		this.sendData(CREATE_QUESTION, "");
+		this.sendData(CREATE_QUESTION);
 	}
 	
 	private void sendData(int message_type, String message) {
@@ -66,6 +64,9 @@ public class OutputThread extends Thread{
 			e.printStackTrace();
 		}
        
+	}
+	private void sendData(int message_type) {
+		this.sendData(message_type, "");
 	}
 	public void disconnect(){
         try {

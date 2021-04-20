@@ -60,12 +60,9 @@ public class InputThread extends Thread{
 		            	player.createdQuestion(data);
 		            	break;
 		        }
-			} catch (IOException e) {
-				e.printStackTrace();
-				this.disconnect();
+			} catch (IOException | RuntimeException e) {
+				player.disconect();
 				return;
-			} catch (RuntimeException e) {
-				e.printStackTrace();
 			}
 		}
 	}

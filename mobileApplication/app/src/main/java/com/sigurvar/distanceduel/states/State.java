@@ -17,12 +17,6 @@ public abstract class State extends AppCompatActivity {
 
 
 
-    @Override
-    public void onDestroy() {
-        ServerController serverController = ServerController.getInstance();
-        serverController.disconnect();
-        super.onDestroy();
-    }
 
     public void displayInfo(String text){    }
 }

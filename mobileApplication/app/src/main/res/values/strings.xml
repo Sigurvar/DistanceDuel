@@ -6,4 +6,7 @@
     <!-- Game strings -->
     <string name="new_game">New Game</string>
     <string name="join_game">Join Game</string>
+    <string name="leave_game_question">Are you sure you want to leave the game?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
