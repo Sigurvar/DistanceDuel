@@ -100,7 +100,6 @@ public class InputThread extends Thread{
                 }
                 // TODO: Insert logic which use the recived message (textMessage)
             } catch (IOException e1) {
-                e1.printStackTrace();
                 return;
             }
         }

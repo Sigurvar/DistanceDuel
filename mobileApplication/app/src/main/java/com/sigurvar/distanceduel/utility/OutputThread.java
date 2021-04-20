@@ -39,7 +39,7 @@ public class OutputThread extends Thread{
     public void sendStartGame(){
         this.sendData(START_GAME, "");
     }
-    public void leaveGame() {this.sendData(LEAVING_GAME, "");}
+    public void leaveGame() { this.sendData(LEAVING_GAME, "");}
     public void getNextQuestion(){this.sendData(NEXT_QUESTION, "");}
     public void sendCreatedQuestion(String question){
         this.sendData(CREATED_QUESTION, question);
