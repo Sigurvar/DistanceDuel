@@ -13,7 +13,7 @@ import java.io.IOException;
 public class InputThread extends Thread{
 
     /** Message codes on messages received from server **/
-    private static final int PLAYERS_IN_GAME = 1;
+    private static final int GAME_INFO = 1;
     private static final int GAME_CODE = 2;
     private static final int GAME_CODE_DOES_NOT_EXIST = 3;
     private static final int NEW_PLAYER_IN_GAME = 4;
@@ -25,6 +25,7 @@ public class InputThread extends Thread{
     private static final int PLAYER_LEFT_GAME = 10;
     private static final int CREATE_QUESTION = 11;
     private static final int DISCONNECT = 12;
+    private static final int NICKNAME_ALREADY_TAKEN = 13;
 
     private final ServerController serverController;
     private final DataInputStream dataInputStream;
@@ -41,7 +42,7 @@ public class InputThread extends Thread{
                 byte messageType = dataInputStream.readByte();
                 String message = dataInputStream.readUTF();
                 switch (messageType) {
-                    case PLAYERS_IN_GAME:
+                    case GAME_INFO:
                         Log.i("InputThread", "Players in game: " + message);
                         ((JoinGameState)StateController.getInstance().getState()).joinedGameSuccessful(message);
                         break;
@@ -50,8 +51,8 @@ public class InputThread extends Thread{
                         ((NewGameState)StateController.getInstance().getState()).receivedGameCode(message);
                         break;
                     case GAME_CODE_DOES_NOT_EXIST:
-                        Log.i("InputThread", message);
-                        ((JoinGameState)StateController.getInstance().getState()).joinedGameFailed(message);
+                        Log.i("InputThread", "Game code does not exist");
+                        ((JoinGameState)StateController.getInstance().getState()).gameCodeDoesNotExist();
                         break;
                     case NEW_PLAYER_IN_GAME:
                         Log.i("InputThread", message + " joined the game");
@@ -82,6 +83,10 @@ public class InputThread extends Thread{
                         ((WriteQuestionController)Game.getInstance().getGameController()).createQuestion();
                     case DISCONNECT:
                         serverController.disconnect();
+                    case NICKNAME_ALREADY_TAKEN:
+                        Log.i("InputThread", "Nickname already taken");
+                        ((JoinGameState)StateController.getInstance().getState()).nicknameAlreadyTaken();
+
 
                 }
                 // TODO: Insert logic which use the recived message (textMessage)

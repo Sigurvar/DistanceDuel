@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.stream.Collectors;
 
 import main.GameController;
 import main.InputThread;
@@ -62,10 +63,17 @@ public class Player{
     		this.outputThread.sendGameCodeDoesNotExist();
     		System.out.println(" Game code does not exist");
     	}else {
-    		System.out.println(" Sucess");
-    		this.outputThread.sendPlayersInGame(g.getGameInfo());
-        	g.join(this);
-    		this.game=g;
+    		if (g.players.stream().map(p->p.getNickname()).collect(Collectors.toList()).contains(nickname)) {
+    			System.out.println(" Nickname already taken");
+        		this.outputThread.sendNicknameAlreadyTaken();
+    		}
+    		else {
+    			System.out.println(" Sucess");
+    			this.outputThread.sendGameInfo(g.getGameInfo());
+            	g.join(this);
+        		this.game=g;
+    		}
+    		
     		
     	}
 	}
