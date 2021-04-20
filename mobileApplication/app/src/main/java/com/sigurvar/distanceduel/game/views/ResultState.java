@@ -17,23 +17,22 @@ public class ResultState extends ReceiveQuestionState {
         setContentView(R.layout.activity_result_state);
         StateController.getInstance().setState(this);
         displayResult();
-        if(gameModel.isHost())setHostButton();
+        setHostButton();
     }
 
     public void setHostButton(){
         if(gameModel.isHost()) {
             if (gameModel.isCreateMoreQuestions()) {
                 findViewById(R.id.moreQuestions).setVisibility(View.VISIBLE);
-            } else if (gameModel.isNoMoreQuestions()) {
-                findViewById(R.id.finalResult).setVisibility(View.VISIBLE);
-            }else{
+            } else if (!gameModel.isNoMoreQuestions()) {
                 findViewById(R.id.nextQuestion).setVisibility(View.VISIBLE);
             }
         }
-    }
-    public void seeFinalResultButton(){
-        findViewById(R.id.finalResult).setVisibility(View.VISIBLE);
-        findViewById(R.id.nextQuestion).setVisibility(View.INVISIBLE);
+        if (!gameModel.isCreateMoreQuestions() && gameModel.isNoMoreQuestions()){
+            //TODO: Legg til tekst om at spillet er over
+            findViewById(R.id.finalResult).setVisibility(View.VISIBLE);
+        }
+
     }
     public void nextQuestion(View view){
         ServerController.getInstance().outputThread.getNextQuestion();

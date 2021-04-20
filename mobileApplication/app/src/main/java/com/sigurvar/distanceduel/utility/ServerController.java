@@ -36,7 +36,6 @@ public class ServerController {
     public void disconnect(){
         this.isConnected=false;
         try {
-            this.outputThread.leaveGame();
             this.inputThread.disconnect();
             this.outputThread.disconnect();
             this.socket.close();
