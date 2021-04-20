@@ -5,6 +5,7 @@
     <string name="normal_mode">Normal modus</string>
     <string name="write_question_mode">Skriv spørsmål</string>
     <string name="join_game">Bli med i Spill</string>
+    <string name="send_answer">Svar</string>
     <string name="leave_game_question">Vil du forlate spillet</string>
     <string name="yes">Ja</string>
     <string name="no">Nei</string>

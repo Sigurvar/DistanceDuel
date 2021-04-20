@@ -8,6 +8,7 @@
     <string name="join_game">Join Game</string>
     <string name="normal_mode">Normal Mode</string>
     <string name="write_question_mode">Write Question Mode</string>
+    <string name="send_answer">Answer</string>
     <string name="leave_game_question">Are you sure you want to leave the game?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
