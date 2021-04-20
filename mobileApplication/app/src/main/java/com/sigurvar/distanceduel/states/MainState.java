@@ -46,9 +46,4 @@ public class MainState extends State {
         });
     }
 
-    public void autocomplete(View view){
-        TextView tv = findViewById(R.id.search_text);
-        System.out.println(new APIController().suggestPlace(tv.getText().toString()));
-
-    }
 }

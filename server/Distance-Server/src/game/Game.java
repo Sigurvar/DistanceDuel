@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import main.GameController;
 import main.Main;
 import main.QuestionGenerator;
 import main.Server;
@@ -98,8 +100,7 @@ public abstract class Game {
 			if(players.get(i)==player) {
 				players.remove(i);
 				if(players.size()==0) {
-					Main main = Main.getInstance();
-					main.endGame(id, code);
+					GameController.getInstance().endGame(id, code);
 				}
 				else if(i==0) {
 					this.players.get(0).outputThread.sendYouAreOwner();	
@@ -108,7 +109,18 @@ public abstract class Game {
 				return;
 			}
 		}
-		
+	}
+	
+	protected JSONObject getInfo() {
+		JSONObject info = new JSONObject();
+		try {
+			info.put("players", players.stream().map(p->p.getNickname()).collect(Collectors.toList()) );
+			info.put("unit", unit.name());
+			
+		}catch (JSONException e) {
+			
+		}
+		return info;
 	}
 	
 	
@@ -124,6 +136,7 @@ public abstract class Game {
 		for (Player p: players) p.outputThread.sendFinalResult("Game completed");
 	}
 	public abstract void startGame();
+	public abstract String getGameInfo();
 	
 
 }

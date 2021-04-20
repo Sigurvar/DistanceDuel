@@ -5,6 +5,7 @@ import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.utility.ServerController;
 
 public abstract class ConnectToServerState extends State{
+
     protected String nickname = "";
     protected ServerController serverController = ServerController.getInstance();
 

@@ -5,13 +5,13 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import main.GameController;
 import main.InputThread;
 import main.Main;
 import main.OutputThread;
 import main.Server;
 
 public class Player{
-	
 	
 	private String nickname;
 	private int id;
@@ -55,19 +55,19 @@ public class Player{
 	}
 	public void createGame(String settings) {
 		// TODO add settings to game constructor
-		Game game = Main.getInstance().createGame(this);
+		Game game = GameController.getInstance().createGame(this, settings);
 		this.game = game;
     	this.outputThread.sendGameCode(game.code);
 	}
 	public void joinGame(String gameCode) {
-		Game g = Main.getInstance().joinGame(gameCode, this);
+		Game g = GameController.getInstance().joinGame(gameCode, this);
     	System.out.print(this.getNickname()+" wants to join game with game code: " + gameCode+"...");
     	if (g==null) {
     		this.outputThread.sendGameCodeDoesNotExist();
     		System.out.println(" Game code does not exist");
     	}else {
     		System.out.println(" Sucess");
-    		this.outputThread.sendPlayersInGame(g.getAllNames());
+    		this.outputThread.sendPlayersInGame(g.getGameInfo());
         	g.join(this);
     		this.game=g;
     		
@@ -85,6 +85,12 @@ public class Player{
 	public void askForNextQuestion() {
 		if (game.getOwner()==this) {
 			game.sendQuestion();
+		}
+	}
+	
+	public void createdQuestion(String question) {
+		if(game instanceof WriteQuestionsMode) {
+			((WriteQuestionsMode) game).userGeneratedQuestion(this, question);
 		}
 	}
 

@@ -3,6 +3,7 @@ package com.sigurvar.distanceduel.utility;
 import android.util.Log;
 
 import com.sigurvar.distanceduel.game.Game;
+import com.sigurvar.distanceduel.game.controller.WriteQuestionController;
 import com.sigurvar.distanceduel.states.JoinGameState;
 import com.sigurvar.distanceduel.states.NewGameState;
 
@@ -22,6 +23,7 @@ public class InputThread extends Thread{
     private static final int YOU_ARE_OWNER = 8;//Veldig usikker på navnet her
     private static final int GAME_STARTING_SOON = 9;//Burde det være countdown mellom hvert spm
     private static final int PLAYER_LEFT_GAME = 10;
+    private static final int CREATE_QUESTION = 11;
 
     private final ServerController serverController;
     private final DataInputStream dataInputStream;
@@ -93,6 +95,8 @@ public class InputThread extends Thread{
                         Log.i("InputThread", message + " left the game");
                         this.setDisplayInfo(message + " left the game");
                         break;
+                    case CREATE_QUESTION:
+                        ((WriteQuestionController)Game.getInstance().getGameController()).createQuestion();
                 }
                 // TODO: Insert logic which use the recived message (textMessage)
             } catch (IOException e1) {

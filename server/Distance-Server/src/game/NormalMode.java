@@ -3,7 +3,9 @@ package game;
 import java.io.FileNotFoundException;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import main.GameController;
 import main.QuestionGenerator;
 
 public class NormalMode extends Game {
@@ -22,6 +24,17 @@ public class NormalMode extends Game {
 			e.printStackTrace();
 		}
 		super.sendQuestion();
+	}
+	
+	public String getGameInfo() {
+		JSONObject info = super.getInfo();
+		try {
+			info.put("mode", GameController.NORMAL_MODE);
+			
+		}catch (JSONException e) {
+			
+		}
+		return info.toString();
 	}
 
 }

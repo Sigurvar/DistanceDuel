@@ -15,6 +15,8 @@ public class OutputThread extends Thread{
     private static final int YOU_ARE_OWNER = 8;//Veldig usikker på navnet her
     private static final int GAME_STARTING_SOON = 9;//Burde det være countdown mellom hvert spm
     private static final int PLAYER_LEFT_GAME = 10;
+    private static final int CREATE_QUESTION = 11;
+    
 
 	private final DataOutputStream dataOutputStream;
 
@@ -50,6 +52,9 @@ public class OutputThread extends Thread{
 	}
 	public void sendPlayerLeftGame(String nickname) {
 		this.sendData(PLAYER_LEFT_GAME, nickname);
+	}
+	public void sendCreateQuestion() {
+		this.sendData(CREATE_QUESTION, "");
 	}
 	
 	private void sendData(int message_type, String message) {
