@@ -36,9 +36,7 @@
         </activity>
         <activity android:name=".states.JoinGameState" />
         <activity android:name=".states.State" />
-        <activity
-            android:name=".states.GameState"
-            android:label="@string/title_activity_game_state" />
+        <activity android:name=".states.GameState"/>
     </application>
 
 </manifest>
