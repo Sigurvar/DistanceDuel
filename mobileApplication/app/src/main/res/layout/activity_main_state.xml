@@ -4,43 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_background"
     tools:context=".states.MainState">
-    <LinearLayout
-        android:orientation="vertical"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <Button
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="1dp"
-            android:id="@+id/createGame"
-            android:layout_width="wrap_content"
+
+        <ImageView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Create game"
-            android:onClick="createGame"
-            tools:layout_editor_absoluteX="123dp"
-            tools:layout_editor_absoluteY="261dp" />
+            android:src="@drawable/ic_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.85"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.1"
+            />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_world_background"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+
 
         <Button
-            android:id="@+id/joinGame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Join game"
+            android:id="@+id/new_game_button"
+            style="@style/Button"
+            app:layout_constraintVertical_bias="0.55"
+            android:onClick="createGame"
+            android:text="@string/new_game"/>
+        <Button
+            android:id="@+id/join_game_button"
+            style="@style/Button"
+            app:layout_constraintVertical_bias="0.7"
             android:onClick="joinGame"
-            tools:layout_editor_absoluteX="153dp"
-            tools:layout_editor_absoluteY="416dp" />
+            android:text="@string/join_game"/>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_baseline_settings_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+
+
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout">
+
 
         <Button
             android:id="@+id/leaveGame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Leave game"
             android:onClick="leaveGame"
+            android:text="Leave game"
             tools:layout_editor_absoluteX="153dp"
             tools:layout_editor_absoluteY="416dp" />
+
         <TextView
+            android:id="@+id/displayInfo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/displayInfo"/>
+            android:layout_height="wrap_content" />
 
 
         <!--
@@ -54,11 +93,12 @@
             android:text="search for text"
             tools:layout_editor_absoluteX="171dp"
             tools:layout_editor_absoluteY="107dp" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="give autocomplete answers"
             android:onClick="autocomplete"
+            android:text="give autocomplete answers"
             tools:layout_editor_absoluteX="153dp"
             tools:layout_editor_absoluteY="143dp" />
 
