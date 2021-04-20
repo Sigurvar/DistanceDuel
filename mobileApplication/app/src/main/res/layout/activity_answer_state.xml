@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".game.views.AnswerState">
+    tools:context=".game.views.AnswerState"
+    android:id="@+id/main">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"

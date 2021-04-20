@@ -37,13 +37,13 @@
 
         <Button
             android:id="@+id/new_game_button"
-            style="@style/Button"
+            style="@style/PrimaryButton"
             app:layout_constraintVertical_bias="0.55"
             android:onClick="createGame"
             android:text="@string/new_game"/>
         <Button
             android:id="@+id/join_game_button"
-            style="@style/Button"
+            style="@style/PrimaryButton"
             app:layout_constraintVertical_bias="0.7"
             android:onClick="joinGame"
             android:text="@string/join_game"/>

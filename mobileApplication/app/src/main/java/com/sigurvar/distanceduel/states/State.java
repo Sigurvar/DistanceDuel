@@ -13,12 +13,6 @@ public abstract class State extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-    @Override
-    public void onDestroy() {
-        ServerController serverController = ServerController.getInstance();
-        serverController.disconnect();
-        super.onDestroy();
-    }
 
     public void displayInfo(String text){    }
 }

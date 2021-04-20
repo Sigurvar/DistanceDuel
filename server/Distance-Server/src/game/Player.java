@@ -45,10 +45,7 @@ public class Player{
 		try {
 			// TODO mulig vi heller vil ha float her
 			ans = Double.valueOf(answer);
-		}catch(NumberFormatException e) {
-			// TODO add exception handling
-			// System.out.println(e);
-		}
+		}catch(NumberFormatException e) {}
 		this.game.answer(this, ans);
 		
 	}

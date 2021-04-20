@@ -44,4 +44,13 @@ public class LobbyState extends ReceiveQuestionState {
             }
         });
     }
+    @Override
+    public void onDestroy() {
+        ServerController serverController = ServerController.getInstance();
+        if (serverController.getIsConnected()){
+            serverController.disconnect();
+        }
+        super.onDestroy();
+    }
+
 }
