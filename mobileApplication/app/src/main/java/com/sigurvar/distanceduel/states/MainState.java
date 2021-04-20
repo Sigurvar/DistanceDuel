@@ -35,7 +35,6 @@ public class MainState extends State {
         this.startActivity(myIntent);
     }
 
-    public void leaveGame(View view){serverController.disconnect();}
     public void displayInfo(String text){
         runOnUiThread(new Runnable() {
             @Override

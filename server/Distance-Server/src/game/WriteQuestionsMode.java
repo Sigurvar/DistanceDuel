@@ -36,14 +36,14 @@ public class WriteQuestionsMode extends Game {
 				super.sendQuestion();
 			}
 		}catch (JSONException e) {
-			
+			System.out.println("Feilet å sende til alle ");
 		}
 	}
 
 	public String getGameInfo() {
 		JSONObject info = super.getInfo();
 		try {
-			info.put("mode", GameController.NORMAL_MODE);
+			info.put("mode", GameController.WRITE_QUESTION_MODE);
 			
 		}catch (JSONException e) {
 			
