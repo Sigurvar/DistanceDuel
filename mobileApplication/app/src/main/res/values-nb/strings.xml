@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DistanceDuel</string>
+    <string name="new_game">Nytt Spill</string>
+    <string name="join_game">Bli med i Spill</string>
 </resources>
