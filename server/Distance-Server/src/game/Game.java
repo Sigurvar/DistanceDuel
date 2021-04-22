@@ -118,12 +118,13 @@ public abstract class Game {
 				players.remove(i);
 				if(players.size()==0) {
 					GameController.getInstance().endGame(id, code);
+					break;
 				}
-				else if(i==0) {
+				if(i==0) {
 					this.players.get(0).outputThread.sendYouAreOwner();	
 				}
 				for (Player p : players) p.outputThread.sendPlayerLeftGame(player.getNickname());
-				return;
+				break;
 			}
 		}
 	}

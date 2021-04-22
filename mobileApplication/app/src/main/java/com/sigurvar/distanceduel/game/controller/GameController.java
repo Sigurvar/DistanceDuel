@@ -38,7 +38,7 @@ public abstract class GameController {
     public void playerLeftTheGame(String playerName){
         gameModel.playerLeftTheGame(playerName);
     }
-
+    public void youAreOwner() {gameModel.setAsHost();}
     public abstract void startGame();
 
     public void receivedQuestion(String message) {
