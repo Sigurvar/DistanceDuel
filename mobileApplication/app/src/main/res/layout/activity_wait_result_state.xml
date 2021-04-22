@@ -16,7 +16,7 @@
             app:layout_constraintVertical_bias="0.3"
             app:layout_constraintWidth_percent="0.8"
             android:id="@+id/question"
-            android:text="Wait for everybody to answer"
+            android:text="@string/wait_for_answers"
             style="@style/HeadingStyle"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

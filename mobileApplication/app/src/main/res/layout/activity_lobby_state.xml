@@ -17,7 +17,7 @@
             app:layout_constraintVertical_bias="0.1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="You are now in the lobby"
+            android:text="@string/in_lobby"
             style="@style/HeadingStyle"/>
 
         <TextView
@@ -42,7 +42,7 @@
         <Button
             android:id="@+id/startGame"
             app:layout_constraintVertical_bias="0.85"
-            android:text="Start Game"
+            android:text="@string/start_game"
             android:visibility="invisible"
             android:onClick="startGame"
             style="@style/PrimaryButton"

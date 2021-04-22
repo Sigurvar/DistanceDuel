@@ -5,7 +5,7 @@
     <string name="normal_mode">Normal modus</string>
     <string name="write_question_mode">Skriv spørsmål</string>
     <string name="join_game">Bli med i Spill</string>
-    <string name="send_answer">Svar</string>
+    <string name="answer">Svar</string>
     <string name="leave_game_question">Vil du forlate spillet</string>
     <string name="create_more_questions">Lag flere spørsmpål</string>
     <string name="see_final_result">Se endelig resultat</string>
@@ -14,4 +14,12 @@
     <string name="no">Nei</string>
     <string name="home">Hjem</string>
     <string name="create_question">Lag spørsmål</string>
+    <string name="in_lobby">Du er nå i lobbyen</string>
+    <string name="start_game">Start spill</string>
+    <string name="wait_for_answers">Vent på at alle har svart</string>
+    <string name="write_locations">Skriv inn to lokasjoner!</string>
+    <string name="hint_loc_a">Lokasjon A</string>
+    <string name="hint_loc_b">Lokasjon B</string>
+    <string name="enter_nickname">Skriv inn kallenavn</string>
+    <string name="enter_game_code">Skriv inn kode for spill</string>
 </resources>

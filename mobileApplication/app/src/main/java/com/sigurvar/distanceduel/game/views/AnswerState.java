@@ -55,6 +55,7 @@ public class AnswerState extends GameState {
         public void run() {
             timeCounter++;
             System.out.println(timeCounter);
+            ((TextView)findViewById(R.id.timer)).setText(String.valueOf(10-timeCounter));
             // TODO: sett timer on displayscreen
             if(timeCounter>10){
                 System.out.println("Timer done");
