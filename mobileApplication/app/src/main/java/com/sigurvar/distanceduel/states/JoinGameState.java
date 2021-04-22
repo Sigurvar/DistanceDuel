@@ -56,4 +56,8 @@ public class JoinGameState extends ConnectToServerState {
         //TODO: error melding
         System.out.println("gameCodeDoesNotExist");
     }
+    public void gameAlreadyStarted(){
+        //TODO: error melding
+        System.out.println("gameAlreadyStarted");
+    }
 }

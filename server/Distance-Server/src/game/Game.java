@@ -29,6 +29,7 @@ public abstract class Game {
 	private JSONObject currentAnswer;
 	private List<Player> playersWhoHaveAnswerd;
 	public String code;
+	private boolean gameHasStarted;
 	
 	
 	public Game(String code, Unit unit, int id, Player creator) {
@@ -68,6 +69,7 @@ public abstract class Game {
 		}
 	}
 	public void join(Player player) {
+
 		for (Player p : players) p.outputThread.newPlayerJoined(player.getNickname());
 		players.add(player);
 		System.out.println(player.getNickname()+" joined game "+id);
@@ -149,7 +151,13 @@ public abstract class Game {
 		}
 		return r;
 	}
-	public abstract void startGame();
+	public void startGame() {
+		gameHasStarted = true;
+	}
+	public boolean isStarted() {
+		return gameHasStarted;
+		
+	}
 	public abstract String getGameInfo();
 	
 

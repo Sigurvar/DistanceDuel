@@ -19,9 +19,11 @@ public class WriteQuestionsMode extends Game {
 
 	@Override
 	public void startGame() {
+		super.startGame();
 		for (Player p : players) {
 			p.outputThread.sendCreateQuestion();
 		}
+		
 	}
 	
 	public void userGeneratedQuestion(Player player, String questionData) {

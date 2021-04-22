@@ -67,6 +67,10 @@ public class Player{
     			System.out.println(" Nickname already taken");
         		this.outputThread.sendNicknameAlreadyTaken();
     		}
+    		else if(g.isStarted()) {
+    			System.out.println(" Game already started");
+        		this.outputThread.sendGameAlreadyStarted();
+    		}
     		else {
     			System.out.println(" Sucess");
     			this.outputThread.sendGameInfo(g.getGameInfo());

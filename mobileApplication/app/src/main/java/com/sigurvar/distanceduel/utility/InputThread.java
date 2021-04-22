@@ -25,6 +25,7 @@ public class InputThread extends Thread{
     private static final int CREATE_QUESTION = 11;
     private static final int DISCONNECT = 12;
     private static final int NICKNAME_ALREADY_TAKEN = 13;
+    private static final int GAME_ALREADY_STARTED = 14;
 
     private final ServerController serverController;
     private final DataInputStream dataInputStream;
@@ -83,8 +84,10 @@ public class InputThread extends Thread{
                         Log.i("InputThread", "Nickname already taken");
                         ((JoinGameState)StateController.getInstance().getState()).nicknameAlreadyTaken();
                         break;
-
-
+                    case GAME_ALREADY_STARTED:
+                        Log.i("InputThread", "Game already started");
+                        ((JoinGameState)StateController.getInstance().getState()).gameAlreadyStarted();
+                        break;
                 }
                 // TODO: Insert logic which use the recived message (textMessage)
             } catch (IOException e1) {
