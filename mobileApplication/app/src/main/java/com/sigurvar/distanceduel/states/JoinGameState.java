@@ -41,15 +41,19 @@ public class JoinGameState extends ConnectToServerState {
             for (int i=0;i<players.length();i++){
                 g.addNewPlayer(players.get(i).toString());
             }
-        }catch (JSONException e){
+        }catch (JSONException ignored){
 
         }
         Intent intent = new Intent(this, LobbyState.class);
         this.startActivity(intent);
     }
 
-    public void joinedGameFailed(String error){
+    public void nicknameAlreadyTaken(){
         //TODO: error melding
-        System.out.println(error);
+        System.out.println("nicknameAlreadyTaken");
+    }
+    public void gameCodeDoesNotExist(){
+        //TODO: error melding
+        System.out.println("gameCodeDoesNotExist");
     }
 }
