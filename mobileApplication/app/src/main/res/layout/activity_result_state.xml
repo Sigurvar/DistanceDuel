@@ -25,6 +25,7 @@
             android:layout_height="400dp"
             style="@style/ScoreBox"
             android:id="@+id/result"/>
+
         <Button
             android:id="@+id/nextQuestion"
             style="@style/PrimaryButton"

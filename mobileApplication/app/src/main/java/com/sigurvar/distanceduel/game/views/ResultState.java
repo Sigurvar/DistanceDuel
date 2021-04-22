@@ -55,6 +55,7 @@ public class ResultState extends ReceiveQuestionState {
         String nickNames = "";
         String answers = "";
         String scores = "";
+        String s = "";
         JSONObject jsonObject = null;
         try {
             jsonObject = new JSONObject(gameModel.getFinalResult().trim());
@@ -67,12 +68,17 @@ public class ResultState extends ReceiveQuestionState {
                 double score = name.getJSONObject(0).getDouble("Score");
                 answers += String.valueOf(answer) + "\n";
                 scores += String.valueOf((int) score) + "\n";
+                s += String.format("%-12s", key);
+                s += String.format("%-12s", answer);
+                s += String.format("%s", (int)score);
+                s += "\n";
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        ((TextView)findViewById(R.id.names)).setText(nickNames);
+        ((TextView)findViewById(R.id.result)).setText(s);
+       /* ((TextView)findViewById(R.id.names)).setText(nickNames);
         ((TextView)findViewById(R.id.answers)).setText(answers);
-        ((TextView)findViewById(R.id.scores)).setText(scores);
+        ((TextView)findViewById(R.id.scores)).setText(scores);*/
     }
 }
