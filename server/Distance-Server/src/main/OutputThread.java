@@ -18,6 +18,8 @@ public class OutputThread extends Thread{
     private static final int DISCONNECT = 12;
     private static final int NICKNAME_ALREADY_TAKEN = 13;
     private static final int GAME_ALREADY_STARTED = 14;
+    private static final int PLAYERS_WHO_HAVE_ANSWERED = 15;
+    private static final int NEW_PLAYER_ANSWERED = 16;
     
 
 	private final DataOutputStream dataOutputStream;
@@ -61,6 +63,12 @@ public class OutputThread extends Thread{
 	}
 	public void sendGameAlreadyStarted() {
 		this.sendData(GAME_ALREADY_STARTED);
+	}
+	public void sendPlayersWhoHaveAnswered(String players) {
+		this.sendData(PLAYERS_WHO_HAVE_ANSWERED,players);
+	}
+	public void sendNewPlayerAnswered(String player) {
+		this.sendData(NEW_PLAYER_ANSWERED, player);
 	}
 	
 	private void sendData(int message_type, String message) {

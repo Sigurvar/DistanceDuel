@@ -2,29 +2,16 @@ package com.sigurvar.distanceduel.game.controller;
 
 import android.content.Context;
 import android.content.Intent;
-import android.widget.TextView;
-
-import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.game.Game;
 import com.sigurvar.distanceduel.game.models.GameModel;
 import com.sigurvar.distanceduel.game.views.AnswerState;
-import com.sigurvar.distanceduel.game.views.FinalResultState;
-import com.sigurvar.distanceduel.game.views.LobbyState;
-import com.sigurvar.distanceduel.game.views.ReceiveQuestionState;
 import com.sigurvar.distanceduel.game.views.ResultState;
 import com.sigurvar.distanceduel.game.views.WaitResultState;
-import com.sigurvar.distanceduel.game.views.WaitState;
 import com.sigurvar.distanceduel.states.GameState;
 import com.sigurvar.distanceduel.utility.ServerController;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.BreakIterator;
-
 
 public abstract class GameController {
-    private GameState activeState;
     protected Context context;
     protected GameModel gameModel;
 
@@ -46,10 +33,18 @@ public abstract class GameController {
         Intent intent = new Intent(context, AnswerState.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
-
-        //TODO implementer timer her
     }
 
+    public void receivedPlayersWhoHaveAnswered(String players){
+        gameModel.setPlayersWhoHaveAnswered(players);
+        Intent intent = new Intent(context, WaitResultState.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
+    public void receivedNewPlayerAnswered(String player){
+        gameModel.updatePlayersWhoHaveAnswered(player);
+    }
     public void sendAnswer(String answer){
         Intent intent = new Intent(context, WaitResultState.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

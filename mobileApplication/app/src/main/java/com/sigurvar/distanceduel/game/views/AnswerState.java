@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.states.GameState;
+import com.sigurvar.distanceduel.utility.ServerController;
 import com.sigurvar.distanceduel.utility.StateController;
 
 import java.util.Timer;
@@ -37,7 +38,9 @@ public class AnswerState extends GameState {
         this.sendAnswer( ((TextView)findViewById(R.id.answer)).getText().toString());
     }
     private void sendAnswer(String answer){
-        gameController.sendAnswer(answer);
+        ServerController.getInstance().outputThread.sendAnswer(answer);
+
+        //gameController.sendAnswer(answer);
     }
 
     public void displayQuestion(){
@@ -45,12 +48,9 @@ public class AnswerState extends GameState {
     }
 
 
-    private void TimerMethod()
-    {
+    private void TimerMethod() {
         this.runOnUiThread(Timer_Tick);
     }
-
-
     private Runnable Timer_Tick = new Runnable() {
         public void run() {
             timeCounter++;

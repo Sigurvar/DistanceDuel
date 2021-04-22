@@ -3,6 +3,7 @@ package com.sigurvar.distanceduel.utility;
 import android.util.Log;
 
 import com.sigurvar.distanceduel.game.Game;
+import com.sigurvar.distanceduel.game.controller.GameController;
 import com.sigurvar.distanceduel.game.controller.WriteQuestionController;
 import com.sigurvar.distanceduel.states.JoinGameState;
 import com.sigurvar.distanceduel.states.NewGameState;
@@ -26,6 +27,8 @@ public class InputThread extends Thread{
     private static final int DISCONNECT = 12;
     private static final int NICKNAME_ALREADY_TAKEN = 13;
     private static final int GAME_ALREADY_STARTED = 14;
+    private static final int PLAYERS_WHO_HAVE_ANSWERED = 15;
+    private static final int NEW_PLAYER_ANSWERED = 16;
 
     private final ServerController serverController;
     private final DataInputStream dataInputStream;
@@ -87,6 +90,14 @@ public class InputThread extends Thread{
                     case GAME_ALREADY_STARTED:
                         Log.i("InputThread", "Game already started");
                         ((JoinGameState)StateController.getInstance().getState()).gameAlreadyStarted();
+                        break;
+                    case PLAYERS_WHO_HAVE_ANSWERED:
+                        Log.i("InputThread", "players who have answer");
+                        Game.getInstance().getGameController().receivedPlayersWhoHaveAnswered(message);
+                        break;
+                    case NEW_PLAYER_ANSWERED:
+                        Log.i("InputThread", "new player answeres");
+                        Game.getInstance().getGameController().receivedNewPlayerAnswered(message);
                         break;
                 }
                 // TODO: Insert logic which use the recived message (textMessage)

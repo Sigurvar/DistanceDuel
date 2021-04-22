@@ -82,6 +82,10 @@ public abstract class Game {
 			JSONObject jPlayer = new JSONObject();
 			jPlayer.put("Answer", answer);
 			jPlayer.put("Score", currentQuestion.calculateScore((float)answer));
+			JSONObject jAnsweredPlayers = new JSONObject().append("players",playersWhoHaveAnswerd.stream().map(p->p.getNickname()).collect(Collectors.toList()));
+			System.out.println(jAnsweredPlayers);
+			player.outputThread.sendPlayersWhoHaveAnswered(jAnsweredPlayers.toString());
+			playersWhoHaveAnswerd.stream().forEach(p->p.outputThread.sendNewPlayerAnswered(player.getNickname()));
 			playersWhoHaveAnswerd.add(player);
 			this.currentAnswer.append(player.getNickname(), jPlayer);
 			System.out.println(currentAnswer);

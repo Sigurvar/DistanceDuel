@@ -1,6 +1,8 @@
 package com.sigurvar.distanceduel.game.models;
 
 import com.sigurvar.distanceduel.game.views.LobbyState;
+import com.sigurvar.distanceduel.game.views.WaitQuestionState;
+import com.sigurvar.distanceduel.game.views.WaitResultState;
 import com.sigurvar.distanceduel.utility.StateController;
 
 import org.json.JSONException;
@@ -18,6 +20,7 @@ public class GameModel {
     private Stack<Question> questions;
     private boolean noMoreQuestions = false;
     private boolean createMoreQuestions = false;
+    private List<String> playersWhoHaveAnswered;
 
     public GameModel(String myNickname, String gameCode){
         this.players = new ArrayList<>();
@@ -38,7 +41,19 @@ public class GameModel {
     public String getGameCode() {
         return gameCode;
     }
-
+    public void setPlayersWhoHaveAnswered(String players){
+        playersWhoHaveAnswered = new ArrayList<>();
+        //TODO: Add all players
+        if(( StateController.getInstance().getState()) instanceof WaitResultState){
+            //((WaitResultState) StateController.getInstance().getState());
+        }
+    }
+    public void updatePlayersWhoHaveAnswered(String player){
+        playersWhoHaveAnswered.add(player);
+        if(( StateController.getInstance().getState()) instanceof WaitResultState){
+            //((WaitResultState) StateController.getInstance().getState());
+        }
+    }
     public String getAllPlayersInGame(){
         StringBuilder str = new StringBuilder();
         for(Player p: players) str.append(p.getNickname()).append("\n");
