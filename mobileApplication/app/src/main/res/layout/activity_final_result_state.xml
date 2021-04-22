@@ -20,11 +20,32 @@
             android:text="@string/final_result"
             style="@style/HeadingStyle"/>
 
-        <TextView
-            app:layout_constraintVertical_bias="0.43"
-            android:layout_height="400dp"
+        <TableLayout
+            android:layout_width="0dp"
+            android:id="@+id/result_table"
+            android:layout_height="wrap_content"
             style="@style/ScoreBox"
-            android:id="@+id/result"/>
+
+            app:layout_constraintVertical_bias="0.40"
+            android:stretchColumns="*">
+            <TableRow>
+                <TextView
+                    android:layout_height="wrap_content"
+                    style="@style/ScoreboardHeader"
+                    android:text="Name"/>
+                <TextView
+                    android:layout_height="wrap_content"
+                    style="@style/ScoreboardHeader"
+                    android:text="Total score"/>
+            </TableRow>
+            <TableRow
+                android:background="@color/black">
+                <TextView
+                    android:layout_height="1dp">
+                </TextView>
+            </TableRow>
+
+        </TableLayout>
 
         <Button
             android:id="@+id/goHome"

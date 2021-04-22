@@ -30,6 +30,8 @@ public abstract class Game {
 	private List<Player> playersWhoHaveAnswerd;
 	public String code;
 	private boolean gameHasStarted;
+	private final static int maxTime = 30;
+	private	ScheduledExecutorService executorService;
 	
 	
 	public Game(String code, Unit unit, int id, Player creator) {
@@ -56,11 +58,13 @@ public abstract class Game {
 	}
 	private void startTimer() {
 		Runnable timer = () -> answerForRest();
-		ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+		executorService = Executors.newSingleThreadScheduledExecutor();
 
-		executorService.schedule(timer, 12, TimeUnit.SECONDS);
+		executorService.schedule(timer, maxTime+1, TimeUnit.SECONDS);
+
 	}
 	private void answerForRest() {
+		System.out.println("Answer for the rest!!NOW");
 		for (Player p : players) {
 			System.out.println(p.getNickname());
 			if (!playersWhoHaveAnswerd.contains(p)) {
@@ -87,6 +91,8 @@ public abstract class Game {
 			System.out.println(currentAnswer);
 			if (this.currentAnswer.length()==players.size()) {
 				System.out.println("All players have answerd");
+				executorService.shutdown();
+				executorService.shutdownNow();
 				sendResult();
 			}
 		} catch (JSONException e) {

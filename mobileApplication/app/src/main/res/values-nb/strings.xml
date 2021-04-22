@@ -26,4 +26,6 @@
     <string name="partial_result">Poengtavle</string>
     <string name="close">Lukk</string>
     <string name="tutorial">Tutorial</string>
+    <string name="game_code">Spill kode</string>
+    <string name="question">Spørsmål</string>
 </resources>

@@ -17,7 +17,7 @@
     <string name="in_lobby">You are now in the lobby</string>
     <string name="start_game">Start Game</string>
     <string name="no">No</string>
-    <string name="home">Finished</string>
+    <string name="home">Home</string>
     <string name="create_question">Create Question</string>
     <string name="wait_for_answers">Wait for everybody to answer</string>
     <string name="write_locations">Write in two locations!</string>
@@ -29,6 +29,8 @@
     <string name="partial_result">Scoreboard</string>
     <string name="close">Close</string>
     <string name="tutorial">Tutorial</string>
+    <string name="game_code">Game code</string>
+    <string name="question">Question</string>
 
 
 

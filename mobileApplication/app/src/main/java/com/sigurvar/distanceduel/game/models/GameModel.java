@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
@@ -71,22 +72,27 @@ public class GameModel {
     }
 
     public void newQuestion(String question){
+
+
         questions.push(new Question(question));
+        System.out.println(questions.size());
     }
 
     public String getQuestionText(){
         return questions.peek().getQ();
     }
-    public String getQuestionResult(){
-        System.out.println("Getting result");
-        System.out.println(questions.peek().getResult());
+    public HashMap<String, ArrayList<Double>> getQuestionResult(){
         return  questions.peek().getResult();
+    }
+    public HashMap<String, ArrayList<Double>> getAndRemoveQuestionResult(){
+        return  questions.empty() ?   null: questions.pop().getResult();
     }
     public String getFinalResult(){
         StringBuilder out = new StringBuilder();
         while(!questions.empty()){
             out.append(questions.pop().getResult());
         }
+        System.out.println(out.toString());
         return out.toString();
     }
 
@@ -95,8 +101,8 @@ public class GameModel {
         Question q = questions.peek();
         try{
             JSONObject jsonObject = new JSONObject(result);
-            q.setAnswer(jsonObject.getString("Answer"));
-            q.setResult(jsonObject.getString("Result"));
+            q.setCorrectAnswer(jsonObject.getString("Answer"));
+            q.setResult(jsonObject.getJSONObject("Result"));
             noMoreQuestions = jsonObject.getBoolean("Last");
             // createMoreQuestions = jsonObject.getBoolean("More")
         }catch (JSONException ignored){
