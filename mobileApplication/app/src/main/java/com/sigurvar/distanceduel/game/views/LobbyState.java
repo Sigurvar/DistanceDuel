@@ -20,8 +20,14 @@ public class LobbyState extends ReceiveQuestionState {
         setPlayersInGame();
         setGameCode();
     }
-    public void canStartGame(){
-        findViewById(R.id.startGame).setVisibility(View.VISIBLE);
+    public void canStartGame() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                findViewById(R.id.startGame).setVisibility(View.VISIBLE);
+            }
+        });
+
     }
     private void setGameCode(){
         ((TextView)findViewById(R.id.gameCode)).setText("Game code is: "+gameModel.getGameCode());
