@@ -30,7 +30,8 @@ public class LobbyState extends ReceiveQuestionState {
 
     }
     private void setGameCode(){
-        ((TextView)findViewById(R.id.gameCode)).setText("Game code is: "+gameModel.getGameCode());
+        String code = getString(R.string.game_code) +": " + gameModel.getGameCode();
+        ((TextView)findViewById(R.id.gameCode)).setText(code);
     }
 
     public void setPlayersInGame(){

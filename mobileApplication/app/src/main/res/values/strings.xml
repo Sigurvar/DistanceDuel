@@ -6,7 +6,34 @@
     <!-- Game strings -->
     <string name="new_game">New Game</string>
     <string name="join_game">Join Game</string>
+    <string name="normal_mode">Normal Mode</string>
+    <string name="write_question_mode">Write Question Mode</string>
+    <string name="answer">Answer</string>
     <string name="leave_game_question">Are you sure you want to leave the game?</string>
+    <string name="create_more_questions">Create More Questions</string>
+    <string name="see_final_result">Final Result</string>
+    <string name="next_question">Next Question</string>
     <string name="yes">Yes</string>
+    <string name="in_lobby">You are now in the lobby</string>
+    <string name="start_game">Start Game</string>
     <string name="no">No</string>
+    <string name="home">Home</string>
+    <string name="create_question">Create Question</string>
+    <string name="wait_for_answers">Wait for everybody to answer</string>
+    <string name="write_locations">Write in two locations!</string>
+    <string name="hint_loc_a">Location A</string>
+    <string name="hint_loc_b">Location B</string>
+    <string name="enter_nickname">Enter Nickname</string>
+    <string name="enter_game_code">Enter Game Code</string>
+    <string name="final_result">Final Result</string>
+    <string name="partial_result">Scoreboard</string>
+    <string name="close">Close</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="game_code">Game code</string>
+    <string name="question">Question</string>
+
+
+
+
+
 </resources>

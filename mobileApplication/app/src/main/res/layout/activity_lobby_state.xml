@@ -5,36 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".game.views.LobbyState"
-    android:id="@+id/main">
-    <LinearLayout
+    android:id="@+id/main"
+    android:background="@color/main_background">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
+
+        <TextView
+            app:layout_constraintVertical_bias="0.1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/in_lobby"
+            style="@style/HeadingStyle"/>
+
+        <TextView
+            app:layout_constraintVertical_bias="0.17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gameCode"
+            style="@style/CodeStyle"
+            />
+        <TextView
+            android:layout_height="wrap_content"
+            android:id="@+id/players"
+            style="@style/LobbyBox"
+            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="You are now in the lobby"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/gameCode"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/players"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/displayInfo"/>
+            android:id="@+id/displayInfo"
+            style="@style/TextView"/>
 
         <Button
             android:id="@+id/startGame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start Game"
+            app:layout_constraintVertical_bias="0.85"
+            android:text="@string/start_game"
             android:visibility="invisible"
-            android:onClick="startGame"/>
+            android:onClick="startGame"
+            style="@style/PrimaryButton"
+            />
 
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,39 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_background"
     tools:context=".states.NewGameState">
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <EditText
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+
+
+        <ImageView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Enter Nickname"
+            android:src="@drawable/ic_world_background"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <EditText
+            app:layout_constraintVertical_bias="0.42"
+            android:hint="@string/enter_nickname"
             android:id="@+id/nickname"
-            android:inputType="textNoSuggestions"
+            style="@style/InputField"
+            app:layout_constraintHeight_percent="0.05"
             />
 
         <Button
             android:id="@+id/normalMode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Normal Mode"
+            style="@style/PrimaryButton"
+            app:layout_constraintVertical_bias="0.55"
             android:onClick="createGame"
-            tools:layout_editor_absoluteX="153dp"
-            tools:layout_editor_absoluteY="416dp" />
+            android:text="@string/normal_mode"/>
         <Button
             android:id="@+id/writeQuestionMode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Write question mode"
+            style="@style/PrimaryButtonSmall"
+            app:layout_constraintVertical_bias="0.7"
             android:onClick="createGame"
-            tools:layout_editor_absoluteX="153dp"
-            tools:layout_editor_absoluteY="416dp" />
+            android:text="@string/write_question_mode" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

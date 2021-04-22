@@ -22,7 +22,7 @@
         <item name="layout_constraintWidth_default">percent</item>
     </style>
     <style name="TextView" parent="ConstraintPosition">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">19sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textAlignment">center</item>
     </style>
@@ -39,9 +39,82 @@
         <item name="layout_constraintWidth_percent">0.6</item>
         <item name="layout_constraintHeight_percent">0.1</item>
     </style>
+    <style name="PrimaryButtonSmall" parent="PrimaryButton">
+        <item name="android:textSize">18sp</item>
+    </style>
     <style name="PopupButton" parent="Button">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="layout_constraintWidth_percent">0.4</item>
         <item name="android:layout_height">50dp</item>
     </style>
+    <style name="CloseInfoButton" parent="Button">
+        <item name="android:textSize">20sp</item>
+        <item name="layout_constraintWidth_percent">0.4</item>
+        <item name="android:layout_height">50dp</item>
+    </style>
+    <style name="InputField" parent="ConstraintPosition">
+        <item name="colorAccent">@color/button_background</item>
+        <item name="colorPrimary">@color/button_background</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/input</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="layout_constraintWidth_percent">0.6</item>
+        <item name="layout_constraintHeight_percent">0.1</item>
+    </style>
+    <style name="HeadingStyle" parent="ConstraintPosition">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:textSize">25sp</item>
+        <item name="layout_constraintWidth_percent">0.8</item>
+        <item name="layout_constraintHeight_percent">0.1</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+    <style name="CodeStyle" parent="HeadingStyle">
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="LobbyBox" parent="ConstraintPosition">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@drawable/lobby_box</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">19sp</item>
+        <item name="layout_constraintWidth_percent">0.85</item>
+    </style>
+    <style name="ScoreBox" parent="ConstraintPosition">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@drawable/lobby_box</item>
+        <item name="layout_constraintWidth_percent">0.85</item>
+
+    </style>
+    <style name="ScoreboardHeader" parent="Theme.DistanceDuel">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="ScoreboardBox" parent="Theme.DistanceDuel">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:layout_margin">1dp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+    <style name="counterCircle" parent="ConstraintPosition">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@drawable/circle</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">25sp</item>
+        <item name="layout_constraintWidth_percent">0.6</item>
+    </style>
+
 </resources>

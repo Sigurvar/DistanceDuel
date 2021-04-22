@@ -4,39 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
+    android:background="@color/main_background"
     android:layout_height="match_parent"
     tools:context=".game.views.ResultState">
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <TextView
-            android:layout_width="wrap_content"
+            app:layout_constraintVertical_bias="0.13"
+            android:text="@string/partial_result"
+            style="@style/HeadingStyle"/>
+
+        <TableLayout
+            android:layout_width="0dp"
+            android:id="@+id/result_table"
             android:layout_height="wrap_content"
-            android:id="@+id/result"/>
+            style="@style/ScoreBox"
+
+            app:layout_constraintVertical_bias="0.40"
+            android:stretchColumns="*">
+            <TableRow>
+                <TextView
+                    android:layout_height="wrap_content"
+                    style="@style/ScoreboardHeader"
+                    android:text="Name"/>
+                <TextView
+                    android:layout_height="wrap_content"
+                    style="@style/ScoreboardHeader"
+                    android:text="Answer"/>
+                <TextView
+                    android:layout_height="wrap_content"
+                    style="@style/ScoreboardHeader"
+                    android:text="Score"/>
+            </TableRow>
+            <TableRow
+                android:background="@color/black">
+                <TextView
+                    android:layout_height="1dp">
+                </TextView>
+            </TableRow>
+
+        </TableLayout>
 
         <Button
             android:id="@+id/nextQuestion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Next question"
+            style="@style/PrimaryButton"
+            app:layout_constraintVertical_bias="0.87"
+            android:text="@string/next_question"
             android:visibility="invisible"
             android:onClick="nextQuestion"/>
         <Button
             android:id="@+id/finalResult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="See final result"
+            style="@style/PrimaryButton"
+            app:layout_constraintVertical_bias="0.87"
+            android:text="@string/see_final_result"
             android:visibility="invisible"
             android:onClick="finalResult"/>
         <Button
             android:id="@+id/moreQuestions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Create more questions"
+            style="@style/PrimaryButtonSmall"
+            app:layout_constraintVertical_bias="0.87"
+            android:text="@string/create_more_questions"
             android:visibility="invisible"
-            android:onClick="moreQuestions"/>
-    </LinearLayout>
+            android:onClick="moreQuestions"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

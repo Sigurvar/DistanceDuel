@@ -15,6 +15,7 @@ public class AnswerState extends GameState {
 
     Timer timer;
     private int timeCounter = 0;
+    private final static int maxTime = 30;
 
 
     @Override
@@ -29,7 +30,6 @@ public class AnswerState extends GameState {
             public void run() {
                 TimerMethod();
             }
-
         }, 0, 1000);
     }
     public void sendAnswer(View view){
@@ -41,12 +41,12 @@ public class AnswerState extends GameState {
     }
 
     public void displayQuestion(){
-        ((TextView)findViewById(R.id.question)).setText("Question:\n"+gameModel.getQuestionText());
+        String question = getString(R.string.question)+":\n"+gameModel.getQuestionText();
+        ((TextView)findViewById(R.id.question)).setText(question);
     }
 
 
-    private void TimerMethod()
-    {
+    private void TimerMethod() {
         this.runOnUiThread(Timer_Tick);
     }
 
@@ -54,10 +54,8 @@ public class AnswerState extends GameState {
     private Runnable Timer_Tick = new Runnable() {
         public void run() {
             timeCounter++;
-            System.out.println(timeCounter);
-            // TODO: sett timer on displayscreen
-            if(timeCounter>10){
-                System.out.println("Timer done");
+            ((TextView)findViewById(R.id.timer)).setText(String.valueOf(maxTime-timeCounter));
+            if(timeCounter>=maxTime){
                 timer.cancel();
                 sendAnswer("0");
             }
