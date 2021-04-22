@@ -4,39 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
+    android:background="@color/main_background"
     android:layout_height="match_parent"
     tools:context=".game.views.ResultState">
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <TextView
+            app:layout_constraintVertical_bias="0.1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/CodeStyle"
             android:id="@+id/result"/>
 
         <Button
             android:id="@+id/nextQuestion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Next question"
+            style="@style/PrimaryButton"
+            app:layout_constraintVertical_bias="0.7"
+            android:text="@string/next_question"
             android:visibility="invisible"
             android:onClick="nextQuestion"/>
         <Button
             android:id="@+id/finalResult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="See final result"
+            style="@style/PrimaryButton"
+            app:layout_constraintVertical_bias="0.7"
+            android:text="@string/see_final_result"
             android:visibility="invisible"
             android:onClick="finalResult"/>
         <Button
             android:id="@+id/moreQuestions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Create more questions"
+            style="@style/PrimaryButtonSmall"
+            app:layout_constraintVertical_bias="0.7"
+            android:text="@string/create_more_questions"
             android:visibility="invisible"
-            android:onClick="moreQuestions"/>
-    </LinearLayout>
+            android:onClick="moreQuestions"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

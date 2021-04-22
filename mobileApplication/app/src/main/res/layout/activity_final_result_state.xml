@@ -4,26 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_background"
     tools:context=".game.views.FinalResultState"
     >
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <TextView
+            app:layout_constraintVertical_bias="0.1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/CodeStyle"
             android:id="@+id/result"/>
 
         <Button
             android:id="@+id/goHome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Go Home"
+            style="@style/PrimaryButton"
+            app:layout_constraintVertical_bias="0.7"
+            android:text="@string/home"
             android:visibility="visible"
             android:onClick="goHome"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

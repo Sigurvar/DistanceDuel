@@ -7,6 +7,11 @@
     <string name="join_game">Bli med i Spill</string>
     <string name="send_answer">Svar</string>
     <string name="leave_game_question">Vil du forlate spillet</string>
+    <string name="create_more_questions">Lag flere spørsmpål</string>
+    <string name="see_final_result">Se endelig resultat</string>
+    <string name="next_question">Neste spørsmål</string>
     <string name="yes">Ja</string>
     <string name="no">Nei</string>
+    <string name="home">Hjem</string>
+    <string name="create_question">Lag spørsmål</string>
 </resources>

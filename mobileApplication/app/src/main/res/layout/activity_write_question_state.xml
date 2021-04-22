@@ -2,49 +2,41 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/main_background"
     android:id="@+id/main">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Location A"/>
+            app:layout_constraintVertical_bias="0.2"
+            style="@style/HeadingStyle"
+            android:text="Write in two locations!"/>
         <EditText
+            app:layout_constraintVertical_bias="0.4"
             android:id="@+id/locationa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="location A"
+            android:hint="Location A"
+            style="@style/InputField"
+             />
 
-            android:text=""
-            tools:layout_editor_absoluteX="171dp"
-            tools:layout_editor_absoluteY="107dp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Location B"/>
         <EditText
+            style="@style/InputField"
+            app:layout_constraintVertical_bias="0.55"
             android:id="@+id/locationb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:hint="location B"
-            tools:layout_editor_absoluteX="171dp"
-            tools:layout_editor_absoluteY="107dp" />
-
+            android:hint="Location B"
+             />
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Create Question"
+            app:layout_constraintVertical_bias="0.7"
+            android:text="@string/create_question"
             android:onClick="createQuestion"
-            tools:layout_editor_absoluteX="153dp"
-            tools:layout_editor_absoluteY="143dp" />
-
+            style="@style/PrimaryButton"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/displayInfo"/>
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

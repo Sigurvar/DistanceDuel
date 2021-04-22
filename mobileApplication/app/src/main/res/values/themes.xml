@@ -39,6 +39,9 @@
         <item name="layout_constraintWidth_percent">0.6</item>
         <item name="layout_constraintHeight_percent">0.1</item>
     </style>
+    <style name="PrimaryButtonSmall" parent="PrimaryButton">
+        <item name="android:textSize">18sp</item>
+    </style>
     <style name="PopupButton" parent="Button">
         <item name="android:textSize">15sp</item>
         <item name="layout_constraintWidth_percent">0.4</item>
@@ -61,18 +64,12 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:textSize">25sp</item>
-
-        <item name="layout_constraintWidth_percent">0.6</item>
-        <item name="layout_constraintHeight_percent">0.1</item>
-    </style>
-    <style name="CodeStyle" parent="ConstraintPosition">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:textSize">18sp</item>
-        <item name="layout_constraintWidth_percent">0.6</item>
+        <item name="layout_constraintWidth_percent">0.8</item>
         <item name="layout_constraintHeight_percent">0.1</item>
         <item name="android:textAlignment">center</item>
+    </style>
+    <style name="CodeStyle" parent="HeadingStyle">
+        <item name="android:textSize">18sp</item>
     </style>
     <style name="LobbyBox" parent="ConstraintPosition">
         <item name="android:textColor">@color/black</item>

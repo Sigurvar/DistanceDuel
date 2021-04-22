@@ -39,11 +39,10 @@
             android:text="@string/normal_mode"/>
         <Button
             android:id="@+id/writeQuestionMode"
-            style="@style/PrimaryButton"
+            style="@style/PrimaryButtonSmall"
             app:layout_constraintVertical_bias="0.7"
             android:onClick="createGame"
-            android:text="@string/write_question_mode"
-            android:textSize="21sp"/>
+            android:text="@string/write_question_mode" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

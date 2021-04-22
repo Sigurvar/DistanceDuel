@@ -10,6 +10,11 @@
     <string name="write_question_mode">Write Question Mode</string>
     <string name="send_answer">Answer</string>
     <string name="leave_game_question">Are you sure you want to leave the game?</string>
+    <string name="create_more_questions">Create more questions</string>
+    <string name="see_final_result">See final result</string>
+    <string name="next_question">Next question</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="home">Home</string>
+    <string name="create_question">Create question</string>
 </resources>
