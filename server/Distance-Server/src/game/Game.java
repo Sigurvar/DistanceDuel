@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.json.JSONArray;
@@ -16,8 +19,6 @@ import main.QuestionGenerator;
 import main.Server;
 
 public abstract class Game {
-	private final float interuptTimer = 11000;
-	private long startTime;
 	private int id;
 	protected Stack<Question> history = new Stack<>();
 	protected Stack<Question> upcoming;
@@ -26,6 +27,7 @@ public abstract class Game {
 	//private Server server;
 	protected Unit unit;
 	private JSONObject currentAnswer;
+	private List<Player> playersWhoHaveAnswerd;
 	public String code;
 	
 	
@@ -39,18 +41,31 @@ public abstract class Game {
 	}
 	void sendQuestion() {
 		try {
+			playersWhoHaveAnswerd = new ArrayList<>();
 			currentQuestion = upcoming.pop();
 			history.push(currentQuestion);
 			currentAnswer = new JSONObject();
 			System.out.println("Sending question to all players");
 			String questionString = "How many " + currentQuestion.getUnit() + " is it between " + currentQuestion.getPlaceA() + " and " + currentQuestion.getPlaceB() + "?";
 			for (Player p : players) p.outputThread.sendQuestion(questionString);
+			startTimer();
 		}catch(Exception e) {
 			System.out.println("Det finnes ingen q");
-			//TODO send game over
 		}
-		
-		
+	}
+	private void startTimer() {
+		Runnable timer = () -> answerForRest();
+		ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+
+		executorService.schedule(timer, 12, TimeUnit.SECONDS);
+	}
+	private void answerForRest() {
+		for (Player p : players) {
+			System.out.println(p.getNickname());
+			if (!playersWhoHaveAnswerd.contains(p)) {
+				this.answer(p, 0);
+			}
+		}
 	}
 	public void join(Player player) {
 		for (Player p : players) p.outputThread.newPlayerJoined(player.getNickname());
@@ -65,20 +80,19 @@ public abstract class Game {
 			JSONObject jPlayer = new JSONObject();
 			jPlayer.put("Answer", answer);
 			jPlayer.put("Score", currentQuestion.calculateScore((float)answer));
-
+			playersWhoHaveAnswerd.add(player);
 			this.currentAnswer.append(player.getNickname(), jPlayer);
 			System.out.println(currentAnswer);
 			if (this.currentAnswer.length()==players.size()) {
 				System.out.println("All players have answerd");
 				sendResult();
-				
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 	}
 	public void sendResult() {
-		
+		System.out.println("Sending result");
 		try {
 			JSONObject result = new JSONObject();
 			result.put("Last", upcoming.empty());
@@ -86,6 +100,7 @@ public abstract class Game {
 			result.put("Result", currentAnswer);
 			for (Player p: players) p.outputThread.sendPartialResult(result.toString());
 			if(upcoming.empty()) {//TODO må endres hvis man også skal lage flere spm
+				System.out.println("Done");
 				for (Player p: players) p.outputThread.sendDisconnect();
 				GameController.getInstance().endGame(id, code);
 			}
