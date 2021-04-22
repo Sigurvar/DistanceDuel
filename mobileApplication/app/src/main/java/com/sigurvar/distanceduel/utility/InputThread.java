@@ -19,8 +19,7 @@ public class InputThread extends Thread{
     private static final int NEW_PLAYER_IN_GAME = 4;
     private static final int NEW_QUESTION = 5;
     private static final int RESULT = 6;
-    private static final int FINAL_RESULT = 7;
-    private static final int YOU_ARE_OWNER = 8;//Veldig usikker på navnet her
+    private static final int YOU_ARE_OWNER = 7;//Veldig usikker på navnet her
     private static final int GAME_STARTING_SOON = 9;//Burde det være countdown mellom hvert spm
     private static final int PLAYER_LEFT_GAME = 10;
     private static final int CREATE_QUESTION = 11;
@@ -67,31 +66,28 @@ public class InputThread extends Thread{
                         Log.i("InputThread", "Received result: " + message);
                         Game.getInstance().getGameController().receivedResult(message);
                         break;
-                    case FINAL_RESULT:
-                        Log.i("InputThread", "Game done: " + message);
-                        this.disconnect();
-                        break;
                     case YOU_ARE_OWNER:
-                        // TODO: implement function to set player as owner
                         Log.i("InputThread", message);
-                        this.setDisplayInfo(message);
+                        Game.getInstance().getGameController().youAreOwner();
                         break;
                     case PLAYER_LEFT_GAME:
+                        Game.getInstance().getGameController().playerLeftTheGame(message);
                         Log.i("InputThread", message + " left the game");
-                        this.setDisplayInfo(message + " left the game");
                         break;
                     case CREATE_QUESTION:
                         ((WriteQuestionController)Game.getInstance().getGameController()).createQuestion();
+                        break;
                     case DISCONNECT:
                         serverController.disconnect();
+                        break;
                     case NICKNAME_ALREADY_TAKEN:
                         Log.i("InputThread", "Nickname already taken");
                         ((JoinGameState)StateController.getInstance().getState()).nicknameAlreadyTaken();
+                        break;
                     case GAME_ALREADY_STARTED:
                         Log.i("InputThread", "Game already started");
                         ((JoinGameState)StateController.getInstance().getState()).gameAlreadyStarted();
-
-
+                        break;
                 }
                 // TODO: Insert logic which use the recived message (textMessage)
             } catch (IOException e1) {

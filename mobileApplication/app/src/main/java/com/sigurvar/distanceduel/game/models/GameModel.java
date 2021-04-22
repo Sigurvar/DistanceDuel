@@ -28,6 +28,9 @@ public class GameModel {
 
     public void setAsHost(){
         this.isHost=true;
+        if(( StateController.getInstance().getState()) instanceof  LobbyState){
+            ((LobbyState) StateController.getInstance().getState()).canStartGame();
+        }
     }
     public boolean isHost(){
         return isHost;

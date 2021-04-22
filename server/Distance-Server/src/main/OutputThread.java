@@ -11,7 +11,7 @@ public class OutputThread extends Thread{
     private static final int NEW_PLAYER_IN_GAME = 4;
     private static final int NEW_QUESTION = 5;
     private static final int RESULT = 6;
-    private static final int YOU_ARE_OWNER = 8;//Veldig usikker på navnet her
+    private static final int YOU_ARE_OWNER = 7;//Veldig usikker på navnet her
     private static final int GAME_STARTING_SOON = 9;//Burde det være countdown mellom hvert spm
     private static final int PLAYER_LEFT_GAME = 10;
     private static final int CREATE_QUESTION = 11;
