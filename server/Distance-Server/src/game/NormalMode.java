@@ -17,6 +17,7 @@ public class NormalMode extends Game {
 
 	@Override
 	public void startGame() {
+		super.startGame();
 		QuestionGenerator questionGenerator = new QuestionGenerator();
 		try {
 			upcoming = questionGenerator.generate(unit, 2);

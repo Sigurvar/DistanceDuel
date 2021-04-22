@@ -11,12 +11,13 @@ public class OutputThread extends Thread{
     private static final int NEW_PLAYER_IN_GAME = 4;
     private static final int NEW_QUESTION = 5;
     private static final int RESULT = 6;
-    private static final int YOU_ARE_OWNER = 8;//Veldig usikker på navnet her
+    private static final int YOU_ARE_OWNER = 7;//Veldig usikker på navnet her
     private static final int GAME_STARTING_SOON = 9;//Burde det være countdown mellom hvert spm
     private static final int PLAYER_LEFT_GAME = 10;
     private static final int CREATE_QUESTION = 11;
     private static final int DISCONNECT = 12;
     private static final int NICKNAME_ALREADY_TAKEN = 13;
+    private static final int GAME_ALREADY_STARTED = 14;
     
 
 	private final DataOutputStream dataOutputStream;
@@ -57,6 +58,9 @@ public class OutputThread extends Thread{
 	}
 	public void sendNicknameAlreadyTaken() {
 		this.sendData(NICKNAME_ALREADY_TAKEN);
+	}
+	public void sendGameAlreadyStarted() {
+		this.sendData(GAME_ALREADY_STARTED);
 	}
 	
 	private void sendData(int message_type, String message) {
