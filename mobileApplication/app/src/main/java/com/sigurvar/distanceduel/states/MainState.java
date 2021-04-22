@@ -3,7 +3,10 @@ package com.sigurvar.distanceduel.states;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.sigurvar.distanceduel.R;
@@ -14,6 +17,7 @@ import com.sigurvar.distanceduel.utility.StateController;
 public class MainState extends State {
 
     ServerController serverController = ServerController.getInstance();
+    PopupWindow popupWindow = new PopupWindow();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,14 @@ public class MainState extends State {
         this.startActivity(myIntent);
     }
 
+    public void viewInstructions(View view) {
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        int height = ((int)(this.getWindowManager().getCurrentWindowMetrics().getBounds().height()*0.9));
+        int width = ((int)(this.getWindowManager().getCurrentWindowMetrics().getBounds().width()*0.9));
+        popupWindow = new PopupWindow(inflater.inflate(R.layout.popup_view_intructions, null, false), width,height, true);
+        popupWindow.showAtLocation(this.findViewById(R.id.info), Gravity.CENTER, 0, 0);
+    }
+
     public void displayInfo(String text){
         runOnUiThread(new Runnable() {
             @Override
@@ -43,6 +55,12 @@ public class MainState extends State {
                 tv.setText(text);
             }
         });
+    }
+    public void closePopup(View view){
+        if(popupWindow!=null){
+            popupWindow.dismiss();
+            popupWindow=null;
+        }
     }
 
 }

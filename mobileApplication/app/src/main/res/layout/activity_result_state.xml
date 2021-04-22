@@ -15,13 +15,12 @@
 
         <TextView
             app:layout_constraintVertical_bias="0.13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/partial_result"
             style="@style/HeadingStyle"/>
 
         <TextView
             app:layout_constraintVertical_bias="0.43"
+            android:layout_width="wrap_content"
             android:layout_height="400dp"
             style="@style/ScoreBox"
             android:id="@+id/result"/>

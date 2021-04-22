@@ -43,7 +43,12 @@
         <item name="android:textSize">18sp</item>
     </style>
     <style name="PopupButton" parent="Button">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="layout_constraintWidth_percent">0.4</item>
+        <item name="android:layout_height">50dp</item>
+    </style>
+    <style name="CloseInfoButton" parent="Button">
+        <item name="android:textSize">20sp</item>
         <item name="layout_constraintWidth_percent">0.4</item>
         <item name="android:layout_height">50dp</item>
     </style>

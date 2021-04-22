@@ -24,4 +24,6 @@
     <string name="enter_game_code">Skriv inn kode for spill</string>
     <string name="final_result">Sluttresultat</string>
     <string name="partial_result">Poengtavle</string>
+    <string name="close">Lukk</string>
+    <string name="tutorial">Tutorial</string>
 </resources>

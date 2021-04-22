@@ -19,5 +19,11 @@
             android:text="@string/wait_for_answers"
             style="@style/HeadingStyle"/>
 
+        <TextView
+            android:layout_height="wrap_content"
+            android:id="@+id/players"
+            style="@style/LobbyBox"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
