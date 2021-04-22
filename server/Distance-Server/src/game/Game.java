@@ -106,8 +106,6 @@ public abstract class Game {
 					break;
 				}
 				if(i==0) {
-					System.out.println("new owner");
-					System.out.println(this.players.get(0).getNickname());
 					this.players.get(0).outputThread.sendYouAreOwner();	
 				}
 				for (Player p : players) p.outputThread.sendPlayerLeftGame(player.getNickname());
