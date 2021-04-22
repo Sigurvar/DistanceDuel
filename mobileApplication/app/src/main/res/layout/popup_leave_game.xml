@@ -22,7 +22,6 @@
         android:id="@+id/no"
         style="@style/PopupButton"
         app:layout_constraintVertical_bias="1"
-
         app:layout_constraintHorizontal_bias="0.1"
         android:onClick="closePopup"
         android:text="@string/no"/>

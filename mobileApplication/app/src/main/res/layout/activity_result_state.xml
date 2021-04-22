@@ -14,30 +14,35 @@
         android:layout_height="match_parent">
 
         <TextView
-            app:layout_constraintVertical_bias="0.1"
+            app:layout_constraintVertical_bias="0.13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/CodeStyle"
-            android:id="@+id/result"/>
+            android:text="@string/partial_result"
+            style="@style/HeadingStyle"/>
 
+        <TextView
+            app:layout_constraintVertical_bias="0.43"
+            android:layout_height="400dp"
+            style="@style/ScoreBox"
+            android:id="@+id/result"/>
         <Button
             android:id="@+id/nextQuestion"
             style="@style/PrimaryButton"
-            app:layout_constraintVertical_bias="0.7"
+            app:layout_constraintVertical_bias="0.87"
             android:text="@string/next_question"
             android:visibility="invisible"
             android:onClick="nextQuestion"/>
         <Button
             android:id="@+id/finalResult"
             style="@style/PrimaryButton"
-            app:layout_constraintVertical_bias="0.7"
+            app:layout_constraintVertical_bias="0.87"
             android:text="@string/see_final_result"
             android:visibility="invisible"
             android:onClick="finalResult"/>
         <Button
             android:id="@+id/moreQuestions"
             style="@style/PrimaryButtonSmall"
-            app:layout_constraintVertical_bias="0.7"
+            app:layout_constraintVertical_bias="0.87"
             android:text="@string/create_more_questions"
             android:visibility="invisible"
             android:onClick="moreQuestions"

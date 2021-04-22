@@ -22,4 +22,6 @@
     <string name="hint_loc_b">Lokasjon B</string>
     <string name="enter_nickname">Skriv inn kallenavn</string>
     <string name="enter_game_code">Skriv inn kode for spill</string>
+    <string name="final_result">Sluttresultat</string>
+    <string name="partial_result">Poengtavle</string>
 </resources>

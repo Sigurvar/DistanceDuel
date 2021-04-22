@@ -25,6 +25,8 @@
     <string name="hint_loc_b">Location B</string>
     <string name="enter_nickname">Enter Nickname</string>
     <string name="enter_game_code">Enter Game Code</string>
+    <string name="final_result">Final Result</string>
+    <string name="partial_result">Scoreboard</string>
 
 
 
