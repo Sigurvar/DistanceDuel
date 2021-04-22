@@ -9,7 +9,6 @@ public class StateController {
     private State state;
 
     public State getState(){
-        System.out.println("Updating state");
         return state;
     }
     public void setState(State state){this.state = state;}

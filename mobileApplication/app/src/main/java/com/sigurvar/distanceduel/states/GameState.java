@@ -39,6 +39,7 @@ public abstract class GameState extends State {
 
     public void leaveGame(View view){
         closePopup(view);
+        ServerController.getInstance().outputThread.leaveGame();
         ServerController.getInstance().disconnect();
         Intent intent = new Intent(this, MainState.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

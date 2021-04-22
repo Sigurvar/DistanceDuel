@@ -71,7 +71,6 @@ public abstract class Game {
 			if (this.currentAnswer.length()==players.size()) {
 				System.out.println("All players have answerd");
 				sendResult();
-				//for (Player p: players) p.outputThread.sendPartialResult(currentAnswer.toString());
 				
 			}
 		} catch (JSONException e) {
@@ -86,8 +85,11 @@ public abstract class Game {
 			result.put("Answer", currentQuestion.getCorrectAnswer());
 			result.put("Result", currentAnswer);
 			for (Player p: players) p.outputThread.sendPartialResult(result.toString());
+			if(upcoming.empty()) {//TODO må endres hvis man også skal lage flere spm
+				for (Player p: players) p.outputThread.sendDisconnect();
+				GameController.getInstance().endGame(id, code);
+			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -130,10 +132,6 @@ public abstract class Game {
 			r+=p.getNickname()+" \n";
 		}
 		return r;
-	}
-	public void gameComplete() {
-		System.out.println("Game complete");
-		for (Player p: players) p.outputThread.sendFinalResult("Game completed");
 	}
 	public abstract void startGame();
 	public abstract String getGameInfo();

@@ -55,6 +55,7 @@ public class LobbyState extends ReceiveQuestionState {
     public void onDestroy() {
         ServerController serverController = ServerController.getInstance();
         if (serverController.getIsConnected()){
+            serverController.outputThread.leaveGame();
             serverController.disconnect();
         }
         super.onDestroy();
