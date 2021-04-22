@@ -9,6 +9,12 @@ import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.utility.ServerController;
 import com.sigurvar.distanceduel.utility.StateController;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Iterator;
+
 public class ResultState extends ReceiveQuestionState {
 
     @Override
@@ -46,6 +52,27 @@ public class ResultState extends ReceiveQuestionState {
     }
 
     public void displayResult(){
-        ((TextView)findViewById(R.id.result)).setText("Result:\n"+gameModel.getQuestionResult());
+        String nickNames = "";
+        String answers = "";
+        String scores = "";
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(gameModel.getFinalResult().trim());
+            Iterator<String> keys = jsonObject.keys();
+            while(keys.hasNext()) {
+                String key = keys.next();
+                nickNames += key + "\n";
+                JSONArray name = jsonObject.getJSONArray(key);
+                double answer = name.getJSONObject(0).getDouble("Answer");
+                double score = name.getJSONObject(0).getDouble("Score");
+                answers += String.valueOf(answer) + "\n";
+                scores += String.valueOf((int) score) + "\n";
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        ((TextView)findViewById(R.id.names)).setText(nickNames);
+        ((TextView)findViewById(R.id.answers)).setText(answers);
+        ((TextView)findViewById(R.id.scores)).setText(scores);
     }
 }
