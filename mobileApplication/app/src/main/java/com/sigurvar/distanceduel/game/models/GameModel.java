@@ -72,10 +72,10 @@ public class GameModel {
     }
 
     public void newQuestion(String question){
-
-
         questions.push(new Question(question));
-        System.out.println(questions.size());
+    }
+    public Double getQuestionAnswer(){
+        return questions.peek().getCorrectAnswer();
     }
 
     public String getQuestionText(){
@@ -87,24 +87,14 @@ public class GameModel {
     public HashMap<String, ArrayList<Double>> getAndRemoveQuestionResult(){
         return  questions.empty() ?   null: questions.pop().getResult();
     }
-    public String getFinalResult(){
-        StringBuilder out = new StringBuilder();
-        while(!questions.empty()){
-            out.append(questions.pop().getResult());
-        }
-        System.out.println(out.toString());
-        return out.toString();
-    }
-
 
     public void gotResultForQuestion(String result){
         Question q = questions.peek();
         try{
             JSONObject jsonObject = new JSONObject(result);
-            q.setCorrectAnswer(jsonObject.getString("Answer"));
+            q.setCorrectAnswer(jsonObject.getDouble("Answer"));
             q.setResult(jsonObject.getJSONObject("Result"));
             noMoreQuestions = jsonObject.getBoolean("Last");
-            // createMoreQuestions = jsonObject.getBoolean("More")
         }catch (JSONException ignored){
             //TODO: gjør noe kult her
             System.out.println("Feil");

@@ -16,8 +16,7 @@ public class Question {
     private String q; // TODO add location class
     private Unit unit;
     private HashMap<String, ArrayList<Double>> result;
-    private HashMap<String, Float> scores;// TODO: create an answer class
-    private String correctAnswer;
+    private Double correctAnswer;
 
 
     public Question(String q){
@@ -29,7 +28,6 @@ public class Question {
     }
 
     public void setResult(JSONObject questionResult) {
-        System.out.println("Setting result for"+q);
         try{
             Iterator<String> keys = questionResult.keys();
             while(keys.hasNext()) {
@@ -49,11 +47,11 @@ public class Question {
         return result;
     }
 
-    public void setCorrectAnswer(String correctAnswer) {
+    public void setCorrectAnswer( double correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 
-    public String getCorrectAnswer() {
+    public Double getCorrectAnswer() {
         return correctAnswer;
     }
 }

@@ -5,11 +5,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.sigurvar.distanceduel.R;
+import com.sigurvar.distanceduel.states.GameState;
 import com.sigurvar.distanceduel.utility.ServerController;
 import com.sigurvar.distanceduel.utility.StateController;
 
 
-public class LobbyState extends ReceiveQuestionState {
+public class LobbyState extends GameState {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
