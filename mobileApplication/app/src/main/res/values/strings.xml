@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">DistanceDuel</string>
-
-
-
     <!-- Game strings -->
     <string name="new_game">New Game</string>
     <string name="join_game">Join Game</string>
@@ -31,8 +28,6 @@
     <string name="tutorial">Tutorial</string>
     <string name="game_code">Game code</string>
     <string name="question">Question</string>
-    <string name="tutorial_new_game"><b>New Game:</b> host a new game choosing either Normal or Challenge Mode. Choose a nickname for that particular game. After creating a game you are sent to a lobby where the game code is presented, as well as an overview of the players joining. Push “Start Game” to start the game.\n\n<b>Join Game:</b> join an existing game by typing in the Game Code for that game. Choose a nickname for that particular game. After joining the game you are sent to a lobby where you can see the other players joining. Wait for the host to start the game.\n\n<b>Normal Mode:</b> the system generates questions.\n\n<b>Challenge Mode:</b>  before the game starts, the players should input two locations, and thus generate questions for the other players.\n\n<b>During a game</b> you are presented with questions. You guess the correct answer by typing in a number, before pushing the “Answer” button. A timer shows how much time you have left to answer.
+    <string name="tutorial_new_game"><b>New Game:</b> host a new game choosing either Normal or Challenge Mode. Choose a nickname for that particular game. After creating a game you are sent to a lobby where the game code is presented, as well as an overview of the players joining. Press “Start Game” to start the game.\n\n<b>Join Game:</b> join an existing game by typing in the Game Code for that game. Choose a nickname for that particular game. After joining the game you are sent to a lobby where you can see the other players joining. Wait for the host to start the game.\n\n<b>Normal Mode:</b> the system generates questions.\n\n<b>Challenge Mode:</b>  before the game starts, the players input two locations, and thus generate questions for the other players.\n\n<b>During a game</b> you are presented with questions. You guess the correct answer by typing in a number, before pressing the “Answer” button. A timer shows how much time you have left to answer.
 </string>
-
-
 </resources>
