@@ -40,19 +40,7 @@ public class FinalResultState extends GameState {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
-
-    /*private void sortByValue(HashMap<String, Float> score)
-    {
-        List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>((Collection<? extends Map.Entry<String, Integer>>) score.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>()
-        {
-            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2)
-            {
-                return o1.getValue().compareTo(o2.getValue());
-            }
-        });
-    }*/
+    
     private static Map<String, Double> sortByComparator(Map<String, Double> unsortMap)
     {
         List<Map.Entry<String, Double>> list = new LinkedList<Map.Entry<String, Double>>(unsortMap.entrySet());
