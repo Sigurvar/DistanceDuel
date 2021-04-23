@@ -2,25 +2,14 @@ package com.sigurvar.distanceduel.game.controller;
 
 import android.content.Context;
 import android.content.Intent;
-import android.widget.TextView;
 
-import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.game.Game;
 import com.sigurvar.distanceduel.game.models.GameModel;
 import com.sigurvar.distanceduel.game.views.AnswerState;
-import com.sigurvar.distanceduel.game.views.FinalResultState;
-import com.sigurvar.distanceduel.game.views.LobbyState;
-import com.sigurvar.distanceduel.game.views.ReceiveQuestionState;
-import com.sigurvar.distanceduel.game.views.ResultState;
+import com.sigurvar.distanceduel.game.views.PartialResultState;
 import com.sigurvar.distanceduel.game.views.WaitResultState;
-import com.sigurvar.distanceduel.game.views.WaitState;
 import com.sigurvar.distanceduel.states.GameState;
 import com.sigurvar.distanceduel.utility.ServerController;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.BreakIterator;
 
 
 public abstract class GameController {
@@ -58,7 +47,7 @@ public abstract class GameController {
     }
     public void receivedResult(String result){
         gameModel.gotResultForQuestion(result);
-        Intent intent = new Intent(context, ResultState.class);
+        Intent intent = new Intent(context, PartialResultState.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }

@@ -1,5 +1,6 @@
 package game;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
@@ -30,6 +31,8 @@ public abstract class Game {
 	private List<Player> playersWhoHaveAnswerd;
 	public String code;
 	private boolean gameHasStarted;
+	
+    
 	private final static int maxTime = 30;
 	private	ScheduledExecutorService executorService;
 	
@@ -41,6 +44,7 @@ public abstract class Game {
 		this.players.add(creator);
 		System.out.println("Game "+id+" created by "+creator.getNickname()+ " with code "+code);
 		System.out.println("Sending game code to owner");
+
 	}
 	void sendQuestion() {
 		try {
@@ -85,7 +89,7 @@ public abstract class Game {
 		try {
 			JSONObject jPlayer = new JSONObject();
 			jPlayer.put("Answer", answer);
-			jPlayer.put("Score", currentQuestion.calculateScore((float)answer));
+			jPlayer.put("Score", currentQuestion.calculateScore((double)answer));
 			playersWhoHaveAnswerd.add(player);
 			this.currentAnswer.append(player.getNickname(), jPlayer);
 			System.out.println(currentAnswer);

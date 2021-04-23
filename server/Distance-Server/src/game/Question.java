@@ -6,21 +6,21 @@ public class Question {
 	
 	private String placeA;
 	private String placeB;
-	private float correctAnswer;
+	private double correctAnswer;
 	private Unit unit;
-	private ArrayList<Float> answers;
-	private final float maxScore = 1500;
+	private ArrayList<Double> answers;
+	private final double maxScore = 1500;
 	
-	public Question(String placeA, String placeB, float correctAnswer, Unit unit) {
+	public Question(String placeA, String placeB, double correctAnswer, Unit unit) {
 		this.placeA = placeA;
 		this.placeB = placeB;
 		this.correctAnswer = correctAnswer;
 		this.unit = unit;
 	}
 
-	public int calculateScore(float userAnswer) {
-		float percentageIncorrect = Math.abs(1 - Math.min((userAnswer / correctAnswer), 2));
-		int score = Math.round(maxScore - (maxScore * percentageIncorrect));
+	public long calculateScore(double userAnswer) {
+		double percentageIncorrect = Math.abs(1 - Math.min((userAnswer / correctAnswer), 2));
+		long score = Math.round(maxScore - (maxScore * percentageIncorrect));
 		System.out.println(score);
 		return score;
 			
@@ -36,7 +36,7 @@ public String getPlaceB() {
 }
 
 
-public float getCorrectAnswer() {
+public double getCorrectAnswer() {
 	return correctAnswer;
 }
 

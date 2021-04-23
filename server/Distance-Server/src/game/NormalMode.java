@@ -20,7 +20,7 @@ public class NormalMode extends Game {
 		super.startGame();
 		QuestionGenerator questionGenerator = new QuestionGenerator();
 		try {
-			upcoming = questionGenerator.generate(unit, 2);
+			upcoming = questionGenerator.generate(unit, 7);
 		} catch (FileNotFoundException | JSONException e) {
 			e.printStackTrace();
 		}

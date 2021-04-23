@@ -23,7 +23,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class FinalResultState extends GameState {
+public class FinalResultState extends ResultState {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +40,7 @@ public class FinalResultState extends GameState {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
-
-    /*private void sortByValue(HashMap<String, Float> score)
-    {
-        List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>((Collection<? extends Map.Entry<String, Integer>>) score.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>()
-        {
-            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2)
-            {
-                return o1.getValue().compareTo(o2.getValue());
-            }
-        });
-    }*/
+    
     private static Map<String, Double> sortByComparator(Map<String, Double> unsortMap)
     {
         List<Map.Entry<String, Double>> list = new LinkedList<Map.Entry<String, Double>>(unsortMap.entrySet());
@@ -61,12 +49,9 @@ public class FinalResultState extends GameState {
         {
 
             public int compare(Map.Entry<String, Double> o1,
-                               Map.Entry<String, Double> o2)
-            {
-                return o2.getValue().compareTo(o1.getValue());
-            }
+                               Map.Entry<String, Double> o2) {
+                return o2.getValue().compareTo(o1.getValue()); }
         });
-
         Map<String, Double> sortedMap = new LinkedHashMap<>();
         for (Map.Entry<String, Double> entry : list)
         {
@@ -75,15 +60,9 @@ public class FinalResultState extends GameState {
 
         return sortedMap;
     }
-    public void displayResult() {
-        Map<String, Double> totalScores = new HashMap<>();
-        TableLayout tableLayout = findViewById(R.id.result_table);
-        LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
-        View tableRow;
-        System.out.println("Displayeing result");
-
+    public HashMap<String, Double> getResult(){
+        HashMap<String, Double> totalScores = new HashMap<>();
         HashMap<String, ArrayList<Double>> result = gameModel.getAndRemoveQuestionResult();
-        System.out.println(result);
         while (result != null) {
             Iterator it = result.entrySet().iterator();
             while (it.hasNext()) {
@@ -100,9 +79,17 @@ public class FinalResultState extends GameState {
             result = gameModel.getAndRemoveQuestionResult();
             System.out.println(totalScores);
         }
-        totalScores = sortByComparator((HashMap<String, Double>) totalScores);
+        return totalScores;
+    }
+    public void displayResult() {
+        HashMap<String, Double> totalScores = getResult();
+        totalScores = (HashMap<String, Double>) sortByComparator(totalScores);
+
+        TableLayout tableLayout = findViewById(R.id.result_table);
+        LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
+        View tableRow;
+
         Iterator it = totalScores.entrySet().iterator();
-        System.out.println(totalScores);
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             String name = (String) pair.getKey();
