@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DistanceDuel</string>
-    <string name="new_game">Nytt Spill</string>
-    <string name="normal_mode">Normal modus</string>
-    <string name="write_question_mode">Skriv spørsmål</string>
-    <string name="join_game">Bli med i Spill</string>
+    <string name="new_game">Nytt spill</string>
+    <string name="normal_mode">Normal</string>
+    <string name="write_question_mode">Utfordring</string>
+    <string name="join_game">Bli med i spill</string>
     <string name="answer">Svar</string>
     <string name="leave_game_question">Vil du forlate spillet</string>
     <string name="create_more_questions">Lag flere spørsmpål</string>
@@ -28,4 +28,6 @@
     <string name="tutorial">Tutorial</string>
     <string name="game_code">Spill kode</string>
     <string name="question">Spørsmål</string>
+    <string name="tutorial_new_game"><b>Nytt spill:</b> opprett et nytt spill ved å velge enten Normal- eller Utfordrings-modus. Velg et kallenavn for akkurat dette spillet. Etter at spillet er opprette blir du sendt til en lobby, der en spill-kode vises, samt en liste over spillere som skal være med. Trykk på “Start spill” for å starte spillet.\n\n<b>Bli med i spill:</b> bli med i et eksisterende spill ved å skrive inn spill-koden for spillet. Velg et kallenavn for akkurat dette spillet. Etter at spillet er opprette blir du sendt til en lobby, der en liste over spillere som skal være med vises. Vent på at spill-verten starter spillet.\n\n<b>Normal modus: </b> systemet genererer spørsmål\n\n<b>Utfordringsmodus:</b> før spillet starter blir spillerne bedt om å skrive inn to lokasjoner for å generere spørsmål til de andre spillerne.\n\n<b>Under et spill</b> blir du presentert spørsmål. Svar ved å skrive inn et nummer, for så å trykke på “Svar”-knappen. En nedtelling viser hvor mye tid du har på å svare.
+</string>
 </resources>

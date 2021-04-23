@@ -11,6 +11,21 @@
     android:id="@+id/popup_leave_game"
     >
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tutorial_new_game"
+            style="@style/TutorialView"
+            />
+
+    </ScrollView>
+
     <Button
         android:id="@+id/yes"
         style="@style/CloseInfoButton"
