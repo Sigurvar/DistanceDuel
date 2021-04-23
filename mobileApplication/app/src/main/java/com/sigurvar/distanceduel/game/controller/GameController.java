@@ -13,7 +13,6 @@ import com.sigurvar.distanceduel.utility.ServerController;
 
 
 public abstract class GameController {
-    private GameState activeState;
     protected Context context;
     protected GameModel gameModel;
 
@@ -35,8 +34,6 @@ public abstract class GameController {
         Intent intent = new Intent(context, AnswerState.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
-
-        //TODO implementer timer her
     }
 
     public void sendAnswer(String answer){

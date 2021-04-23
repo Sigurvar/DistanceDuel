@@ -1,8 +1,6 @@
 package game;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.Executors;
@@ -10,14 +8,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import main.GameController;
-import main.Main;
-import main.QuestionGenerator;
-import main.Server;
 
 public abstract class Game {
 	private int id;
@@ -30,7 +24,7 @@ public abstract class Game {
 	private JSONObject currentAnswer;
 	private List<Player> playersWhoHaveAnswerd;
 	public String code;
-	private boolean gameHasStarted;
+	protected boolean gameHasStarted;
 	
     
 	private final static int maxTime = 30;
@@ -152,7 +146,6 @@ public abstract class Game {
 		}
 		return info;
 	}
-	
 	
 	public String getAllNames() {
 		String r="";

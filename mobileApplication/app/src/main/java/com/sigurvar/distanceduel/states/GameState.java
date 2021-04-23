@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -17,6 +18,7 @@ import com.sigurvar.distanceduel.game.models.GameModel;
 import com.sigurvar.distanceduel.utility.ServerController;
 
 public abstract class GameState extends State {
+
 
     protected GameController gameController = Game.getInstance().getGameController();
     protected GameModel gameModel = Game.getInstance().getGameModel();
