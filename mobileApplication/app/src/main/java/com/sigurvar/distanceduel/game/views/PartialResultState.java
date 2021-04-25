@@ -46,7 +46,6 @@ public class PartialResultState extends ResultState {
             }
         }
         if (!gameModel.isCreateMoreQuestions() && gameModel.isNoMoreQuestions()){
-            //TODO: Legg til tekst om at spillet er over
             findViewById(R.id.finalResult).setVisibility(View.VISIBLE);
         }
 
@@ -63,7 +62,8 @@ public class PartialResultState extends ResultState {
     }
 
     public void displayResult(){
-        String correctResultText = getString(R.string.correct_answer)+": "+ df.format(gameModel.getQuestionAnswer());
+        String correctAnswer = df.format(gameModel.getQuestionAnswer()).split("\\.")[0];
+        String correctResultText = getString(R.string.correct_answer)+": "+ correctAnswer;
         ((TextView)findViewById(R.id.correctResult)).setText(correctResultText);
         TableLayout tableLayout = findViewById(R.id.result_table);
         LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());

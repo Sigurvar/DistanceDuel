@@ -10,8 +10,8 @@ import main.QuestionGenerator;
 
 public class NormalMode extends Game {
 
-	public NormalMode(String code, Unit unit, int id, Player creator) {
-		super(code, unit, id, creator);
+	public NormalMode(String code, int id, Player creator) {
+		super(code, Unit.KILOMETER, id, creator);
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class NormalMode extends Game {
 		super.startGame();
 		QuestionGenerator questionGenerator = new QuestionGenerator();
 		try {
-			upcoming = questionGenerator.generate(unit, 7);
+			upcoming = questionGenerator.generate(unit, 2);
 		} catch (FileNotFoundException | JSONException e) {
 			e.printStackTrace();
 		}

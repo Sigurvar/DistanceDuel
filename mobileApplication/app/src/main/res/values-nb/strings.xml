@@ -29,4 +29,11 @@
     <string name="game_code">Spill kode</string>
     <string name="question">Spørsmål</string>
     <string name="correct_answer">Riktig svar</string>
+    <string name="how_many">Hvor mange</string>
+    <string name="are_between">er mellom</string>
+    <string name="and">og</string>
+    <string name="bananas">bananer</string>
+    <string name="kilometers">kilometer</string>
+    <string name="meters">meter</string>
+    <string name="cars">biler</string>
 </resources>

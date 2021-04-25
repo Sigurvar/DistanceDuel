@@ -19,10 +19,7 @@ public abstract class Game {
 	protected Stack<Question> upcoming;
 	protected List<Player> players = new ArrayList<Player>();
 	protected Question currentQuestion;
-	//private Server server;
 	protected Unit unit;
-	private JSONObject currentAnswer;
-	private List<Player> playersWhoHaveAnswerd;
 	public String code;
 	protected boolean gameHasStarted;
 	
@@ -42,13 +39,10 @@ public abstract class Game {
 	}
 	void sendQuestion() {
 		try {
-			playersWhoHaveAnswerd = new ArrayList<>();
 			currentQuestion = upcoming.pop();
 			history.push(currentQuestion);
-			currentAnswer = new JSONObject();
 			System.out.println("Sending question to all players");
-			String questionString = "How many " + currentQuestion.getUnit() + " is it between " + currentQuestion.getPlaceA() + " and " + currentQuestion.getPlaceB() + "?";
-			for (Player p : players) p.outputThread.sendQuestion(questionString);
+			for (Player p : players) p.outputThread.sendQuestion(currentQuestion.getQuestion().toString());
 			startTimer();
 		}catch(Exception e) {
 			System.out.println("Det finnes ingen q");
@@ -62,9 +56,8 @@ public abstract class Game {
 
 	}
 	private void answerForRest() {
-		System.out.println("Answer for the rest!!NOW");
+		ArrayList<String> playersWhoHaveAnswerd = currentQuestion.getPlayersWhoHaveAnswered();
 		for (Player p : players) {
-			System.out.println(p.getNickname());
 			if (!playersWhoHaveAnswerd.contains(p)) {
 				this.answer(p, 0);
 			}
@@ -80,21 +73,11 @@ public abstract class Game {
 	public void answer(Player player, double answer) {
 		
 		System.out.println(player.getNickname() +" answered "+answer);
-		try {
-			JSONObject jPlayer = new JSONObject();
-			jPlayer.put("Answer", answer);
-			jPlayer.put("Score", currentQuestion.calculateScore((double)answer));
-			playersWhoHaveAnswerd.add(player);
-			this.currentAnswer.append(player.getNickname(), jPlayer);
-			System.out.println(currentAnswer);
-			if (this.currentAnswer.length()==players.size()) {
-				System.out.println("All players have answerd");
-				executorService.shutdown();
-				executorService.shutdownNow();
-				sendResult();
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
+		currentQuestion.playerAnswered(player, answer);
+		if (currentQuestion.numberOfPlayerAnswered()==players.size()) {
+			System.out.println("All players have answerd");
+			executorService.shutdownNow();
+			sendResult();
 		}
 	}
 	public void sendResult() {
@@ -103,9 +86,9 @@ public abstract class Game {
 			JSONObject result = new JSONObject();
 			result.put("Last", upcoming.empty());
 			result.put("Answer", currentQuestion.getCorrectAnswer());
-			result.put("Result", currentAnswer);
+			result.put("Result", currentQuestion.getCurrentAnswers());
 			for (Player p: players) p.outputThread.sendPartialResult(result.toString());
-			if(upcoming.empty()) {//TODO må endres hvis man også skal lage flere spm
+			if(upcoming.empty()) {
 				System.out.println("Done");
 				for (Player p: players) p.outputThread.sendDisconnect();
 				GameController.getInstance().endGame(id, code);

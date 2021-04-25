@@ -39,9 +39,9 @@ public class GameController {
 					int gameMode = new JSONObject(settings).getInt("gameMode");
 					Game newGame = null;
 					if (gameMode==NORMAL_MODE) {
-						newGame = new NormalMode(code, Unit.BANANA, i, player);
+						newGame = new NormalMode(code, i, player);
 					}else if (gameMode == WRITE_QUESTION_MODE){
-						newGame = new WriteQuestionsMode(code, Unit.BANANA,i,player);
+						newGame = new WriteQuestionsMode(code,i,player);
 					}
 					gameCodes.put(code, newGame);
 					this.games[ i ] = newGame;

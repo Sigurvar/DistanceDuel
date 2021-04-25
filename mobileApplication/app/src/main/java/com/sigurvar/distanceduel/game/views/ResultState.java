@@ -13,7 +13,7 @@ import java.util.Map;
 public abstract class ResultState extends GameState {
 
 
-    private static Map<String, Double> sortByComparator(Map<String, Double> unsortMap) {
+    protected static Map<String, Double> sortByComparator(Map<String, Double> unsortMap) {
         List<Map.Entry<String, Double>> list = new LinkedList<Map.Entry<String, Double>>(unsortMap.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
             public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {
