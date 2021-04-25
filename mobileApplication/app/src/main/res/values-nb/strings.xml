@@ -32,6 +32,9 @@
     <string name="how_many">Hvor mange</string>
     <string name="are_between">er mellom</string>
     <string name="and">og</string>
+    <string name="dark_mode">Dark mode</string>
+
+    <!-- Words for units -->
     <string name="bananas">bananer</string>
     <string name="kilometers">kilometer</string>
     <string name="meters">meter</string>
