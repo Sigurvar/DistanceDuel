@@ -7,6 +7,7 @@ import com.sigurvar.distanceduel.R;
 public enum Unit {
 
     BANANA((float)0.15, R.string.bananas),
+    EIFFELTOWER(324, R.string.eiffel_tower),
     KILOMETER(1000, R.string.kilometers),
     METER(1, R.string.meters),
     CAR((float)4.5, R.string.cars);

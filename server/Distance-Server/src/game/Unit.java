@@ -9,7 +9,8 @@ public enum Unit {
 	BANANA((float)0.15),
 	KILOMETER(1000),
 	METER(1),
-	CAR((float)4.5);
+	CAR((float)4.5),
+	EIFFELTOWER(324);
 	
 	private float length;
 	
