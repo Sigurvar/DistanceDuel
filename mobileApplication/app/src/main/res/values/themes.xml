@@ -25,6 +25,10 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textAlignment">center</item>
     </style>
+    <style name="TutorialView" parent="ConstraintPosition">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
     <style name="Button" parent="ConstraintPosition">
         <item name="colorAccent">@color/button_background</item>
         <item name="colorPrimary">@color/button_background</item>
