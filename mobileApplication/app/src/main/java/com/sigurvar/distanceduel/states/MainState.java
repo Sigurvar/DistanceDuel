@@ -62,5 +62,9 @@ public class MainState extends State {
             popupWindow=null;
         }
     }
+    public void goToSettings(View view){
+        Intent myIntent = new Intent(this, SettingsState.class);
+        this.startActivity(myIntent);
+    }
 
 }
