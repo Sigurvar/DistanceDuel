@@ -26,8 +26,6 @@ public class NewGameState extends ConnectToServerState {
         StateController.getInstance().setState(this);
     }
     public void createGame(View view) {
-        Log.i("Game", "Starting new game");
-
         if(view.getId()==R.id.normalMode){
             gameMode = Game.NORMAL_MODE;
         }else {

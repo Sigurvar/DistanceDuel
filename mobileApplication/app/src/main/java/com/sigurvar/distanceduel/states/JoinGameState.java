@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.game.Game;
@@ -49,15 +50,12 @@ public class JoinGameState extends ConnectToServerState {
     }
 
     public void nicknameAlreadyTaken(){
-        //TODO: error melding
-        System.out.println("nicknameAlreadyTaken");
+        displayErrorMessage("nicknameAlreadyTaken");
     }
     public void gameCodeDoesNotExist(){
-        //TODO: error melding
-        System.out.println("gameCodeDoesNotExist");
+        displayErrorMessage("Gamecode does not exists");
     }
     public void gameAlreadyStarted(){
-        //TODO: error melding
-        System.out.println("gameAlreadyStarted");
+        displayErrorMessage("Game already started");
     }
 }

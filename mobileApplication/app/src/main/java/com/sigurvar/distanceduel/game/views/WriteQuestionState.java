@@ -19,6 +19,8 @@ import java.util.ArrayList;
 public class WriteQuestionState extends GameState {
 
     APIController autocomplete = new APIController();
+    private int activeAutoCompleteBox =0;
+    private boolean clicked = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +33,11 @@ public class WriteQuestionState extends GameState {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.toString().length()>2){
-                    autocomplete(s.toString());
+                if(s.toString().length()>2 && !clicked){
+                    activeAutoCompleteBox = R.id.locationa;
+                    getAutocompleteSuggestion(s.toString());
                 }
+                clicked=false;
             }
         });
         ((EditText)findViewById(R.id.locationb)).addTextChangedListener(new TextWatcher() {
@@ -42,9 +46,11 @@ public class WriteQuestionState extends GameState {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.toString().length()>2){
-                    autocomplete(s.toString());
+                if(s.toString().length()>2 && !clicked){
+                    activeAutoCompleteBox = R.id.locationb;
+                    getAutocompleteSuggestion(s.toString());
                 }
+                clicked=false;
             }
         });
     }
@@ -55,7 +61,7 @@ public class WriteQuestionState extends GameState {
         ((WriteQuestionController) Game.getInstance().getGameController()).createdQuestion(locationA, locationB);
     }
 
-    public void autocomplete(String text){
+    public void getAutocompleteSuggestion(String text){
         autocomplete.run(text);
     }
 
@@ -63,13 +69,38 @@ public class WriteQuestionState extends GameState {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                StringBuilder text = new StringBuilder();
-                for (String s: suggestions){
-                    text.append(s);
+                TextView tv1= findViewById(R.id.suggestion1);
+                TextView tv2= findViewById(R.id.suggestion2);
+                TextView tv3= findViewById(R.id.suggestion3);
+                if (suggestions.size()>0){
+                    findViewById(R.id.include).setVisibility(View.VISIBLE);
+                    tv1.setText(suggestions.get(0));
+                    if (suggestions.size()>1){
+                        tv2.setText(suggestions.get(1));
+                        if (suggestions.size()>2){
+                            tv3.setText(suggestions.get(2));
+                        }else{
+                            tv3.setText("");
+                        }
+                    }else{
+                        tv3.setText("");
+                        tv2.setText("");
+                    }
+                }else{
+                    findViewById(R.id.include).setVisibility(View.INVISIBLE);
+                    tv3.setText("");
+                    tv2.setText("");
+                    tv1.setText("");
                 }
-                TextView tv = findViewById(R.id.displayInfo);
-                tv.setText(text.toString());
             }
         });
     }
+    public void onclickSuggestion(View view){
+        clicked=true;
+
+        ((TextView)findViewById(activeAutoCompleteBox)).setText(((TextView)view).getText());
+        displayInfo(new ArrayList<>());
+        //System.out.println(((TextView)view).getText());
+    }
+
 }

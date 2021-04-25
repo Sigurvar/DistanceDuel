@@ -10,13 +10,13 @@ import main.QuestionGenerator;
 
 public class NormalMode extends Game {
 
-	public NormalMode(String code, Unit unit, int id, Player creator) {
-		super(code, unit, id, creator);
-		// TODO Auto-generated constructor stub
+	public NormalMode(String code, int id, Player creator) {
+		super(code, Unit.KILOMETER, id, creator);
 	}
 
 	@Override
 	public void startGame() {
+		if(super.gameHasStarted) {return;}
 		super.startGame();
 		QuestionGenerator questionGenerator = new QuestionGenerator();
 		try {
