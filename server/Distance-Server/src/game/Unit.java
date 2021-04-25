@@ -1,5 +1,10 @@
 package game;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 public enum Unit {
 	BANANA((float)0.15),
 	KILOMETER(1000),
@@ -14,6 +19,14 @@ public enum Unit {
 	
 	public float getLength() {
 		return length;
+	}
+	private static final List<Unit> VALUES =
+    Collections.unmodifiableList(Arrays.asList(values()));
+	private static final int SIZE = VALUES.size();
+	private static final Random RANDOM = new Random();
+
+	public static Unit randomUnit()  {
+		return VALUES.get(RANDOM.nextInt(SIZE));
 	}
 	
 }

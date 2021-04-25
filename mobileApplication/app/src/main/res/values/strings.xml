@@ -32,6 +32,13 @@
     <string name="game_code">Game code</string>
     <string name="question">Question</string>
     <string name="correct_answer">Correct answer</string>
+    <string name="how_many">How many</string>
+    <string name="are_between">are between</string>
+    <string name="and">and</string>
+    <string name="bananas">bananas</string>
+    <string name="kilometers">kilometers</string>
+    <string name="meters">meters</string>
+    <string name="cars">cars</string>
 
 
 

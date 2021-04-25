@@ -1,5 +1,9 @@
 package com.sigurvar.distanceduel.game.models;
 
+import android.content.Context;
+
+import com.sigurvar.distanceduel.R;
+import com.sigurvar.distanceduel.game.Game;
 import com.sigurvar.distanceduel.utility.Unit;
 
 import org.json.JSONArray;
@@ -13,18 +17,33 @@ import java.util.Iterator;
 
 public class Question {
 
-    private String q; // TODO add location class
+    private String locationA;
+    private String locationB;
     private Unit unit;
     private HashMap<String, ArrayList<Double>> result;
     private Double correctAnswer;
+    private final Context context = Game.getInstance().getApplicationContext();
 
 
-    public Question(String q){
+    public Question(String jsonString){
         result = new HashMap<>();
-        this.q = q;
+        try{
+            JSONObject question = new JSONObject(jsonString);
+            locationA = question.getString("locationA");
+            locationB = question.getString("locationB");
+            unit = Unit.valueOf(question.getString("unit"));
+            System.out.println(unit);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
     }
     public String getQ(){
-        return q;
+        System.out.println(unit);
+        System.out.println(context);
+        String question = context.getString(R.string.how_many)+" "+context.getString(unit.getResourceId())
+                +" "+context.getString(R.string.are_between)+" "+ locationA
+                +" "+context.getString(R.string.and)+" "+locationB+"?";
+        return question;
     }
 
     public void setResult(JSONObject questionResult) {

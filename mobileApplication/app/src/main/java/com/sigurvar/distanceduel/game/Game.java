@@ -27,6 +27,7 @@ public class Game {
     private GameController gameController;
 
     public GameModel setupNewGame(String myNickname, String gameCode, int gameMode, Context context){
+        applicationContext = context;
         gameModel = new GameModel(myNickname, gameCode);
         if (gameMode==NORMAL_MODE) {
             gameController = new NormalController(context);
@@ -42,5 +43,9 @@ public class Game {
 
     public GameModel getGameModel() {
         return gameModel;
+    }
+
+    public Context getApplicationContext(){
+        return applicationContext;
     }
 }

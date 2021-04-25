@@ -18,7 +18,7 @@ public final class QuestionGenerator {
 	public  Stack<Question> generate(Unit unit, int numberOfQuestions) throws FileNotFoundException, JSONException {
 		
 		Random rand = new Random();
-		Stack<Question> product = new Stack<Question>();
+		Stack<Question> questions = new Stack<Question>();
 		Scanner file = new Scanner(new File("src/main/worldcities.txt"));  
 		file.useDelimiter("\n");
 		
@@ -27,6 +27,7 @@ public final class QuestionGenerator {
 		while (file.hasNext()){	
 			cities.add(new String(file.next()));
 		}
+		file.close();
 
 		for (int i = 0; i < numberOfQuestions; i ++) {
 			
@@ -40,9 +41,9 @@ public final class QuestionGenerator {
 			String placeB = cities.get(b);
 			System.out.println(placeA + placeB);
 			
-			product.push(create(placeA, placeB, unit));
+			questions.push(create(placeA, placeB, unit));
 		}
-		return product;
+		return questions;
 	}
 	
 	public Question create(String placeA, String placeB, Unit unit) throws JSONException {
@@ -58,8 +59,6 @@ public final class QuestionGenerator {
 		
 		double placeBx = dataB.getJSONObject(0).getDouble("longitude");
 		double placeBy = dataB.getJSONObject(0).getDouble("latitude");
-		
-		System.out.println(placeA+": "+placeAx + " "+ placeAy + placeB+": " + placeBx + " "+ placeBy);
 		
 		float distance = (float) calculateDistance(placeAx, placeAy, placeBx, placeBy, unit);
 		return new Question(placeA, placeB, distance, unit);

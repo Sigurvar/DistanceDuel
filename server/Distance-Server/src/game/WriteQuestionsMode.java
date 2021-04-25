@@ -12,8 +12,8 @@ public class WriteQuestionsMode extends Game {
 
 	QuestionGenerator questionGenerator = new QuestionGenerator();
 	
-	public WriteQuestionsMode(String code,Unit unit, int id, Player creator) {
-		super(code, unit, id, creator);
+	public WriteQuestionsMode(String code, int id, Player creator) {
+		super(code, Unit.randomUnit(), id, creator);
 		upcoming = new Stack<>();
 	}
 
@@ -33,7 +33,7 @@ public class WriteQuestionsMode extends Game {
 			String locationA = data.getString("locationA");
 			String locationB = data.getString("locationB");
 			upcoming.add(questionGenerator.create(locationA, locationB, unit));
-			System.out.println(upcoming.peek().getPlaceA());
+			System.out.println(upcoming.peek().getLocationA());
 			if (upcoming.size()==players.size()) {
 				super.sendQuestion();
 			}
