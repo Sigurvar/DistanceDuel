@@ -2,6 +2,7 @@ package com.sigurvar.distanceduel.game.views;
 
 import com.sigurvar.distanceduel.states.GameState;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -22,6 +23,19 @@ public abstract class ResultState extends GameState {
         });
         Map<String, Double> sortedMap = new LinkedHashMap<>();
         for (Map.Entry<String, Double> entry : list) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+        return sortedMap;
+    }
+    protected static Map<String, ArrayList<Double>> sort(Map<String, ArrayList<Double>> unsortMap) {
+        List<Map.Entry<String, ArrayList<Double>>> list = new LinkedList<Map.Entry<String, ArrayList<Double>>>(unsortMap.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<String, ArrayList<Double>>>() {
+            public int compare(Map.Entry<String, ArrayList<Double>> o1, Map.Entry<String, ArrayList<Double>>o2) {
+                return o2.getValue().get(1).compareTo(o1.getValue().get(1));
+            }
+        });
+        Map<String, ArrayList<Double>> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<String, ArrayList<Double>> entry : list) {
             sortedMap.put(entry.getKey(), entry.getValue());
         }
         return sortedMap;

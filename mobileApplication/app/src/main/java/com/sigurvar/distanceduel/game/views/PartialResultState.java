@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class PartialResultState extends ResultState {
 
-    private final DecimalFormat df = new DecimalFormat("###,###,###,###");
+    private final DecimalFormat df = new DecimalFormat("###,###,###,###.#");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +69,7 @@ public class PartialResultState extends ResultState {
         LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
         View tableRow;
         HashMap<String, ArrayList<Double>> result = getResult();
+        result = (HashMap<String, ArrayList<Double>>) sort(result);
         Iterator it = ((HashMap)result.clone()).entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
