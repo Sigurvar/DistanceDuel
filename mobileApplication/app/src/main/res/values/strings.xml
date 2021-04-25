@@ -35,6 +35,9 @@
     <string name="how_many">How many</string>
     <string name="are_between">are between</string>
     <string name="and">and</string>
+    <string name="dark_mode">Dark mode</string>
+
+    <!-- Words for units -->
     <string name="bananas">bananas</string>
     <string name="kilometers">kilometers</string>
     <string name="meters">meters</string>
