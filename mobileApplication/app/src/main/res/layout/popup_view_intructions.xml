@@ -9,12 +9,15 @@
     android:background="@drawable/popup"
     app:layout_constraintHeight_percent="0.9"
     android:id="@+id/popup_leave_game"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
     >
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="20dp"
+        app:layout_constraintHeight_percent="0.9"
         android:layout_marginBottom="20dp">
 
         <TextView
