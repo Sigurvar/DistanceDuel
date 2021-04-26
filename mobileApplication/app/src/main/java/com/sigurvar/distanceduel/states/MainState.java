@@ -16,7 +16,6 @@ import com.sigurvar.distanceduel.utility.StateController;
 
 public class MainState extends State {
 
-    ServerController serverController = ServerController.getInstance();
     PopupWindow popupWindow = new PopupWindow();
 
     @Override
@@ -47,15 +46,7 @@ public class MainState extends State {
         popupWindow.showAtLocation(this.findViewById(R.id.info), Gravity.CENTER, 0, 0);
     }
 
-    public void displayInfo(String text){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                TextView tv = findViewById(R.id.displayInfo);
-                tv.setText(text);
-            }
-        });
-    }
+
     public void closePopup(View view){
         if(popupWindow!=null){
             popupWindow.dismiss();

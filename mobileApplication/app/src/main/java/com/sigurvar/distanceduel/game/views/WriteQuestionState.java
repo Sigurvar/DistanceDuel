@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.game.Game;
-import com.sigurvar.distanceduel.game.controller.WriteQuestionController;
+import com.sigurvar.distanceduel.game.controller.ChallengeController;
 import com.sigurvar.distanceduel.states.GameState;
 import com.sigurvar.distanceduel.utility.APIController;
 import com.sigurvar.distanceduel.utility.StateController;
@@ -58,7 +58,7 @@ public class WriteQuestionState extends GameState {
     public void createQuestion(View view){
         String locationA = ((EditText)findViewById(R.id.locationa)).getText().toString();
         String locationB = ((EditText)findViewById(R.id.locationb)).getText().toString();
-        ((WriteQuestionController) Game.getInstance().getGameController()).createdQuestion(locationA, locationB);
+        ((ChallengeController) Game.getInstance().getGameController()).createdQuestion(locationA, locationB);
     }
 
     public void getAutocompleteSuggestion(String text){
@@ -100,7 +100,6 @@ public class WriteQuestionState extends GameState {
 
         ((TextView)findViewById(activeAutoCompleteBox)).setText(((TextView)view).getText());
         displayInfo(new ArrayList<>());
-        //System.out.println(((TextView)view).getText());
     }
 
 }

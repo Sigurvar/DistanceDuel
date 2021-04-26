@@ -8,19 +8,13 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.sigurvar.distanceduel.R;
-import com.sigurvar.distanceduel.states.GameState;
 import com.sigurvar.distanceduel.states.MainState;
 import com.sigurvar.distanceduel.utility.StateController;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 public class FinalResultState extends ResultState {
@@ -34,8 +28,6 @@ public class FinalResultState extends ResultState {
     }
 
     public void goHome(View view){
-
-        //TODO: go to main and delete onBackButtonPressedStack
         Intent intent = new Intent(this, MainState.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

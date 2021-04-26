@@ -50,15 +50,6 @@ public class LobbyState extends GameState {
         ServerController.getInstance().outputThread.sendStartGame();
     }
 
-    public void displayInfo(String text){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                TextView tv = findViewById(R.id.displayInfo);
-                tv.setText(text);
-            }
-        });
-    }
     @Override
     public void onDestroy() {
         ServerController serverController = ServerController.getInstance();

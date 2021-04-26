@@ -95,10 +95,7 @@ public class GameModel {
             q.setCorrectAnswer(jsonObject.getDouble("Answer"));
             q.setResult(jsonObject.getJSONObject("Result"));
             noMoreQuestions = jsonObject.getBoolean("Last");
-        }catch (JSONException ignored){
-            //TODO: gjør noe kult her
-            System.out.println("Feil");
-        }
+        }catch (JSONException ignored){   }
 
     }
 }

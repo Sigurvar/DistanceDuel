@@ -14,7 +14,6 @@ import org.json.JSONObject;
 import main.GameController;
 
 public abstract class Game {
-	private int id;
 	protected Stack<Question> history = new Stack<>();
 	protected Stack<Question> upcoming;
 	protected List<Player> players = new ArrayList<Player>();
@@ -28,12 +27,11 @@ public abstract class Game {
 	private	ScheduledExecutorService executorService;
 	
 	
-	public Game(String code, Unit unit, int id, Player creator) {
+	public Game(String code, Unit unit, Player creator) {
 		this.unit = unit;
 		this.code = code;
-		this.id= id;
 		this.players.add(creator);
-		System.out.println("Game "+id+" created by "+creator.getNickname()+ " with code "+code);
+		System.out.println("Game  created by "+creator.getNickname()+ " with code: "+code);
 		System.out.println("Sending game code to owner");
 
 	}
@@ -64,10 +62,9 @@ public abstract class Game {
 		}
 	}
 	public void join(Player player) {
-
 		for (Player p : players) p.outputThread.newPlayerJoined(player.getNickname());
 		players.add(player);
-		System.out.println(player.getNickname()+" joined game "+id);
+		System.out.println(player.getNickname()+" joined game " + code);
 	}
 	
 	public void answer(Player player, double answer) {
@@ -89,9 +86,9 @@ public abstract class Game {
 			result.put("Result", currentQuestion.getCurrentAnswers());
 			for (Player p: players) p.outputThread.sendPartialResult(result.toString());
 			if(upcoming.empty()) {
-				System.out.println("Done");
+				System.out.println("Sending result to all players");
 				for (Player p: players) p.outputThread.sendDisconnect();
-				GameController.getInstance().endGame(id, code);
+				GameController.getInstance().endGame(code);
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -101,12 +98,12 @@ public abstract class Game {
 		return players.get(0);
 	}
 	public void leaveGame(Player player) {
-		System.out.println(player.getNickname()+" is leaving game "+id);
+		System.out.println(player.getNickname()+" is leaving game");
 		for (int i=0;i<players.size();i++) {
 			if(players.get(i)==player) {
 				players.remove(i);
 				if(players.size()==0) {
-					GameController.getInstance().endGame(id, code);
+					GameController.getInstance().endGame(code);
 					break;
 				}
 				if(i==0) {

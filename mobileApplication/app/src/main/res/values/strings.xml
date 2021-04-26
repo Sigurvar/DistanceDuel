@@ -17,6 +17,7 @@
     <string name="home">Home</string>
     <string name="create_question">Create Question</string>
     <string name="wait_for_answers">Wait for everybody to answer</string>
+    <string name="wait_for_player_question">Wait for everybody to create question</string>
     <string name="write_locations">Write in two locations!</string>
     <string name="hint_loc_a">Location A</string>
     <string name="hint_loc_b">Location B</string>
@@ -35,6 +36,13 @@
     <string name="are_between">are between</string>
     <string name="and">and</string>
     <string name="dark_mode">Dark mode</string>
+
+    <!-- Error messages -->
+    <string name="error_nickname_already_taken">That nickname is already taken</string>
+    <string name="error_game_code_does_not_exist">The game code does not exist</string>
+    <string name="error_game_already_started">The game has already started</string>
+    <string name="error_could_not_create_game">Could not create game</string>
+    <string name="error_could_not_connect_to_server">Could not connect to game server</string>
 
     <!-- Words for units -->
     <string name="bananas">bananas</string>

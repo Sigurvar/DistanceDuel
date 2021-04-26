@@ -74,7 +74,7 @@ public final class QuestionGenerator {
 		dist = dist * 60 * 1.1515;
 		dist = dist * 1.609344;
 		dist = (dist / unit.getLength())*1000;
-		System.out.println("number of "+unit.name()+"'s: "+dist);
+		System.out.println("Number of "+unit.name()+"'s: "+dist);
 		return (dist);
 	}
 	private double deg2rad(double deg) {

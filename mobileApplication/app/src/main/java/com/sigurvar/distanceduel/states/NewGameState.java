@@ -2,13 +2,10 @@ package com.sigurvar.distanceduel.states;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.game.Game;
-import com.sigurvar.distanceduel.game.controller.GameController;
-import com.sigurvar.distanceduel.game.controller.WriteQuestionController;
 import com.sigurvar.distanceduel.game.views.LobbyState;
 import com.sigurvar.distanceduel.utility.StateController;
 
@@ -33,12 +30,12 @@ public class NewGameState extends ConnectToServerState {
         }
         connectToServer();
         try{
-            // TODO: add other settings posibilities
+
             JSONObject settings = new JSONObject();
             settings.put("gameMode",gameMode);
             serverController.outputThread.sendNewGame(settings.toString());
         }catch (JSONException e){
-            //TODO: could not create game
+            displayErrorMessage((String)getText(R.string.error_could_not_create_game));
         }
     }
 

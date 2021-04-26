@@ -8,7 +8,6 @@ import com.sigurvar.distanceduel.game.models.GameModel;
 import com.sigurvar.distanceduel.game.views.AnswerState;
 import com.sigurvar.distanceduel.game.views.PartialResultState;
 import com.sigurvar.distanceduel.game.views.WaitResultState;
-import com.sigurvar.distanceduel.states.GameState;
 import com.sigurvar.distanceduel.utility.ServerController;
 
 
@@ -27,7 +26,6 @@ public abstract class GameController {
         gameModel.playerLeftTheGame(playerName);
     }
     public void youAreOwner() {gameModel.setAsHost();}
-    public abstract void startGame();
 
     public void receivedQuestion(String message) {
         gameModel.newQuestion(message);

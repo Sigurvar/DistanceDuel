@@ -1,15 +1,12 @@
 package com.sigurvar.distanceduel.states;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.sigurvar.distanceduel.R;
 import com.sigurvar.distanceduel.game.Game;
-import com.sigurvar.distanceduel.game.controller.GameController;
 import com.sigurvar.distanceduel.game.models.GameModel;
 import com.sigurvar.distanceduel.game.views.LobbyState;
 import com.sigurvar.distanceduel.utility.StateController;
@@ -34,7 +31,6 @@ public class JoinGameState extends ConnectToServerState {
     }
 
     public void joinedGameSuccessful(String info){
-        // TODO: info needs to contain game setting and players in game
         try{
             JSONObject details = new JSONObject(info);
             GameModel g = Game.getInstance().setupNewGame(nickname, gameCode, details.getInt("mode"), getApplicationContext());
@@ -50,12 +46,12 @@ public class JoinGameState extends ConnectToServerState {
     }
 
     public void nicknameAlreadyTaken(){
-        displayErrorMessage("nicknameAlreadyTaken");
+        displayErrorMessage((String) getText(R.string.error_nickname_already_taken));
     }
     public void gameCodeDoesNotExist(){
-        displayErrorMessage("Gamecode does not exists");
+        displayErrorMessage((String) getText(R.string.error_game_code_does_not_exist));
     }
     public void gameAlreadyStarted(){
-        displayErrorMessage("Game already started");
+        displayErrorMessage((String) getText(R.string.error_game_already_started));
     }
 }

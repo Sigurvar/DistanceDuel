@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sigurvar.distanceduel">
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -20,14 +17,12 @@
         <activity android:name=".game.views.AnswerState"/>
         <activity android:name=".game.views.WriteQuestionState"/>
         <activity android:name=".game.views.WaitQuestionState"/>
-
-        <meta-data
-            android:name="com.google.android.wearable.standalone"
-            android:value="true" />
-
         <activity android:name=".states.SettingsState" />
         <activity android:name=".states.NewGameState" />
         <activity android:name=".game.views.LobbyState" />
+        <activity android:name=".states.JoinGameState" />
+        <activity android:name=".states.State" />
+        <activity android:name=".states.GameState"/>
         <activity android:name=".states.MainState">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,9 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".states.JoinGameState" />
-        <activity android:name=".states.State" />
-        <activity android:name=".states.GameState"/>
+
     </application>
 
 </manifest>

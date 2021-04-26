@@ -9,7 +9,7 @@ import game.Game;
 import game.NormalMode;
 import game.Player;
 import game.Unit;
-import game.WriteQuestionsMode;
+import game.ChallengeMode;
 
 public class GameController {
 	
@@ -18,8 +18,6 @@ public class GameController {
     public static final int WRITE_QUESTION_MODE = 2;
 
 	
-	final public static int MAX_GAMES = 300;
-	
 	private static GameController gameController = new GameController( );
     private GameController() { }
     
@@ -27,41 +25,29 @@ public class GameController {
         return gameController;
     }
 
-    Game[] games = new Game[MAX_GAMES];
 	HashMap<String, Game> gameCodes = new HashMap<String, Game>();
     
     public Game createGame(Player player, String settings) {
-    	//TODO make this better
-		for ( int i = 0 ; i < MAX_GAMES ; i++ ) {
-			if ( this.games[ i ] == null ) {
-				String code = generateGameCode();
-				try {
-					int gameMode = new JSONObject(settings).getInt("gameMode");
-					Game newGame = null;
-					if (gameMode==NORMAL_MODE) {
-						newGame = new NormalMode(code, i, player);
-					}else if (gameMode == WRITE_QUESTION_MODE){
-						newGame = new WriteQuestionsMode(code,i,player);
-					}
-					gameCodes.put(code, newGame);
-					this.games[ i ] = newGame;
-					return newGame;
-				} catch (JSONException e) {
-					e.printStackTrace();
-					return null;
-				}
-				
-				
+		String code = generateGameCode();
+		try {
+			int gameMode = new JSONObject(settings).getInt("gameMode");
+			Game newGame = null;
+			if (gameMode==NORMAL_MODE) {
+				newGame = new NormalMode(code, player);
+			}else if (gameMode == WRITE_QUESTION_MODE){
+				newGame = new ChallengeMode(code,player);
 			}
+			gameCodes.put(code, newGame);
+			return newGame;
+		} catch (JSONException e) {
+			return null;
 		}
-		return null;
 		
 	}
 	public Game joinGame(String code, Player player) {
 		return gameCodes.get(code);
 	}
-	public void endGame(int id, String code) {
-		games[id]=null;
+	public void endGame(String code) {
 		gameCodes.put(code, null);
 	}
 	private String generateGameCode() {

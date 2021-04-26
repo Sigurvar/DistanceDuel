@@ -10,8 +10,8 @@ import main.QuestionGenerator;
 
 public class NormalMode extends Game {
 
-	public NormalMode(String code, int id, Player creator) {
-		super(code, Unit.KILOMETER, id, creator);
+	public NormalMode(String code, Player creator) {
+		super(code, Unit.KILOMETER, creator);
 	}
 
 	@Override

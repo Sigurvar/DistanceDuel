@@ -18,9 +18,7 @@ public class Main {
     public static Main getInstance( ) {
         return main;
     }
-    // TODO: Har bare en server, hvordan blir det hvis vi utvider med flere 
 	Server server;
-	// TODO Har begrensning på antall spillere, trenger det være begrensning på antall spill??
 
 	
 	public  void startServer() {
@@ -28,7 +26,6 @@ public class Main {
 			server = Server.getInstance();
 			server.start(8888);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

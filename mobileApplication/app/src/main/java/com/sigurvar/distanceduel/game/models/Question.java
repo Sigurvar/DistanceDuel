@@ -32,14 +32,11 @@ public class Question {
             locationA = question.getString("locationA");
             locationB = question.getString("locationB");
             unit = Unit.valueOf(question.getString("unit"));
-            System.out.println(unit);
         }catch (JSONException e){
             e.printStackTrace();
         }
     }
     public String getQ(){
-        System.out.println(unit);
-        System.out.println(context);
         String question = context.getString(R.string.how_many)+" "+context.getString(unit.getResourceId())
                 +" "+context.getString(R.string.are_between)+" "+ locationA
                 +" "+context.getString(R.string.and)+" "+locationB+"?";

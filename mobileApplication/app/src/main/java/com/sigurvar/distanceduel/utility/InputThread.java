@@ -3,7 +3,7 @@ package com.sigurvar.distanceduel.utility;
 import android.util.Log;
 
 import com.sigurvar.distanceduel.game.Game;
-import com.sigurvar.distanceduel.game.controller.WriteQuestionController;
+import com.sigurvar.distanceduel.game.controller.ChallengeController;
 import com.sigurvar.distanceduel.states.JoinGameState;
 import com.sigurvar.distanceduel.states.NewGameState;
 
@@ -19,8 +19,7 @@ public class InputThread extends Thread{
     private static final int NEW_PLAYER_IN_GAME = 4;
     private static final int NEW_QUESTION = 5;
     private static final int RESULT = 6;
-    private static final int YOU_ARE_OWNER = 7;//Veldig usikker på navnet her
-    private static final int GAME_STARTING_SOON = 9;//Burde det være countdown mellom hvert spm
+    private static final int YOU_ARE_OWNER = 7;
     private static final int PLAYER_LEFT_GAME = 10;
     private static final int CREATE_QUESTION = 11;
     private static final int DISCONNECT = 12;
@@ -75,9 +74,11 @@ public class InputThread extends Thread{
                         Log.i("InputThread", message + " left the game");
                         break;
                     case CREATE_QUESTION:
-                        ((WriteQuestionController)Game.getInstance().getGameController()).createQuestion();
+                        Log.i("InputThread", "Create question");
+                        ((ChallengeController)Game.getInstance().getGameController()).createQuestion();
                         break;
                     case DISCONNECT:
+                        Log.i("InputThread", "Disconnecting");
                         serverController.disconnect();
                         break;
                     case NICKNAME_ALREADY_TAKEN:
@@ -89,14 +90,10 @@ public class InputThread extends Thread{
                         ((JoinGameState)StateController.getInstance().getState()).gameAlreadyStarted();
                         break;
                 }
-                // TODO: Insert logic which use the recived message (textMessage)
             } catch (IOException e1) {
                 return;
             }
         }
-    }
-    private void setDisplayInfo(String text){
-        StateController.getInstance().getState().displayInfo(text);
     }
     public void disconnect(){
         try {

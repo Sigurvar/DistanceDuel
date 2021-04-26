@@ -9,7 +9,9 @@ import game.Game;
 import game.Player;
 import game.Question;
 
-public class Server extends Thread {// https://stackoverflow.com/questions/20753971/java-handling-multiple-client-sockets
+//https://stackoverflow.com/questions/20753971/java-handling-multiple-client-sockets
+public class Server extends Thread {
+	
 
 	private ServerSocket serverSocket;
 	final public static int MAX_CLIENTS = 3000;

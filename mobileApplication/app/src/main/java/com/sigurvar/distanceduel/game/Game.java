@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.sigurvar.distanceduel.game.controller.GameController;
 import com.sigurvar.distanceduel.game.controller.NormalController;
-import com.sigurvar.distanceduel.game.controller.WriteQuestionController;
+import com.sigurvar.distanceduel.game.controller.ChallengeController;
 import com.sigurvar.distanceduel.game.models.GameModel;
 
 public class Game {
@@ -32,7 +32,7 @@ public class Game {
         if (gameMode==NORMAL_MODE) {
             gameController = new NormalController(context);
         }else if (gameMode==WRITE_QUESTION_MODE){
-            gameController = new WriteQuestionController(context);
+            gameController = new ChallengeController(context);
         }
         return gameModel;
     }

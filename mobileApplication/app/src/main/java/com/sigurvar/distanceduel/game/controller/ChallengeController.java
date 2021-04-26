@@ -11,15 +11,10 @@ import com.sigurvar.distanceduel.utility.ServerController;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class WriteQuestionController extends GameController{
+public class ChallengeController extends GameController{
 
-    public WriteQuestionController(Context context){
+    public ChallengeController(Context context){
         super(context);
-    }
-
-    @Override
-    public void startGame() {
-
     }
 
     public void createQuestion(){

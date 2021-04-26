@@ -8,12 +8,12 @@ import org.json.JSONObject;
 import main.GameController;
 import main.QuestionGenerator;
 
-public class WriteQuestionsMode extends Game {
+public class ChallengeMode extends Game {
 
 	QuestionGenerator questionGenerator = new QuestionGenerator();
 	
-	public WriteQuestionsMode(String code, int id, Player creator) {
-		super(code, Unit.randomUnit(), id, creator);
+	public ChallengeMode(String code, Player creator) {
+		super(code, Unit.randomUnit(), creator);
 		upcoming = new Stack<>();
 	}
 
@@ -27,8 +27,7 @@ public class WriteQuestionsMode extends Game {
 	}
 	
 	public void userGeneratedQuestion(Player player, String questionData) {
-		try {
-			// TODO: create writequestionmode with player as owner 
+		try { 
 			JSONObject data = new JSONObject(questionData);
 			String locationA = data.getString("locationA");
 			String locationB = data.getString("locationB");
@@ -38,7 +37,7 @@ public class WriteQuestionsMode extends Game {
 				super.sendQuestion();
 			}
 		}catch (JSONException e) {
-			System.out.println("Feilet å sende til alle ");
+			e.printStackTrace();
 		}
 	}
 

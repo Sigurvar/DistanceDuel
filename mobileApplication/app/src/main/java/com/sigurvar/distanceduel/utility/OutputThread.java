@@ -49,7 +49,7 @@ public class OutputThread extends Thread{
 
 
     private void sendData(int message_type, String message) {
-        Log.i("SendingThread","Sending message: "+message);
+        Log.i("SendingThread","Sending message with type "+message_type);
 
         try {
             dataOutputStream.writeByte(message_type);

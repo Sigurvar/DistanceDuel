@@ -44,14 +44,12 @@ public class Player{
 	public void answerQuestion(String answer) {
 		double ans = -1;
 		try {
-			// TODO mulig vi heller vil ha float her
 			ans = Double.valueOf(answer);
 		}catch(NumberFormatException e) {}
 		this.game.answer(this, ans);
 		
 	}
 	public void createGame(String settings) {
-		// TODO add settings to game constructor
 		Game game = GameController.getInstance().createGame(this, settings);
 		this.game = game;
     	this.outputThread.sendGameCode(game.code);
@@ -97,8 +95,8 @@ public class Player{
 	}
 	
 	public void createdQuestion(String question) {
-		if(game instanceof WriteQuestionsMode) {
-			((WriteQuestionsMode) game).userGeneratedQuestion(this, question);
+		if(game instanceof ChallengeMode) {
+			((ChallengeMode) game).userGeneratedQuestion(this, question);
 		}
 	}
 

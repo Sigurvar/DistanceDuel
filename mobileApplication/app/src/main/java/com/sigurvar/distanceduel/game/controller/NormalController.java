@@ -8,10 +8,4 @@ public class NormalController extends GameController{
         super(context);
     }
 
-    @Override
-    public void startGame() {
-
-    }
-
-
 }
